@@ -1,17 +1,52 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch } from "react-router-dom";
+
+import "assets/scss/material-kit-react.scss?v=1.10.0";
+
+// pages for this product
+import Components from "views/Components/Components.js";
+import LandingPage from "views/LandingPage/LandingPage.js";
+import ProfilePage from "views/ProfilePage/ProfilePage.js";
+import LoginPage from "views/LoginPage/LoginPage.js";
+import SignUpPage from "views/SignUpPage/SignUpPage.js";
+import Write from "views/Components/Editor/Write";
+import ViewPage from "views/ContentsPage/ViewPage";
+
+var hist = createBrowserHistory();
+
+// componentDidMount(){
+
+//   if(localStorage.getItem("ACCESS_TOKEN")){
+//    this.setState(localStorage.getItem("ACCESS_TOKEN"))
+//   };
+  
+// }
+
+// useEffect(() => {
+ 
+  
+// }, [])
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  
+    <Router history={hist}>
+      
+      <Switch>
+      <Route path="/landing-page" component={LandingPage} />
+      <Route path="/signUp" component={SignUpPage} />
+      <Route path="/profile-page" component={ProfilePage} />
+      <Route path="/login-page" component={LoginPage} />
+      <Route path="/editorViewer" component={Write} />
+      <Route path="/view/:id" component={ViewPage}/>
+      <Route exact path="/" component={Components} />
+    </Switch>
+   
+    
+  </Router>, 
+  document.getElementById("root")
+  
+  
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
