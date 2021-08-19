@@ -33,16 +33,16 @@ export default function Footer(props) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/?ref=mkr-footer"
+                href="https://github.com/taehwan-jang/crowdee"
                 className={classes.block}
                 target="_blank"
               >
-                Creative Tim
+                Crowdee
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/presentation?ref=mkr-footer"
+                href="https://www.notion.so/39f818016eff40f0ba0c5e52af4d859a"
                 className={classes.block}
                 target="_blank"
               >
@@ -51,7 +51,7 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="http://blog.creative-tim.com/?ref=mkr-footer"
+                href="https://www.notion.so/39f818016eff40f0ba0c5e52af4d859a"
                 className={classes.block}
                 target="_blank"
               >
@@ -73,11 +73,11 @@ export default function Footer(props) {
           &copy; {1900 + new Date().getYear()} , made with{" "}
           <Favorite className={classes.icon} /> by{" "}
           <a
-            href="https://www.creative-tim.com?ref=mkr-footer"
+            href="https://www.notion.so/39f818016eff40f0ba0c5e52af4d859a"
             className={aClasses}
             target="_blank"
           >
-            Creative Tim
+            Team Crowdee
           </a>{" "}
           for a better web.
         </div>

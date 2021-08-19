@@ -39,7 +39,7 @@ ReactDOM.render(
       <Route path="/signUp" component={SignUpPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/login-page" component={LoginPage} />
-      <Route path="/editorViewer" component={Write} />
+      <Route path="/Write" component={Write} />
       <Route path="/view/:id" component={ViewPage}/>
       <Route exact path="/" component={Components} />
     </Switch>

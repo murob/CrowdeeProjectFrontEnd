@@ -1,11 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Provider,useSelector,useDispatch} from "react-redux";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from "ckeditor5-custom-build/build/ckeditor";
-
+import classNames from "classnames";
+import { makeStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-kit-react/views/components.js";
 export default function Write() {
-   
-    
+    const useStyles = makeStyles(styles);
+    const classes = useStyles();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [flag, setFlag] = useState(false);
@@ -55,7 +56,7 @@ export default function Write() {
 
       <div className="Editor">
 
-        <div style={{width: "100%"}}>
+        <div>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                 <div style={{width: "60%", marginBottom: "10px"}}>
                     <input type="text" className="form-control" id="title" onChange={handleTitleChange} ref={inputRef}/>
@@ -68,8 +69,8 @@ export default function Write() {
                     </div>
                 </form>
             </div>
-            
-          <CKEditor
+            <div>
+            <CKEditor
               editor={ Editor }
               
               config={{
@@ -126,6 +127,8 @@ export default function Write() {
                 console.log("시작한다", editor);
               }}
           />
+            </div>
+          
           </div>
       </div>
     );
