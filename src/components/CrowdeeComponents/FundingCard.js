@@ -30,7 +30,7 @@ export default function FundingCard(props) {
   );
   
   return (
-    <Card style={{width: "20rem"}}>
+    <Card style={{width: "20rem",margin:"35px"}}>
       <img
         style={{height: "180px", width: "100%", display: "block"}}
         className={classes.imgCardTop}
