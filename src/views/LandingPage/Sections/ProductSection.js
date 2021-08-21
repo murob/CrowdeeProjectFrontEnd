@@ -7,6 +7,8 @@ import GridItem from "components/Grid/GridItem.js";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 import { useEffect, useState } from "react";
 import FundingCard from "components/CrowdeeComponents/FundingCard";
+import { Typography } from "@material-ui/core";
+
 const useStyles = makeStyles(styles);
 
 export default function ProductSection() {
@@ -30,16 +32,19 @@ export default function ProductSection() {
         alert("게시물 조회 중 에러발생 "+ e.message);
       });
   },[])
-
+  const [title,setTitle] = useState();
+  const modalControl = (funding) =>{
+    s
+  }
   return (
     <div>
       <div className={classes.section}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={8}>
-            <h2 className={classes.title}>주목할 만한 펀딩</h2>
+            <Typography>주목할 만한 펀딩</Typography>
           </GridItem>
         </GridContainer>
-        
+   
 
           <GridContainer justify="center">
             
@@ -49,6 +54,7 @@ export default function ProductSection() {
                 title={funding.title}
                 imgUrl={funding.imgUrl}
                 summary={funding.summary}
+
               ></FundingCard>
             ))} */}
             <GridItem>
@@ -58,6 +64,7 @@ export default function ProductSection() {
                   title='펀딩타이틀1'
                   imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
                   summary='펀딩게시물1'
+                  
                 />
                 <FundingCard 
                   id='2'
