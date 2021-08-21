@@ -51,12 +51,12 @@ export default function FundingCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Button size ='small' variant="outlined" color="secondary">
+      {/* <Button size ='small' variant="outlined" color="secondary">
         <FavoriteBorderIcon />찜하기
       </Button>
         <Button size="small" variant="outlined" color="primary">
           상세보기
-        </Button>
+        </Button> */}
       </CardActions>
     </Card>
   );

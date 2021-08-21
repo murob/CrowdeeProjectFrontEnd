@@ -21,7 +21,7 @@ const makeComponentStyles = makeStyles((theme) => ({
   },
 
 }));
-const [open,setOpen] = useState(false);
+
 const RegularButton = React.forwardRef((props, ref) => {
   const {
     color,
@@ -53,9 +53,19 @@ const RegularButton = React.forwardRef((props, ref) => {
     [classes.justIcon]: justIcon,
     [className]: className,
   });
-  return (
+
+    const handleToggle = () => {
+        setOpen(true);
+        props.onClick();
+    };
+    const [open,setOpen] = useState(false);
+    useEffect(() => {
+        setOpen(false)
+       
+    }, [props.open])
+    return (
     <div>
-      <Button {...rest} ref={ref} className={btnClasses}>
+      <Button {...rest} ref={ref} className={btnClasses} onClick={handleToggle}>
       {children}
       </Button>
       <Backdrop className={classes.backdrop} open={open} >

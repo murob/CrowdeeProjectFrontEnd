@@ -4,6 +4,7 @@ import Editor from "ckeditor5-custom-build/build/ckeditor";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/components.js";
+import Button from "components/CustomButtons/Button.js";
 export default function Write() {
     const useStyles = makeStyles(styles);
     const classes = useStyles();
@@ -63,7 +64,7 @@ export default function Write() {
                 </div>
                 <form className="form-inline">
                     <div className="form-group">
-                        <button type="button" className="btn btn-primary" onClick={handleSave}>작성하기</button>{' '}
+                        <Button onClick={handleSave}>작성하기</Button>{' '}
                         <button type="button" className="btn btn-warning" onClick={handleReset}>리셋하기</button>{' '}
                         <button type="button" className="btn btn-normal" onClick={handleList}>리스트보기</button>
                     </div>
