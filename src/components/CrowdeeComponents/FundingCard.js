@@ -21,12 +21,14 @@ const useStyles = makeStyles((theme)=>({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    transition: 'transform 0.7s,opacity 1s'
   },
 }));
 
@@ -47,10 +49,15 @@ export default function FundingCard(props) {
           id:props.id,
           title:props.title,
           imgUrl:props.imgUrl,
-          summary:props.summary
+          summary:props.summary,
+          restDate:props.restDate,
+          category:props.category,
+          goalFundraising:props.goalFundraising,
+          ROA:props.ROA
+
       }
   );
- 
+
   return (
     <div>
        <Card 
@@ -92,7 +99,14 @@ export default function FundingCard(props) {
 
           <div className={classes.paper}>
             <h2 id="transition-modal-title">{funding.title}</h2>
-            <p id="transition-modal-description">{funding.summary}</p>
+            <p id="transition-modal-description">
+                카테고리 : {funding.category}
+              {funding.summary}
+               남은날짜 : {funding.restDate}
+                목표금액 : {funding.goalFundraising}
+                진행률 : {funding.ROA}
+              </p>
+            <div style={{height:'500px'}}></div>
           </div>
 
       </Modal>

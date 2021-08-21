@@ -27,6 +27,7 @@ export default function ProductSection() {
       .then((res)=>{
       console.log(1,res);
       setFundings(res);
+      console.log('fundings : ' + fundings)
       })
       .catch((e) =>{
         alert("게시물 조회 중 에러발생 "+ e.message);
@@ -34,7 +35,7 @@ export default function ProductSection() {
   },[])
   const [title,setTitle] = useState();
   const modalControl = (funding) =>{
-    s
+    
   }
   return (
     <div>
@@ -47,17 +48,25 @@ export default function ProductSection() {
    
 
           <GridContainer justify="center">
-            
-            {/* {fundings.map((funding) => (
-              <FundingCard 
-                id={funding.id}
-                title={funding.title}
-                imgUrl={funding.imgUrl}
-                summary={funding.summary}
-
-              ></FundingCard>
-            ))} */}
             <GridItem>
+              <GridContainer justify="center">
+              {fundings.map((funding) => (
+                <FundingCard 
+                  id={funding.funding_id}
+                  title={funding.title}
+                  imgUrl={funding.thumbNailUrl}
+                  summary={funding.summery}
+                  restDate={funding.restDate}
+                  category={funding.category}
+                  goalFundraising={funding.goalFundraising}
+                  ROA={funding.rateOfAchievment}
+                ></FundingCard>
+              ))} 
+              </GridContainer>
+            </GridItem>
+             {/* <GridItem>
+              GridItem : 행
+              GridContainer : 열
               <GridContainer justify="center">
                <FundingCard 
                   id='1'
@@ -113,12 +122,8 @@ export default function ProductSection() {
                   imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
                   summary='펀딩게시물3'
                 />
-              </GridContainer>
-              
-            </GridItem>
-             
+              </GridContainer> */}
           </GridContainer>
-        
       </div>
     </div>
   );
