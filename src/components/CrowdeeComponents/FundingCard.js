@@ -8,18 +8,38 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-
-const useStyles = makeStyles({
+import Modal from '@material-ui/core/Modal'
+const useStyles = makeStyles((theme)=>({
   root: {
     maxWidth: 345,
     margin:20
   },
   media: {
     height: 140,
-  }
-});
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 export default function FundingCard(props) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const classes = useStyles();
   
   const [funding,setFunding] = useState(
@@ -30,9 +50,12 @@ export default function FundingCard(props) {
           summary:props.summary
       }
   );
-  
+ 
   return (
-    <Card className={classes.root}>
+    <div>
+       <Card 
+      onClick={handleOpen}
+      className={classes.root}>
        <CardActionArea>
         <CardMedia
           component="img"
@@ -58,6 +81,23 @@ export default function FundingCard(props) {
           상세보기
         </Button> */}
       </CardActions>
-    </Card>
+      </Card>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        className={classes.modal}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description">
+
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">{funding.title}</h2>
+            <p id="transition-modal-description">{funding.summary}</p>
+          </div>
+
+      </Modal>
+    </div>
+     
+    
   );
 }

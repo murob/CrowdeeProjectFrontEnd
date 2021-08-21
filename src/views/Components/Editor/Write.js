@@ -75,7 +75,7 @@ export default function Write() {
               editor={ Editor }
               
               config={{
-                placeholder: "기모치맨!",
+                
                 image: {
                     styles: ['alignLeft', 'alignCenter', 'alignRight'],
                     resizeUnit: 'px',
@@ -112,6 +112,7 @@ export default function Write() {
                 }
                 
               }}
+              
               onReady={ editor => {
                   // You can store the "editor" and use when it is needed.
                   console.log( 'Editor is ready to use!', editor );
