@@ -1,21 +1,23 @@
 import React,{useState,useEffect} from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
-import { makeStyles } from "@material-ui/core/styles";
-
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import Button from "components/CustomButtons/Button.js";
-
-import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
-
-import { cardTitle } from "assets/jss/material-kit-react.js";
-
-const styles = {
-  ...imagesStyles,
-  cardTitle,
-};
-
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+    margin:20
+  },
+  media: {
+    height: 140,
+  }
+});
 
 export default function FundingCard(props) {
   const classes = useStyles();
@@ -30,18 +32,32 @@ export default function FundingCard(props) {
   );
   
   return (
-    <Card style={{width: "20rem",margin:"35px"}}>
-      <img
-        style={{height: "180px", width: "100%", display: "block"}}
-        className={classes.imgCardTop}
-        src={funding.imgUrl}
-        alt="펀딩 사진"
-      />
-      <CardBody>
-        <h4 className={classes.cardTitle}>{funding.title}</h4>
-        <p>{funding.summary}</p>
-        <Button color="primary">펀딩 참여하기</Button>
-      </CardBody>
+    <Card className={classes.root}>
+       <CardActionArea>
+        <CardMedia
+          component="img"
+          alt="펀딩 사진"
+          height="140"
+          image={funding.imgUrl}
+          title="펀딩 사진"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h6" component="h6">
+            {funding.title}
+          </Typography>
+          <Typography variant="caption" display="block" gutterBottom>
+            {funding.summary}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+      <Button size ='small' variant="outlined" color="secondary">
+        <FavoriteBorderIcon />찜하기
+      </Button>
+        <Button size="small" variant="outlined" color="primary">
+          상세보기
+        </Button>
+      </CardActions>
     </Card>
   );
 }

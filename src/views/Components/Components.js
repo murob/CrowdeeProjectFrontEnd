@@ -1,5 +1,6 @@
 import React from "react";
 // nodejs library that concatenates classes
+import Container from '@material-ui/core/Container'
 import classNames from "classnames";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
@@ -24,14 +25,14 @@ export default function Components(props) {
   const classes = useStyles();
   const { ...rest } = props;
   return (
-    <div>
+    <Container>
       <Header
         brand="Crowdee"
         rightLinks={<HeaderLinks />}
         fixed
         color="transparent"
         changeColorOnScroll={{
-          height: 400,
+          height: 347,
           color: "white",
         }}
         {...rest}
@@ -54,7 +55,7 @@ export default function Components(props) {
         <ProductSection/>
       </div>
       <Footer />
-    </div>
+    </Container>
   );
 }
 

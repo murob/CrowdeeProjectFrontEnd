@@ -71,6 +71,12 @@ export default function ProductSection() {
                   imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
                   summary='펀딩게시물3'
                 />
+                <FundingCard 
+                  id='3'
+                  title='펀딩타이틀3'
+                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
+                  summary='펀딩게시물3'
+                />
               </GridContainer>
               
             </GridItem>
@@ -93,6 +99,12 @@ export default function ProductSection() {
                   title='펀딩타이틀6'
                   imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
                   summary='펀딩게시물6'
+                />
+                <FundingCard 
+                  id='3'
+                  title='펀딩타이틀3'
+                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
+                  summary='펀딩게시물3'
                 />
               </GridContainer>
               
