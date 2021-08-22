@@ -8,9 +8,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import Modal from '@material-ui/core/Modal'
+import Modal from '@material-ui/core/Modal';
+import LinearWithValueLabel from "./LinearProgressWithLabel";
 const useStyles = makeStyles((theme)=>({
   root: {
+    width : 200,
     maxWidth: 345,
     margin:20
   },
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme)=>({
     
   },
   paper: {
+    
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -67,7 +70,7 @@ export default function FundingCard(props) {
         <CardMedia
           component="img"
           alt="펀딩 사진"
-          height="140"
+          height="160"
           image={funding.imgUrl}
           title="펀딩 사진"
         />
@@ -87,6 +90,7 @@ export default function FundingCard(props) {
           <Typography variant="caption" display="block" gutterBottom>
            목표금액 : {funding.goalFundraising}
           </Typography>
+          <LinearWithValueLabel value={70} />
         </CardContent>
       </CardActionArea>
       <CardActions>

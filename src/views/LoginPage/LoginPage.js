@@ -23,7 +23,7 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { login,request } from "Utils/Utils";
 import image from "assets/img/bg7.jpg";
 import { ACCESS_TOKEN } from "export/export";
-
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
@@ -145,9 +145,7 @@ export default function LoginPage(props) {
                         onChange: ChangeValue,
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
+                            <LockOpenIcon></LockOpenIcon>
                           </InputAdornment>
                         ),
                         autoComplete: "off",
