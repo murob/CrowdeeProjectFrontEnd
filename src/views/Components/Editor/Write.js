@@ -4,6 +4,7 @@ import Editor from "ckeditor5-custom-build/build/ckeditor";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/components.js";
+import { Button } from "@material-ui/core";
 export default function Write() {
     const useStyles = makeStyles(styles);
     const classes = useStyles();
@@ -57,24 +58,14 @@ export default function Write() {
       <div className="Editor">
 
         <div>
-            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                <div style={{width: "60%", marginBottom: "10px"}}>
-                    <input type="text" className="form-control" id="title" onChange={handleTitleChange} ref={inputRef}/>
-                </div>
-                <form className="form-inline">
-                    <div className="form-group">
-                        <button type="button" className="btn btn-primary" onClick={handleSave}>작성하기</button>{' '}
-                        <button type="button" className="btn btn-warning" onClick={handleReset}>리셋하기</button>{' '}
-                        <button type="button" className="btn btn-normal" onClick={handleList}>리스트보기</button>
-                    </div>
-                </form>
-            </div>
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}} />
             <div>
             <CKEditor
               editor={ Editor }
               
               config={{
                 placeholder: "기모치맨!",
+                title: {isEnabled:false},
                 image: {
                     styles: ['alignLeft', 'alignCenter', 'alignRight'],
                     resizeUnit: 'px',
@@ -111,10 +102,6 @@ export default function Write() {
                 }
                 
               }}
-              onReady={ editor => {
-                  // You can store the "editor" and use when it is needed.
-                  console.log( 'Editor is ready to use!', editor );
-              } }
               onChange={handleEditorChange}
               onBlur={ ( event, editor ) => {
                   console.log( 'Blur.', editor );
