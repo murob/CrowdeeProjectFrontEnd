@@ -78,6 +78,15 @@ export default function FundingCard(props) {
           <Typography variant="caption" display="block" gutterBottom>
             {funding.summary}
           </Typography>
+          <Typography variant="caption" display="block" gutterBottom>
+            카테고리 : {funding.category}
+          </Typography>
+          <Typography variant="caption" display="block" gutterBottom>
+            남은날짜 : {funding.restDate}
+          </Typography>
+          <Typography variant="caption" display="block" gutterBottom>
+           목표금액 : {funding.goalFundraising}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -101,8 +110,8 @@ export default function FundingCard(props) {
             <h2 id="transition-modal-title">{funding.title}</h2>
             <p id="transition-modal-description">
                 카테고리 : {funding.category}
-              {funding.summary}
-               남은날짜 : {funding.restDate}
+                {funding.summary}
+                남은날짜 : {funding.restDate}
                 목표금액 : {funding.goalFundraising}
                 진행률 : {funding.ROA}
               </p>

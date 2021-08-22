@@ -20,14 +20,15 @@ export default function ProductSection() {
   useEffect(() => {
     fetch("http://localhost:8081/contents")
     .then((res)=>{
+      console.log(res)
       if(!res.status==200){
         throw new Error('http 오류');
       }
       return res.json()})
       .then((res)=>{
-      console.log(1,res);
+        
       setFundings(res);
-      console.log('fundings : ' + fundings)
+  
       })
       .catch((e) =>{
         alert("게시물 조회 중 에러발생 "+ e.message);

@@ -14,7 +14,7 @@ const useStyles = makeStyles(styles);
 export default function Parallax(props) {
   const [index,setIndex] = useState(0)
   const indexRef = useRef(0)
-
+    
   const changeIndex = () =>{
     console.log("changeIndex 실행 됨")
     console.log(index)
