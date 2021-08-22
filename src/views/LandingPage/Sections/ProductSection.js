@@ -39,8 +39,7 @@ export default function ProductSection() {
             <h2 className={classes.title}>주목할 만한 펀딩</h2>
           </GridItem>
         </GridContainer>
-        
-
+      
           <GridContainer justify="center">
             
             {/* {fundings.map((funding) => (
@@ -61,7 +60,7 @@ export default function ProductSection() {
                 />
                 <FundingCard 
                   id='2'
-                  title='펀딩타이틀2'
+                  title='펀딩타이틀2' 
                   imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
                   summary='펀딩게시물2'
                 />

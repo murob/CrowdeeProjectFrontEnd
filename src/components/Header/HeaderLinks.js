@@ -37,28 +37,28 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <LoadingButton
+        <Button
             color="transparent"
             className={classes.navLink}
             onClick={()=>buttonClick("/search")}>
             <SearchRoundedIcon className={classes.inputIconsColor} />
-          </LoadingButton>
+          </Button>
       </ListItem>
       <ListItem className={classes.listItem}> 
-        <LoadingButton
+        <Button
           color="transparent"
           className={classes.navLink}
           onClick={()=>buttonClick("/login-page")}>
           <AccountCircleRoundedIcon	 className={classes.inputIconsColor} />
-        </LoadingButton>
+        </Button>
       </ListItem>
       <ListItem className={classes.listItem}> 
-        <LoadingButton
+        <Button
           color="transparent"
           className={classes.navLink}
           onClick={()=>buttonClick("/notification")}>
           <NotificationsActiveIcon className={classes.inputIconsColor} />
-        </LoadingButton>
+        </Button>
       </ListItem>
     </List>
   );
