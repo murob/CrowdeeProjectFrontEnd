@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Modal from '@material-ui/core/Modal'
+import ViewDetails from "views/ViewPage/ViewDetails";
 const useStyles = makeStyles((theme)=>({
   root: {
     maxWidth: 345,
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme)=>({
 }));
 
 export default function FundingCard(props) {
+  
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -53,11 +55,12 @@ export default function FundingCard(props) {
           restDate:props.restDate,
           category:props.category,
           goalFundraising:props.goalFundraising,
-          ROA:props.ROA
-
+          rateOfAchievement:props.rateOfAchievement
+        
       }
+      
   );
-
+ 
   return (
     <div>
        <Card 
@@ -98,26 +101,23 @@ export default function FundingCard(props) {
         </Button> */}
       </CardActions>
       </Card>
-
       <Modal
         open={open}
         onClose={handleClose}
         className={classes.modal}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description">
-
-          <div className={classes.paper}>
-            <h2 id="transition-modal-title">{funding.title}</h2>
-            <p id="transition-modal-description">
-                카테고리 : {funding.category}
-                {funding.summary}
-                남은날짜 : {funding.restDate}
-                목표금액 : {funding.goalFundraising}
-                진행률 : {funding.ROA}
-              </p>
-            <div style={{height:'500px'}}></div>
-          </div>
-
+          <ViewDetails
+             id={funding.funding_id}
+             title={funding.title}
+             imgUrl={funding.imgUrl}
+             summary={funding.summery}
+             restDate={funding.restDate}
+             category={funding.category}
+             goalFundraising={funding.goalFundraising}
+             rateOfAchievment={funding.rateOfAchievement}
+          ></ViewDetails>
+         
       </Modal>
     </div>
      
