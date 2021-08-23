@@ -1,4 +1,3 @@
-
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
@@ -12,9 +11,9 @@ import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import SignUpPage from "views/SignUpPage/SignUpPage.js";
-import Write from "views/Components/Editor/Write";
-import ViewPage from "views/ViewPage/ViewPage.js";
 import WritePage from "views/WritePage/WritePage";
+import ViewPage from "views/ViewPage/ViewPage.js";
+import ViewDetails from "views/ViewPage/ViewDetails";
 
 var hist = createBrowserHistory();
 
@@ -40,15 +39,12 @@ ReactDOM.render(
       <Route path="/signUp" component={SignUpPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/login-page" component={LoginPage} />
-      <Route path="/write" component={Write} />
-      <Route path="/write-page" component={WritePage} />
       <Route path="/view/:id" component={ViewPage}/>
+      <Route path="/write-page" component={WritePage} />
       <Route exact path="/" component={Components} />
     </Switch>
-   
-    
   </Router>, 
   document.getElementById("root")
   
   
-);
+); 등 

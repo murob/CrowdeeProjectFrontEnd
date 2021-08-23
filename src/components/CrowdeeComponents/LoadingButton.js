@@ -1,3 +1,4 @@
+
 import React,{useState} from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
@@ -21,7 +22,7 @@ const makeComponentStyles = makeStyles((theme) => ({
   },
 
 }));
-//const [open,setOpen] = useState(false);
+
 const RegularButton = React.forwardRef((props, ref) => {
   const {
     color,

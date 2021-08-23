@@ -24,7 +24,7 @@ import {Link} from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import Button from 'components/CustomButtons/Button.js';
 import image from "assets/img/bg7.jpg";
-
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 const useStyles = makeStyles(styles);
 
 export default function SignUpPage(props) {
@@ -113,7 +113,7 @@ export default function SignUpPage(props) {
       }
       else{
         
-        setBadRequest("이미 회원가입한 이메일입니다.");
+        setBadRequest("이메일을 확인해주세요.");
       }
       
     });
@@ -323,9 +323,7 @@ export default function SignUpPage(props) {
                        
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
+                            <LockOpenIcon></LockOpenIcon>
                           </InputAdornment>
                         ),
                         autoComplete: "off",
@@ -346,9 +344,7 @@ export default function SignUpPage(props) {
                         onChange: changeinputColor,
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
+                            <LockOpenIcon></LockOpenIcon>
                           </InputAdornment>
                         ),
                         autoComplete: "off",
