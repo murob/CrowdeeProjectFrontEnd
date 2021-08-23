@@ -26,9 +26,8 @@ export default function ProductSection() {
       }
       return res.json()})
       .then((res)=>{
-        
       setFundings(res);
-  
+     
       })
       .catch((e) =>{
         alert("게시물 조회 중 에러발생 "+ e.message);
@@ -46,8 +45,7 @@ export default function ProductSection() {
             <Typography>주목할 만한 펀딩</Typography>
           </GridItem>
         </GridContainer>
-   
-
+      
           <GridContainer justify="center">
             <GridItem>
               <GridContainer justify="center">
@@ -60,7 +58,7 @@ export default function ProductSection() {
                   restDate={funding.restDate}
                   category={funding.category}
                   goalFundraising={funding.goalFundraising}
-                  ROA={funding.rateOfAchievment}
+                  ROA={funding.rateOfAchievement}
                 ></FundingCard>
               ))} 
               </GridContainer>
@@ -78,7 +76,7 @@ export default function ProductSection() {
                 />
                 <FundingCard 
                   id='2'
-                  title='펀딩타이틀2'
+                  title='펀딩타이틀2' 
                   imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
                   summary='펀딩게시물2'
                 />
