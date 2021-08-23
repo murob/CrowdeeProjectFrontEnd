@@ -52,6 +52,7 @@ export default function ViewDetails(props) {
           maxWidth: 1000,
           margin:20,
           flexGrow: 1,
+          
         },
         paper: {
           width : 1000,
@@ -63,7 +64,7 @@ export default function ViewDetails(props) {
           padding: theme.spacing(2, 4, 3),
           textAlign: 'center',
           transition: 'transform 0.7s,opacity 1s',
-        
+          overflowY: 'auto',
           padding: theme.spacing(2),
         },
         topmain: {
@@ -76,8 +77,7 @@ export default function ViewDetails(props) {
         bottom: {
             padding: theme.spacing(2),
             textAlign: 'center',
-            height: 250,
-            overflowY: 'auto'
+            
 
         },
 
