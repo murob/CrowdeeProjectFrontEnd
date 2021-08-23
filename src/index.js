@@ -1,4 +1,3 @@
-
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
@@ -48,4 +47,4 @@ ReactDOM.render(
   document.getElementById("root")
   
   
-);
+); 등 
