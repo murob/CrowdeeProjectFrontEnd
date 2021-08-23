@@ -27,7 +27,7 @@ export default function ProductSection() {
       return res.json()})
       .then((res)=>{
       setFundings(res);
-  
+     
       })
       .catch((e) =>{
         alert("게시물 조회 중 에러발생 "+ e.message);
@@ -58,7 +58,7 @@ export default function ProductSection() {
                   restDate={funding.restDate}
                   category={funding.category}
                   goalFundraising={funding.goalFundraising}
-                  ROA={funding.rateOfAchievment}
+                  ROA={funding.rateOfAchievement}
                 ></FundingCard>
               ))} 
               </GridContainer>
