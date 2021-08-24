@@ -1,11 +1,25 @@
+import React,{useState} from 'react';
 import { Container } from '@material-ui/core';
 import SimpleSelect from 'components/CrowdeeComponents/SimpleSelect';
-import React from 'react';
-import { Form } from 'react-bootstrap';
-import Write from 'views/Components/Editor/Write';
-import TextField from '@material-ui/core/TextField';
-import CustomInput from 'components/CustomInput/CustomInput';
+
 export default function WriteDefault() {
+    const [firstForm,setFirstForm] = useState({
+
+    });
+    const CategoryControl= (data)=>{
+        setFirstForm({
+            ...firstForm,
+            category : data
+        })
+        console.log(firstForm)
+    }
+    const FormValueHandler = (e) =>{
+        setFirstForm({
+            ...firstForm,
+            [e.target.name] : [e.target.value]
+        })
+        console.log(firstForm)
+    }
     return (
         <div style={{paddingTop:'30px', paddingBottom:'30px', backgroundColor:'#FCFCFC',}}>
                 <Container maxWidth="md">
@@ -15,7 +29,7 @@ export default function WriteDefault() {
                             <h6>프로젝트 성격상 가장 일치하는 카테고리를 선택해주세요.</h6>
                         </div>
                         <div style={{display:'flex', alignItems:'center'}}>
-                            <SimpleSelect/>
+                            <SimpleSelect handleState={CategoryControl} />
                         </div>
                     </div>
 
@@ -26,9 +40,9 @@ export default function WriteDefault() {
                         </div>
                         <div>
                             <h5 style={{fontWeight:'bold'}}>긴 제목</h5>
-                            <input style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'40px'}} placeholder={'긴 제목을 입력해주세요'}></input>
+                            <input name="title" onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'40px'}} placeholder={'긴 제목을 입력해주세요'}></input>
                             <h5 style={{fontWeight:'bold'}}>짧은 제목</h5>
-                            <input style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'40px'}} placeholder={'짧은 제목을 입력해주세요'}></input>
+                            <input name="subTitle" onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'40px'}} placeholder={'짧은 제목을 입력해주세요'}></input>
                         </div>
                     </div>
 
@@ -38,7 +52,7 @@ export default function WriteDefault() {
                             <h6>후원자 분들이 프로젝트를 빠르게 이해할 수 있도록<br/>명확하고 간략하게 소개해주세요.</h6>
                         </div>
                         <div>
-                            <input style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'100px'}} placeholder={'프로젝트에 대해 요약해서 입력해주세요'}></input>
+                            <input name="summary" onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'100px'}} placeholder={'프로젝트에 대해 요약해서 입력해주세요'}></input>
                         </div>
                     </div>
 
@@ -58,7 +72,7 @@ export default function WriteDefault() {
                             <h6>잠재 후원자의 관심사를 고려한 검색 태그를 입력해주세요.</h6>
                         </div>
                         <div>
-                            <input style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'80px'}} placeholder={'예시) 피아노,사극,현대무용'}></input>
+                            <input name="hashtag" onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'80px'}} placeholder={'예시) 피아노,사극,현대무용 (# 또는 , 로 구분)'}></input>
                         </div>
                     </div>
 

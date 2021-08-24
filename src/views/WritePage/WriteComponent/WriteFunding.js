@@ -1,7 +1,5 @@
 import { Container } from '@material-ui/core';
 import React from 'react';
-import Form from 'react-bootstrap/Form';
-import Write from 'views/Components/Editor/Write';
 
 export default function WriteFunding() {
     return (

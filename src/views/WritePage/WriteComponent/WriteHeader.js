@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core'; 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Box } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+
 
 export default function WriteHeader() {
     return (

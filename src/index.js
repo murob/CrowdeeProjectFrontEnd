@@ -47,4 +47,4 @@ ReactDOM.render(
   document.getElementById("root")
   
   
-); 등 
+); 
