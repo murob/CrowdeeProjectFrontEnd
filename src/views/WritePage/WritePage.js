@@ -5,21 +5,48 @@ import { Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Box } from '@material-ui/core';
 import WritePageNav from './WritePageNav';
+import WriteDefault from './WriteComponent/WriteDefault';
+import WriteFunding from './WriteComponent/WriteFunding';
+import WriteStory from './WriteComponent/WriteStory';
 export default function WritePage(props) {
 
-    const [path,setPath] = useState();
     
+    
+    const [path,setPath] = useState();
+    const [nextPath,setNextPath] = useState();
+    const [firstData , setFirstData] = useState({});
+    const [secondData , setSecondData] = useState({});
+    const [lastData , setLastData] = useState({});
     const changeDef = () =>{
         setPath("/creator/create/thumbNail")
-        props.history.push(props.match.path)
+       
+         setNextPath(`${props.match.path}/funding`)
+         props.history.push(props.match.path)
+        
     }
     const changeFun = () =>{
         setPath("/creator/create/fundingPlan")
+        
+        setNextPath(`${props.match.path}/story`)
         props.history.push(`${props.match.path}/funding`)
     }
     const changeSto = () =>{
         setPath("/creator/create/detail")
-        props.history.push(`${props.match.path}/story`)
+       
+        setNextPath("/")
+         props.history.push(`${props.match.path}/story`)
+    }
+
+    const firstForm = (data) =>{
+        setFirstData(data)
+    }
+
+    const secondForm = (data) =>{
+        setSecondData(data)
+    }
+
+    const lastForm = (data) =>{
+        setLastData(data)
     }
 
     
@@ -31,9 +58,11 @@ export default function WritePage(props) {
             method  : post
         }).
         then((res)=>{
-            if(res.status==200){
-                
+            if(!res.status==200){
+                throw new Error('http에러')
             }
+         
+
         })
     }
 
@@ -48,7 +77,7 @@ export default function WritePage(props) {
                     </div>
                     <div>
                         <Button variant="outlined" size='large'>취소</Button>{' '}
-                        <Button variant="contained" color="secondary" size='large'>저장</Button>{' '}
+                        <Button variant="contained" color="secondary" size='large' onClick={onSubmit}>저장</Button>{' '}
                     </div>
                 </div>
                 <div style={{display:'flex',marginTop:'20px', paddingTop:'80px'}}>
@@ -66,7 +95,7 @@ export default function WritePage(props) {
                     </Button>
                 </div>
             </div>
-               <WritePageRouter/>
+               <WritePageRouter first={firstData} second={secondData} last={lastData} />
         </div>
         </Container>
     </div>

@@ -2,23 +2,23 @@ import React,{useState} from 'react';
 import { Container } from '@material-ui/core';
 import SimpleSelect from 'components/CrowdeeComponents/SimpleSelect';
 
-export default function WriteDefault() {
-    const [firstForm,setFirstForm] = useState({
+export default function WriteDefault(props) {
+    const [form,setForm] = useState({
 
     });
     const CategoryControl= (data)=>{
-        setFirstForm({
-            ...firstForm,
+        setForm({
+            ...form,
             category : data
         })
-        console.log(firstForm)
+  
     }
     const FormValueHandler = (e) =>{
         setFirstForm({
-            ...firstForm,
+            ...form,
             [e.target.name] : [e.target.value]
         })
-        console.log(firstForm)
+       props.save(form)
     }
     return (
         <div style={{paddingTop:'30px', paddingBottom:'30px', backgroundColor:'#FCFCFC',}}>
