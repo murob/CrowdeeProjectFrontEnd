@@ -13,35 +13,38 @@ import Modal from '@material-ui/core/Modal';
 import LinearWithValueLabel from "./LinearProgressWithLabel";
 
 import ViewDetails from "views/ViewPage/ViewDetails";
-const useStyles = makeStyles((theme)=>({
-  root: {
-    width : 200,
-    maxWidth: 345,
-    margin:20
-  },
-  media: {
-    height: 140,
-  },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    
-  },
-  paper: {
-    
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    transition: 'transform 0.7s,opacity 1s'
-  },
-}));
+
 
 export default function FundingCard(props) {
-  
+  const useStyles = makeStyles((theme)=>({
+    root: {
+      width : 250,
+      maxWidth: 250,
+      maxHeight: 350,
+      margin:20
+    },
+    media: {
+      height: 140,
+    },
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height : '850px',
+      backgroundImage : `url(${props.imgUrl})`
+    },
+    paper: {
+      
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+      transition: 'transform 0.7s,opacity 1s'
+    },
+  }));
   const [open, setOpen] = React.useState(false);
-
+  const [totalFundraising,setTotalFundraising] = useState();
+  const [goalFundraising,setGoalFundraising] = useState();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -51,21 +54,38 @@ export default function FundingCard(props) {
   };
   const classes = useStyles();
   
-  const [funding,setFunding] = useState(
-      {
-          id:props.id,
-          title:props.title,
-          imgUrl:props.imgUrl,
-          summary:props.summary,
-          restDate:props.restDate,
-          category:props.category,
-          goalFundraising:props.goalFundraising,
-          rateOfAchievement:props.rateOfAchievement
-        
-      }
-      
+  const [funding,setFunding] = useState({
+    imgUrl : props.imgUrl,
+    rateOfAchievement:props.ROA,
+    id:props.id,
+    title:props.title,
+    summary:props.summary,
+    restDate:props.restDate,
+    category:props.category
+  }
   );
- 
+  const comma = (obj) => {
+    var regx = new RegExp(/(-?\d+)(\d{3})/);
+   
+    var strArr = `${obj}`.split('.');
+    while (regx.test(strArr[0])) {//문자열에 정규식 특수문자가 포함되어 있는지 체크
+        //정수 부분에만 콤마 달기 
+        strArr[0] = strArr[0].replace(regx, "$1,$2");//콤마추가하기
+    }
+        obj = strArr[0];
+    
+    return obj;//문자열 반환
+}
+
+useEffect(() => {
+  setFunding({
+    ...funding,
+    totalFundraising:comma(props.totalFundraising),
+    goalFundraising:comma(props.goalFundraising),
+    
+  })
+  
+}, [])
   return (
     <div>
        <Card 
@@ -95,7 +115,7 @@ export default function FundingCard(props) {
           <Typography variant="caption" display="block" gutterBottom>
            목표금액 : {funding.goalFundraising}
           </Typography>
-          <LinearWithValueLabel value={70} />
+          <LinearWithValueLabel value={funding.rateOfAchievement} />
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -117,9 +137,10 @@ export default function FundingCard(props) {
              id={funding.funding_id}
              title={funding.title}
              imgUrl={funding.imgUrl}
-             summary={funding.summery}
+             summary={funding.summary}
              restDate={funding.restDate}
              category={funding.category}
+             totalFundraising={funding.totalFundraising}
              goalFundraising={funding.goalFundraising}
              rateOfAchievment={funding.rateOfAchievement}
           ></ViewDetails>

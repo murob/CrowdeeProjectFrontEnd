@@ -27,7 +27,7 @@ export default function ProductSection() {
       return res.json()})
       .then((res)=>{
       setFundings(res);
-     
+      console.log(res[0].rateOfAchievement)
       })
       .catch((e) =>{
         alert("게시물 조회 중 에러발생 "+ e.message);
@@ -54,74 +54,16 @@ export default function ProductSection() {
                   id={funding.funding_id}
                   title={funding.title}
                   imgUrl={funding.thumbNailUrl}
-                  summary={funding.summery}
+                  summary={funding.summary}
                   restDate={funding.restDate}
                   category={funding.category}
+                  totalFundraising={funding.totalFundraising}
                   goalFundraising={funding.goalFundraising}
                   ROA={funding.rateOfAchievement}
                 ></FundingCard>
               ))} 
               </GridContainer>
             </GridItem>
-             {/* <GridItem>
-              GridItem : 행
-              GridContainer : 열
-              <GridContainer justify="center">
-               <FundingCard 
-                  id='1'
-                  title='펀딩타이틀1'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물1'
-                  
-                />
-                <FundingCard 
-                  id='2'
-                  title='펀딩타이틀2' 
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물2'
-                />
-                  <FundingCard 
-                  id='3'
-                  title='펀딩타이틀3'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물3'
-                />
-                <FundingCard 
-                  id='3'
-                  title='펀딩타이틀3'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물3'
-                />
-              </GridContainer>
-              
-            </GridItem>
-            <GridItem>
-              <GridContainer justify="center">
-               <FundingCard 
-                  id='4'
-                  title='펀딩타이틀4'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물4'
-                />
-                <FundingCard 
-                  id='5'
-                  title='펀딩타이틀5'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물5'
-                />
-                  <FundingCard 
-                  id='6'
-                  title='펀딩타이틀6'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물6'
-                />
-                <FundingCard 
-                  id='3'
-                  title='펀딩타이틀3'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물3'
-                />
-              </GridContainer> */}
           </GridContainer>
       </div>
     </div>
