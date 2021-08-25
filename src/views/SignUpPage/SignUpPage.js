@@ -40,6 +40,7 @@ export default function SignUpPage(props) {
     nickName : "",
     mobile : ""
   })
+  
   const [cardAnimaton, setCardAnimation ] = React.useState("cardHidden");
   const [certAttribute,setCertAttribute] = useState({
     display : "none",

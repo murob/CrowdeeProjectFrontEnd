@@ -36,7 +36,9 @@ export default function WritePage(props) {
         setNextPath("/")
          props.history.push(`${props.match.path}/story`)
     }
-
+    const move = () =>{
+        props.history.push("/")
+    }
     const firstForm = (data) =>{
         setFirstData(data)
     }
@@ -73,7 +75,7 @@ export default function WritePage(props) {
             <div style={{borderBottom: '1px solid #C8C8C8', boxShadow:'4px black', height:'300px'}}>
                 <div style={{display:'flex', paddingTop:'20px', justifyContent:'space-between'}}>
                     <div>
-                        <Button fontSize="large" size='large'><ArrowBackIcon fontSize="large"/></Button>{' '}
+                        <Button fontSize="large" size='large' onClick={move}><ArrowBackIcon fontSize="large"/></Button>{' '}
                     </div>
                     <div>
                         <Button variant="outlined" size='large'>취소</Button>{' '}

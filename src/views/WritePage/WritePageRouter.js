@@ -7,7 +7,7 @@ import WriteStory from './WriteComponent/WriteStory';
 function WritePageRouter(props){
   return (
     <Switch>
-        <Route exact path={"/write-page"} render={()=><WriteDefault save={props.first} />} />
+        <Route exact path="/write-page" render={()=><WriteDefault save={props.first} />} />
         <Route path="/write-page/funding" render={()=><WriteFunding save={props.second} />} />
         <Route path="/write-page/story" render={()=><WriteStory save={props.last} />} />
     </Switch>

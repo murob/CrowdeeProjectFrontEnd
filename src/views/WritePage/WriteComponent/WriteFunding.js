@@ -54,7 +54,8 @@ export default function WriteFunding() {
                             <h6>설정한 일시가 되면 펀딩이 자동 시작됩니다. 펀딩 시작 전까지<br/>날짜를 변경할 수 있고, 즉시 펀딩을 시작할 수도 있습니다.</h6>
                         </div>
                         <div>
-                            <h3 style={{fontWeight:'bold'}}>펀딩금액</h3>
+                            <input name="goalFundraising" onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'150px', height:'40px', marginRight:'5px'}} placeholder={'최소 펀딩 금액을 입력해 주세요.'}></input>
+                             <Typography variant="h6" display="block" gutterBottom>원</Typography>
                         </div>
                     </div>
 
@@ -64,7 +65,8 @@ export default function WriteFunding() {
                             <h6>설정한 일시가 되면 펀딩이 자동 시작됩니다. 펀딩 시작 전까지<br/>날짜를 변경할 수 있고, 즉시 펀딩을 시작할 수도 있습니다.</h6>
                         </div>
                         <div>
-                            <h3 style={{fontWeight:'bold'}}>후원자 수</h3>
+                            <input name="goalFundraising" onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'150px', height:'40px', marginRight:'5px'}} placeholder={'최대 후원자 수를 입력해 주세요'}></input>
+                             <Typography variant="h6" display="block" gutterBottom>명</Typography>
                         </div>
                     </div>
                 </Container>  

@@ -1,12 +1,21 @@
-
-import { Button } from '@material-ui/core'; 
+import React from 'react';
+import Button from "components/CustomButtons/Button.js";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-export default function WritePageNav(){
+import { useHistory,Link } from "react-router-dom";
+export default function WritePageNav(props){
 
+    const history = useHistory();
+
+    const buttonClick = () =>{
+        console.log("먹냐")
+    };
+
+    
     return(
+
         <div style={{display:'flex', paddingTop:'20px', justifyContent:'space-between'}}>
             <div>
-                <Button fontSize="large" size='large'><ArrowBackIcon fontSize="large"/></Button>{' '}
+               <Button fontSize="large" size='large' onClick={buttonClick} ><ArrowBackIcon fontSize="large"/></Button>
             </div>
             <div>
                 <Button variant="outlined" size='large'>취소</Button>{' '}
