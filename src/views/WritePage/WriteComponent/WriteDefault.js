@@ -102,6 +102,9 @@ export default function WriteDefault(props) {
               method : 'post',
             //   headers :{
             //     'Content-Type': 'multipart/form-data'
+            //      Authorization : {
+        //              Bearer ${token}
+            //        }
             //   },
               body : data
                 
