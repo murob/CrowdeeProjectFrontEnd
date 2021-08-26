@@ -1,53 +1,11 @@
 import { Container, Typography } from '@material-ui/core';
 import React,{useState} from 'react';
-import { makeStyles } from "@material-ui/core/styles";
+
 
 
 
 export default function WriteFunding() {
-    // const useStyles = makeStyles((theme)=>({
-    //     imageuploadbox{
-    //         width: '202'
-    //         height: 202px;
-    //         position: relative;
-    //         border: 1px solid rgb(230, 229, 239);
-    //         background: rgb(250, 250, 253);
-    //         display: flex;
-    //         -webkit-box-align: center;
-    //         align-items: center;
-    //         -webkit-box-pack: center;
-    //         justify-content: center;
-    //         flex-direction: column;
-    //         color: rgb(155, 153, 169);
-    //         font-size: 1rem;
-    //         margin-right: 1rem;
-    //         margin-bottom: 0px;
-    //     },
-    //     image-upload-box::before{
-    //         content: "";
-    //         background-position: center center;
-    //         background-repeat: no-repeat;
-    //         background-size: cover;
-    //         width: 2rem;
-    //         height: 2rem;
-    //         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICAgIDxwYXRoIGZpbGw9IiNEQ0RCRTQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTI4LjQ3MSAzMkgzLjUzYy0uOTcxIDAtMS44OTQtLjQyMi0yLjUyOS0xLjE1N2wtLjAyNi0uMDNBNCA0IDAgMCAxIDAgMjguMTk4VjguNjA3QTQgNCAwIDAgMSAuOTc0IDUuOTlMMSA1Ljk2YTMuMzQzIDMuMzQzIDAgMCAxIDIuNTI5LTEuMTU2aDIuNTM0YTIgMiAwIDAgMCAxLjUzNy0uNzJMMTAuNC43MkEyIDIgMCAwIDEgMTEuOTM3IDBoOC4xMjZBMiAyIDAgMCAxIDIxLjYuNzJsMi44IDMuMzYzYTIgMiAwIDAgMCAxLjUzNy43MmgyLjUzNGMuOTcxIDAgMS44OTQuNDIzIDIuNTI5IDEuMTU3bC4wMjYuMDNBNCA0IDAgMCAxIDMyIDguNjA2djE5LjU5MWE0IDQgMCAwIDEtLjk3NCAyLjYxN2wtLjAyNi4wM0EzLjM0MyAzLjM0MyAwIDAgMSAyOC40NzEgMzJ6TTE2IDkuNmE4IDggMCAxIDEgMCAxNiA4IDggMCAwIDEgMC0xNnptMCAxMi44YzIuNjQ3IDAgNC44LTIuMTUzIDQuOC00LjhzLTIuMTUzLTQuOC00LjgtNC44YTQuODA1IDQuODA1IDAgMCAwLTQuOCA0LjhjMCAyLjY0NyAyLjE1MyA0LjggNC44IDQuOHoiLz4KPC9zdmc+Cg==);
-    //         margin-bottom: 1rem;
-    //     },
-    //     image-upload-box input{
-    //         border: 1px solid rgb(195, 194, 204);
-    //         width: 100%;
-    //         height: 100%;
-    //         position: absolute;
-    //         top: 0px;
-    //         left: 0px;
-    //         opacity: 0;
-    //         cursor: pointer;
-    //         font-size: 0px;
-    //     }
-
-
-
-    //   }));
+    
     const [form,setForm] = useState({
 
     });

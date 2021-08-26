@@ -112,7 +112,7 @@ export default function ViewDetails(props) {
                         이만큼 모였어요.  /  이만큼 모아야 해요.
                     </Typography>
                     <Typography variant="caption" display="block" gutterBottom>
-                    {totalFundraising} 원  /  {goalFundraising} 원 / {props.rateOfAchievment} %
+                    {props.totalFundraising} 원  /  {props.goalFundraising} 원 / {props.rateOfAchievment} %
                     </Typography>
                     
                     <Slider
