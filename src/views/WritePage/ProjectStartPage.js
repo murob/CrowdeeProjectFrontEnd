@@ -27,7 +27,7 @@ export default function ProjectStartPage(props) {
 
     const doubleCheck = () => {
         console.log('중복확인')
-        fetch(`http://localhost:8081/creator/checkUrl/:${projectUrl}`, {
+        fetch(`http://localhost:8081/creator/checkUrl/${projectUrl}`, {
             headers:{
               
             }
@@ -44,7 +44,7 @@ export default function ProjectStartPage(props) {
 
     const submitStart = () => {
         const token = localStorage.getItem(ACCESS_TOKEN)
-        fetch(`http://localhost:8081/create/funding/:${projectUrl}`, {
+        fetch(`http://localhost:8081/create/funding/${projectUrl}`, {
             headers:{
               "Authorization" : token
             }
@@ -57,7 +57,7 @@ export default function ProjectStartPage(props) {
         }).
         then((res)=>{
             setManageUrl(res.tempFundingDTO.manageUrl)
-            props.history.push(`/write-page/:${manageUrl}`)
+            props.history.push(`/write-page/${manageUrl}`)
         })
     }
     const subStart = () => {

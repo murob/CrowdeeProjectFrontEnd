@@ -40,7 +40,8 @@ ReactDOM.render(
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/login-page" component={LoginPage} />
       <Route path="/view/:id" component={ViewPage}/>
-      <Route path="/write-page" component={WritePage} />
+      <Route path="/write-page/:manageUrl" component={WritePage} />
+      <Route path="/project-start" component={ViewPage}/>
       <Route exact path="/" component={Components} />
     </Switch>
   </Router>, 
