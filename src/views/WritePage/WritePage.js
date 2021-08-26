@@ -9,9 +9,9 @@ import WriteDefault from './WriteComponent/WriteDefault';
 import WriteFunding from './WriteComponent/WriteFunding';
 import WriteStory from './WriteComponent/WriteStory';
 export default function WritePage(props) {
-
+ 
     
-    
+    const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
     const [path,setPath] = useState();
     const [nextPath,setNextPath] = useState();
     const [firstData , setFirstData] = useState({});
