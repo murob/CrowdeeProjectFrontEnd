@@ -8,47 +8,53 @@ import WritePageNav from './WritePageNav';
 import WriteDefault from './WriteComponent/WriteDefault';
 import WriteFunding from './WriteComponent/WriteFunding';
 import WriteStory from './WriteComponent/WriteStory';
+import { ACCESS_TOKEN } from 'export/export';
 export default function WritePage(props) {
  
-    
+    const JWT = localStorage.getItem(ACCESS_TOKEN)
+    const [token,setToken] = useState(JWT)
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
     const [path,setPath] = useState();
     const [nextPath,setNextPath] = useState();
-    const [firstData , setFirstData] = useState({});
-    const [secondData , setSecondData] = useState({});
-    const [lastData , setLastData] = useState({});
+    // const [firstData , setFirstData] = useState({});
+    // const [secondData , setSecondData] = useState({});
+    // const [lastData , setLastData] = useState({});
+    const [formData,setFormData] = useState({});
     const changeDef = () =>{
-        setPath("/creator/create/thumbNail")
+        setPath(`/creator/create/thumbNail/${manageUrl}`)
        
-         setNextPath(`${props.match.path}/funding`)
+         setNextPath(`${props.match.path}/funding/${manageUrl}`)
          props.history.push(props.match.path)
         
     }
     const changeFun = () =>{
-        setPath("/creator/create/fundingPlan")
+        setPath(`/creator/create/fundingPlan/${manageUrl}`)
         
         setNextPath(`${props.match.path}/story`)
-        props.history.push(`${props.match.path}/funding`)
+        props.history.push(`${props.match.path}/funding/${manageUrl}`)
     }
     const changeSto = () =>{
-        setPath("/creator/create/detail")
+        setPath(`/creator/create/detail/${manageUrl}`)
        
         setNextPath("/")
-         props.history.push(`${props.match.path}/story`)
+         props.history.push(`${props.match.path}/story/${manageUrl}`)
     }
     const move = () =>{
         props.history.push("/")
     }
-    const firstForm = (data) =>{
-        setFirstData(data)
-    }
+    // const firstForm = (data) =>{
+    //     setFirstData(data)
+    // }
 
-    const secondForm = (data) =>{
-        setSecondData(data)
-    }
+    // const secondForm = (data) =>{
+    //     setSecondData(data)
+    // }
 
-    const lastForm = (data) =>{
-        setLastData(data)
+    // const lastForm = (data) =>{
+    //     setLastData(data)
+    // }
+    const form = data =>{
+        setFormData(data)
     }
 
     
@@ -57,7 +63,14 @@ export default function WritePage(props) {
     const onSubmit = () =>{
         
         fetch(`http://localhost:8081${path}`,{
-            method  : post
+            method  : post,
+            headers : {
+                Authorization : `Bearer ${token}`
+            },
+            body : {
+
+            }
+                
         }).
         then((res)=>{
             if(!res.status==200){
@@ -97,7 +110,7 @@ export default function WritePage(props) {
                     </Button>
                 </div>
             </div>
-               <WritePageRouter first={firstData} second={secondData} last={lastData} />
+               <WritePageRouter form={form} />
         </div>
         </Container>
     </div>
