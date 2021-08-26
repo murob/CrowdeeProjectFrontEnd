@@ -22,22 +22,22 @@ export default function WritePage(props) {
     const [formData,setFormData] = useState({});
     const changeDef = () =>{
         setPath(`/creator/create/thumbNail/${manageUrl}`)
-       
+        
          setNextPath(`${props.match.path}/funding/${manageUrl}`)
-         props.history.push(props.match.path)
+         props.history.push({nextPath})
         
     }
     const changeFun = () =>{
         setPath(`/creator/create/fundingPlan/${manageUrl}`)
         
-        setNextPath(`${props.match.path}/story`)
-        props.history.push(`${props.match.path}/funding/${manageUrl}`)
+        setNextPath(`${props.match.path}/story/${manageUrl}`)
+        props.history.push({nextPath})
     }
     const changeSto = () =>{
         setPath(`/creator/create/detail/${manageUrl}`)
        
-        setNextPath("/")
-         props.history.push(`${props.match.path}/story/${manageUrl}`)
+        setNextPath(`${props.match.path}${manageUrl}`)
+         props.history.push({nextPath})
     }
     const move = () =>{
         props.history.push("/")
@@ -68,6 +68,7 @@ export default function WritePage(props) {
                 Authorization : `Bearer ${token}`
             },
             body : {
+                data
 
             }
                 
