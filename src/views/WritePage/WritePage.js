@@ -93,7 +93,7 @@ export default function WritePage(props) {
                         <h4 style={{fontWeight:'bold'}} onClick={changeFun}>펀딩 계획</h4>
                     </Button>
                     <Button>
-                        <h4 style={{fontWeight:'bold'}} onClick={changeSto}>프로젝트 계획</h4>
+                        <h4 style={{fontWeight:'bold'}} onClick={changeSto}>프로젝트 계획 가나다</h4>
                     </Button>
                 </div>
             </div>
