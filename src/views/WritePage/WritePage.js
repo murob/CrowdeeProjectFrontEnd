@@ -11,7 +11,7 @@ import WriteStory from './WriteComponent/WriteStory';
 import { ACCESS_TOKEN } from 'export/export';
 export default function WritePage(props) {
  
-    const JWT = localStorage.getItem(ACCESS_TOKEN)
+    const JWT = localStorage.getItem("token")
     const [token,setToken] = useState(JWT)
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
     const [path,setPath] = useState();
@@ -65,7 +65,7 @@ export default function WritePage(props) {
         fetch(`http://localhost:8081${path}`,{
             method  : post,
             headers : {
-                Authorization : `Bearer ${token}`
+                "Authorization" : `Bearer ${token}`
             },
             body : {
                 data

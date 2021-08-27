@@ -22,7 +22,6 @@ import {Link} from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { login,request } from "Utils/Utils";
 import image from "assets/img/bg7.jpg";
-import { ACCESS_TOKEN } from "export/export";
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 const useStyles = makeStyles(styles);
 
@@ -58,7 +57,8 @@ export default function LoginPage(props) {
     }).then((res)=>res)
     .then((res)=>{
       console.log(res.token)
-      localStorage.setItem(ACCESS_TOKEN,res.token)
+      console.log(res.userNickName)
+      localStorage.setItem("token",res.token)
       props.history.push("/")
     });
   }

@@ -14,6 +14,8 @@ import { createTrue } from 'typescript';
 const useStyles = makeStyles(styles);
 
 export default function ProjectStartPage(props) {
+    const JWT = localStorage.getItem("token")
+    const [token,setToken] = useState(JWT)
     const classes = useStyles();
     const { ...rest } = props;
     const [manageUrl,setManageUrl] = useState()
@@ -49,14 +51,15 @@ export default function ProjectStartPage(props) {
     }
 
     const submitStart = () => {
-        const token = localStorage.getItem(ACCESS_TOKEN)
+        console.log("token값" + {token})
         fetch(`http://localhost:8081/create/funding/${projectUrl}`, {
             headers:{
-              "Authorization" : token
+                "Authorization" : `Bearer ${token}`
             }
         }).
         then((res)=>{
             if(!res.status==200){
+                console.log("에러 진입")
                 throw new Error("에러임")
             }
             res.json();
@@ -67,7 +70,9 @@ export default function ProjectStartPage(props) {
                 props.history.push(`/write-page/${manageUrl}`)
             }
             
-        })
+        }).catch((e) =>{
+            alert("펀딩 생성 중 에러 발생 "+ e.message);
+          });
     }
     
     return (
