@@ -29,6 +29,7 @@ export default function Components(props) {
       <Header
         brand="Crowdee"
         rightLinks={<HeaderLinks />}
+        postion="right"
         fixed
         color="transparent"
         changeColorOnScroll={{

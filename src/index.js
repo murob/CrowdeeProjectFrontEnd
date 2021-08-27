@@ -15,7 +15,7 @@ import WritePage from "views/WritePage/WritePage";
 import ViewPage from "views/ViewPage/ViewPage.js";
 import ProjectStartPage from "views/WritePage/ProjectStartPage";
 import ViewDetails from "views/ViewPage/ViewDetails";
-import ProjectStartPage from "views/WritePage/ProjectStartPage";
+
 var hist = createBrowserHistory();
 
 // componentDidMount(){
