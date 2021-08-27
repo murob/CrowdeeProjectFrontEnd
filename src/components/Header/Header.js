@@ -64,7 +64,7 @@ export default function Header(props) {
   
   const brandComponent = 
     <Link to="/" className={classes.title}>
-      <Button className={classes.title}>{brand}</Button>
+      <Button className={classes.title}><img src={require('./CrowdeeLogoFinal2.png').default}  /></Button>
     </Link>
   
   return (
