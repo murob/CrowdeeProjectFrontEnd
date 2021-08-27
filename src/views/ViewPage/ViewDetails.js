@@ -112,18 +112,18 @@ export default function ViewDetails(props) {
                     <Typography variant="subtitle1" gutterBottom>
                      남은 기간  {props.restDate}일
                     </Typography>
-                    <h3></h3> 
-                    <Typography variant="caption" display="block" gutterBottom>
+                    
+                    <Typography style={{marginTop:"15px"}} variant="caption" display="block" gutterBottom>
                         이만큼 모였어요.  /  이만큼 모아야 해요.
                     </Typography>
-                    <Typography variant="caption" display="block" gutterBottom>
+                    <Typography style={{marginTop:"15px"}} variant="caption" display="block" gutterBottom>
                     {props.totalFundraising} 원  /  {props.goalFundraising} 원 
                     </Typography>
                     <div style={{marginTop:"65px"}}>
                     <LinearWithValueLabel  value={props.rateOfAchievment} />
                     </div>
                     
-                    <div className={classes.fundingButton} style={{marginTop:"70px"}}>
+                    <div className={classes.fundingButton} style={{marginTop:"100px"}}>
             
                         <Button style={{marginRight:"30px"}} variant="outlined" color="secondary"><FavoriteBorderIcon />찜하기</Button>
                         

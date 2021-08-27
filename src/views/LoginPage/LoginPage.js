@@ -54,11 +54,12 @@ export default function LoginPage(props) {
     //     "Content-type":"application/json;charset=utf-8"
       body:JSON.stringify(login)
       
-    }).then((res)=>res)
+    })
     .then((res)=>{
       console.log(res.token)
       console.log(res.userNickName)
       localStorage.setItem("token",res.token)
+      localStorage.setItem("nickName",res.userNickName)
       props.history.push("/")
     });
   }
