@@ -16,9 +16,6 @@ export default function WritePage(props) {
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
     const [path,setPath] = useState();
     const [nextPath,setNextPath] = useState();
-    // const [firstData , setFirstData] = useState({});
-    // const [secondData , setSecondData] = useState({});
-    // const [lastData , setLastData] = useState({});
     const [formData,setFormData] = useState({});
     const changeDef = () =>{
         setPath(`/creator/create/thumbNail/${manageUrl}`)

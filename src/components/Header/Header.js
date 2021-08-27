@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import { useHistory } from "react-router";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -14,6 +15,8 @@ import Drawer from "@material-ui/core/Drawer";
 import {Link} from 'react-router-dom';
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 // core components
 import styles from "assets/jss/material-kit-react/components/headerStyle.js";
 
@@ -61,24 +64,39 @@ export default function Header(props) {
     [classes.absolute]: absolute,
     [classes.fixed]: fixed,
   });
+  const history = useHistory();
+
+  const buttonClick = (url) =>{
+    
+    history.push(url);
+  };
   
   const brandComponent = 
     <Link to="/" className={classes.title}>
       <Button className={classes.title}><img src={require('./CrowdeeLogoFinal2.png').default}  /></Button>
     </Link>
   
+  const menuIcon = 
+      
+        <MenuIcon
+        color="white"
+        className={classes.navLink}
+        onClick={()=>buttonClick("/menu-page")}
+        >
+        <AccountCircleRoundedIcon	 className={classes.inputIconsColor} />
+        </MenuIcon>
+     
+      
+   
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
-        {leftLinks !== undefined ? brandComponent : null}
-        <div className={classes.flex}>
-          {leftLinks !== undefined ? (
-            <Hidden smDown implementation="css">
-              {leftLinks}
-            </Hidden>
-          ) : (
-            brandComponent
-          )}
+       {menuIcon}
+        <div className={classes.flex} style={{justifyContent:"center",display:"flex"}}>
+          <div style={{}}>
+          {brandComponent}
+          </div>
+          
         </div>
         <Hidden smDown implementation="css">
           {rightLinks}

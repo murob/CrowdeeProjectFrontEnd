@@ -26,7 +26,7 @@ export default function MenuPage() {
                     <h4 style={{fontWeight:'bold'}}>프로젝트 메뉴</h4>
                 </div>
             </div>
-            <div style={{height:'700px', width:'100%', paddingTop:'100px'}}>
+            <div style={{height:'920px', width:'100%', paddingTop:'100px'}}>
                 <div style={{paddingLeft:'55px'}}>
                     <div>
                         <Button style={{marginBottom:'-30px'}}
@@ -80,6 +80,7 @@ export default function MenuPage() {
                         </div>
                     </div>
                 </div>
+               
             </div>
             <Footer />
         </div>

@@ -43,6 +43,7 @@ export default function SimpleSelect(props) {
           <MenuItem value="theater">연극</MenuItem>
           <MenuItem value="musical">뮤지컬</MenuItem>
           <MenuItem value="concert">연주</MenuItem>
+          <MenuItem value="etc">기타</MenuItem>
         </Select>
       </FormControl>
     </div>
