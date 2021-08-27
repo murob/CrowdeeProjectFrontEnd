@@ -1,4 +1,6 @@
-import React,{useState,useEffect} from "react";
+
+import React, {useState, useEffect} from "react";
+
 // nodejs library that concatenates classes
 import Container from '@material-ui/core/Container'
 import classNames from "classnames";
@@ -18,6 +20,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 
 import styles from "assets/jss/material-kit-react/views/components.js";
 import ProductSection from "views/LandingPage/Sections/ProductSection.js";
+import MenuLink from "components/Header/MenuLink";
 
 const useStyles = makeStyles(styles);
 
@@ -37,6 +40,7 @@ export default function Components(props) {
     <Container>
       <Header
         brand="Crowdee"
+        leftLinks={<MenuLink/>}
         rightLinks={<HeaderLinks />}
         fixed
         color="transparent"

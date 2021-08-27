@@ -13,8 +13,11 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import SignUpPage from "views/SignUpPage/SignUpPage.js";
 import WritePage from "views/WritePage/WritePage";
 import ViewPage from "views/ViewPage/ViewPage.js";
-import ViewDetails from "views/ViewPage/ViewDetails";
+import MenuPage from "views/MenuPage/MenuPage";
+import DiscoverPage from "views/DiscoverPage/DiscoverPage";
 import ProjectStartPage from "views/WritePage/ProjectStartPage";
+import ViewDetails from "views/ViewPage/ViewDetails";
+
 var hist = createBrowserHistory();
 
 // componentDidMount(){
@@ -41,7 +44,9 @@ ReactDOM.render(
       <Route path="/login-page" component={LoginPage} />
       <Route path="/view/:id" component={ViewPage}/>
       <Route path="/write-page/:manageUrl" component={WritePage} />
-      <Route path="/project-start" component={ProjectStartPage}/>
+      <Route path="/project-start" component={ProjectStartPage} />
+      <Route path="/menu-page" component={MenuPage} />
+      <Route path="/discover-page/:param" component={DiscoverPage} />
       <Route exact path="/" component={Components} />
     </Switch>
   </Router>, 
