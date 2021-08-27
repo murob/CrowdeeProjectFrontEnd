@@ -113,7 +113,7 @@ useEffect(() => {
             남은날짜 : {funding.restDate}
           </Typography>
           <Typography variant="caption" display="block" gutterBottom>
-           목표금액 : {funding.goalFundraising}
+           목표금액 : {funding.goalFundraising} 원
           </Typography>
           <LinearWithValueLabel value={funding.rateOfAchievement} />
         </CardContent>

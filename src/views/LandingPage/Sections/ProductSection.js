@@ -27,7 +27,7 @@ export default function ProductSection() {
       return res.json()})
       .then((res)=>{
       setFundings(res);
-      console.log(res[0].rateOfAchievement)
+    
       })
       .catch((e) =>{
         alert("게시물 조회 중 에러발생 "+ e.message);

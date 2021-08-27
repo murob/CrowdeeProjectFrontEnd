@@ -3,16 +3,15 @@ import { makeStyles } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from "components/CustomButtons/Button.js";
+
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import IconButton from '@material-ui/core/IconButton';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import Story from 'views/ViewPage/Story'
-//아이콘임포트
-import AddIcCallSharpIcon from '@material-ui/icons/AddIcCallSharp';
 
+import Button from '@material-ui/core/Button';
+import LinearWithValueLabel from "components/CrowdeeComponents/LinearProgressWithLabel";
+//아이콘임포트
+
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 //달성률버튼 퍼센트
 const marks = [
@@ -79,6 +78,11 @@ export default function ViewDetails(props) {
             textAlign: 'center',
 
         },
+        fundingButton : {
+            margin: theme.spacing(1),
+            justifyContent:'space-between'
+        },
+        
       }));
       
       const classes = useStyles();
@@ -89,11 +93,6 @@ export default function ViewDetails(props) {
     <div className={classes.paper}>
         <div className={classes.root}>
         <Grid container spacing={3}>
-            <Grid item xs={12}>
-                <Paper >
-                    <h2> {props.title}</h2>
-                </Paper>
-            </Grid>
             <Grid item xs={7}>
                 <Paper className={classes.topmain}>
                 <CardMedia
@@ -107,39 +106,30 @@ export default function ViewDetails(props) {
             </Grid>
             <Grid item xs={5}>
                 <Paper className={classes.topmain}>
-                    <h3>남은 기간  {props.restDate}일</h3> 
+                    <Typography variant="h4" gutterBottom>
+                        {props.title}
+                    </Typography>
+                    <Typography variant="subtitle1" gutterBottom>
+                     남은 기간  {props.restDate}일
+                    </Typography>
+                    <h3></h3> 
                     <Typography variant="caption" display="block" gutterBottom>
                         이만큼 모였어요.  /  이만큼 모아야 해요.
                     </Typography>
                     <Typography variant="caption" display="block" gutterBottom>
-                    {props.totalFundraising} 원  /  {props.goalFundraising} 원 / {props.rateOfAchievment} %
+                    {props.totalFundraising} 원  /  {props.goalFundraising} 원 
                     </Typography>
+                    <div style={{marginTop:"65px"}}>
+                    <LinearWithValueLabel  value={props.rateOfAchievment} />
+                    </div>
                     
-                    <Slider
-                        defaultValue={props.rateOfAchievment}
-                        getAriaValueText={valuetext}
-                        aria-labelledby="discrete-slider-custom"
-                        step={10}
-                        valueLabelDisplay="auto"
-                        marks={marks}
-                        disabled
-                    />
-                    <div className={classes.grapbutton}>
-                        <ButtonGroup
-                        orientation="vertical"
-                        color="primary"
-                        aria-label="vertical contained primary button group"
-                        variant="text"
-                    >
-                        <IconButton color="primary" aria-label="add to shopping cart">
-                            펀딩하기
-                            <AddShoppingCartIcon/>
-                        </IconButton>
-                        <IconButton color="primary" aria-label="add to shopping cart">
-                            문의하기
-                        <AddIcCallSharpIcon/>
-                        </IconButton>
-                        </ButtonGroup>
+                    <div className={classes.fundingButton} style={{marginTop:"70px"}}>
+            
+                        <Button style={{marginRight:"30px"}} variant="outlined" color="secondary"><FavoriteBorderIcon />찜하기</Button>
+                        
+                        <Button variant="outlined"  color="primary">
+                            자세히보기
+                        </Button>
                     </div>
                 </Paper>
             </Grid>
