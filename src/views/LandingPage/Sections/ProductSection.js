@@ -15,7 +15,10 @@ export default function ProductSection() {
   const classes = useStyles();
 
   const [fundings, setFundings] = useState([]);
-
+  const [fundingsKey,setFundingsKey] = useState([]);
+  const [categoryTitle,setCategoryTitle] = useState([
+    "달성 완료 펀딩" , "신규 추천 펀딩" , "달성 임박 펀딩" , "인기 추천 펀딩"
+  ])
   //함수 실행시 최초 한번 실행되는 것
   useEffect(() => {
     fetch("http://localhost:8081/contents")
@@ -27,6 +30,7 @@ export default function ProductSection() {
       return res.json()})
       .then((res)=>{
       setFundings(res);
+      setFundingsKey(Object.keys(fundings))
     
       })
       .catch((e) =>{
@@ -40,31 +44,63 @@ export default function ProductSection() {
   return (
     <div>
       <div className={classes.section}>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={8}>
-            <Typography>주목할 만한 펀딩</Typography>
-          </GridItem>
-        </GridContainer>
-      
-          <GridContainer justify="center">
-            <GridItem>
-              <GridContainer justify="center">
-              {fundings.map((funding) => (
-                <FundingCard 
-                  id={funding.funding_id}
-                  title={funding.title}
-                  imgUrl={funding.thumbNailUrl}
-                  summary={funding.summary}
-                  restDate={funding.restDate}
-                  category={funding.category}
-                  totalFundraising={funding.totalFundraising}
-                  goalFundraising={funding.goalFundraising}
-                  ROA={funding.rateOfAchievement}
-                ></FundingCard>
-              ))} 
-              </GridContainer>
-            </GridItem>
-          </GridContainer>
+       
+        
+              {fundings.map((category,index) => (
+               
+                <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={8}>
+                <Typography>{categoryTitle[index]}</Typography>
+              </GridItem>
+               </GridContainer>
+                ,category.map((funding) => (
+                <>
+
+                <GridContainer justify="center">
+                  <GridItem>
+                    <GridContainer justify="center">
+                      <FundingCard 
+                        id={funding.funding_id}
+                        title={funding.title}
+                        imgUrl={funding.thumbNailUrl}
+                        summary={funding.summary}
+                        restDate={funding.restDate}
+                        category={funding.category}
+                        totalFundraising={funding.totalFundraising}
+                        goalFundraising={funding.goalFundraising}
+                        ROA={funding.rateOfAchievement} />
+                   </GridContainer>
+                  </GridItem>
+                </GridContainer>
+                </>
+              ))))} 
+              {/* {fundings.new.map((funding) => (
+                <>
+                 <GridContainer justify="center">
+                  <GridItem xs={12} sm={12} md={8}>
+                  <Typography>신규 추천 펀딩</Typography>
+                </GridItem>
+                 </GridContainer>
+            
+                <GridContainer justify="center">
+                  <GridItem>
+                    <GridContainer justify="center">
+                      <FundingCard 
+                        id={funding.funding_id}
+                        title={funding.title}
+                        imgUrl={funding.thumbNailUrl}
+                        summary={funding.summary}
+                        restDate={funding.restDate}
+                        category={funding.category}
+                        totalFundraising={funding.totalFundraising}
+                        goalFundraising={funding.goalFundraising}
+                        ROA={funding.rateOfAchievement} />
+                   </GridContainer>
+                  </GridItem>
+                </GridContainer>
+                </>
+              ))}  */}
+             
       </div>
     </div>
   );
