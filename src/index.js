@@ -14,7 +14,7 @@ import SignUpPage from "views/SignUpPage/SignUpPage.js";
 import WritePage from "views/WritePage/WritePage";
 import ViewPage from "views/ViewPage/ViewPage.js";
 import MenuPage from "views/MenuPage/MenuPage";
-import DiscoverPage from "views/DiscoverPage/DiscoverPage";
+import CategoryPage from "views/CategoryPage/CategoryPage";
 import ProjectStartPage from "views/WritePage/ProjectStartPage";
 import ViewDetails from "views/ViewPage/ViewDetails";
 
@@ -46,7 +46,7 @@ ReactDOM.render(
       <Route path="/write-page/:manageUrl" component={WritePage} />
       <Route path="/project-start" component={ProjectStartPage} />
       <Route path="/menu-page" component={MenuPage} />
-      <Route path="/discover-page/:param" component={DiscoverPage} />
+      <Route path="/category/:param" component={CategoryPage} />
       <Route exact path="/" component={Components} />
     </Switch>
   </Router>, 
