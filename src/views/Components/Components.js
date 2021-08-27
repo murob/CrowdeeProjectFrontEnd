@@ -36,7 +36,7 @@ export default function Components(props) {
   }, [])
   return (
     <Container>
-      <Header
+      {/* <Header
         brand="Crowdee"
         leftLinks={<MenuLink/>}
         rightLinks={<HeaderLinks />}
@@ -49,7 +49,11 @@ export default function Components(props) {
           color: "white",
         }}
         {...rest}
-      />
+      /> */}
+
+      <div style={{position:'fixed', color:'transparent', height:'347px', backgroundColor:'white', width:'100%'}}>
+
+      </div>
       <Parallax image={
         [require("assets/img/bg4.jpg").default,
         require("assets/img/bg2.jpg").default]}>
