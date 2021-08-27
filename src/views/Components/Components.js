@@ -24,6 +24,15 @@ const useStyles = makeStyles(styles);
 export default function Components(props) {
   const classes = useStyles();
   const { ...rest } = props;
+  const [userNickName,setUserNickName] = useState(localStorage.getItem("nickName"))
+  const [userToken,setUserToken] = useState(localStorage.getItem("token"))
+  const [checkLogin,setCheckLogin] = useState(false);
+  useEffect(() => {
+    if(userToken){
+      setCheckLogin(true)
+    }
+    
+  }, [])
   return (
     <Container>
       <Header
@@ -32,6 +41,8 @@ export default function Components(props) {
         postion="right"
         fixed
         color="transparent"
+        checkLogin={checkLogin}
+        userNickName={userNickName}
         changeColorOnScroll={{
           height: 347,
           color: "white",
