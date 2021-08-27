@@ -34,10 +34,11 @@ export default function ProjectStartPage(props) {
         }).then((res)=>{
             if(res.status==200){
                 console.log('중복URL 없음')
-                submitStart()
+                alert('사용할 수 있는 url입니다.')
             }
             else if(res.status==400||res.status==401||res.status==403||res.status==404){
                 console.log('URL이 중복됩니다.')
+                alert('url이 중복됩니다.')
             }
         })
     }
