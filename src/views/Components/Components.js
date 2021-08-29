@@ -34,7 +34,7 @@ export default function Components(props) {
     if(userToken){
       setCheckLogin(true)
     }
-    
+    console.log(checkLogin);
   }, [])
   return (
     <Container>
@@ -43,7 +43,7 @@ export default function Components(props) {
         leftLinks={<MenuLink/>}
         rightLinks={<HeaderLinks />}
         fixed
-        color="transparent"
+        color="white"
         checkLogin={checkLogin}
         userNickName={userNickName}
         changeColorOnScroll={{

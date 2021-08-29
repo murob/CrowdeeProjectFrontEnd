@@ -4,7 +4,7 @@
  */
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment.js';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat.js';
+//import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat.js';
 import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage.js';
 import AutoLink from '@ckeditor/ckeditor5-link/src/autolink.js';
 import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave.js';
@@ -34,7 +34,7 @@ import Link from '@ckeditor/ckeditor5-link/src/link.js';
 import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage.js';
 import List from '@ckeditor/ckeditor5-list/src/list.js';
 import ListStyle from '@ckeditor/ckeditor5-list/src/liststyle.js';
-import Markdown from '@ckeditor/ckeditor5-markdown-gfm/src/markdown.js';
+//import Markdown from '@ckeditor/ckeditor5-markdown-gfm/src/markdown.js';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed.js';
 import MediaEmbedToolbar from '@ckeditor/ckeditor5-media-embed/src/mediaembedtoolbar.js';
 import Mention from '@ckeditor/ckeditor5-mention/src/mention.js';
@@ -47,13 +47,13 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import Title from '@ckeditor/ckeditor5-heading/src/title.js';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
-
+import { Input } from '@ckeditor/ckeditor5-typing';
 class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.
 Editor.builtinPlugins = [
 	Alignment,
-	Autoformat,
+	Input,
 	AutoImage,
 	AutoLink,
 	Autosave,
@@ -83,7 +83,6 @@ Editor.builtinPlugins = [
 	LinkImage,
 	List,
 	ListStyle,
-	Markdown,
 	MediaEmbed,
 	MediaEmbedToolbar,
 	Mention,

@@ -14,9 +14,9 @@ export default function WriteDefault(props) {
   
     }
     const FormValueHandler = (e) =>{
-        setFirstForm({
+        setForm({
             ...form,
-            [e.target.name] : [e.target.value]
+            [e.target.name] : e.target.value
         })
        props.save(form)
     }
@@ -98,7 +98,7 @@ export default function WriteDefault(props) {
           const input = document.querySelector('input[type="file"]')
           var data = new FormData();
           data.append("file",input.files[0])
-          fetch("http://localhost:8081/api/image",{
+          fetch("http://localhost:8081/api/thumbnail",{
               method : 'post',
             //   headers :{
             //     'Content-Type': 'multipart/form-data'
@@ -189,7 +189,7 @@ export default function WriteDefault(props) {
                             <h6>잠재 후원자의 관심사를 고려한 검색 태그를 입력해주세요.</h6>
                         </div>
                         <div>
-                            <input name="hashtag" onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'80px'}} placeholder={'예시) 피아노,사극,현대무용 (# 또는 , 로 구분)'}></input>
+                            <input name="tag" onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'80px'}} placeholder={'예시) 피아노,사극,현대무용 (# 또는 , 로 구분)'}></input>
                         </div>
                     </div>
 

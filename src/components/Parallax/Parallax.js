@@ -16,10 +16,7 @@ export default function Parallax(props) {
   const indexRef = useRef(0)
     
   const changeIndex = () =>{
-    console.log("changeIndex 실행 됨")
-    console.log(index)
-    console.log(index)
-   
+ 
     if(index==0){
       setIndex(index+1)
       //indexRef.current+=1
@@ -77,6 +74,7 @@ export default function Parallax(props) {
       className={parallaxClasses}
       style={{
         ...style,
+        marginTop:"77px",
         backgroundImage: "url(" + image[index] + ")",
         transform: transform,
       }}

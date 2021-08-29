@@ -91,7 +91,11 @@ export default function Header(props) {
   
   const writeFunding = 
 
-    <Typography variant="subtitle1" style={{cursor:"pointer",}}>펀딩 등록하기</Typography>
+    <Typography
+      variant="subtitle1"
+      style={{cursor:"pointer",}}
+      onClick={()=>buttonClick("/project-start")}
+      >펀딩 등록하기</Typography>
       
      
       
