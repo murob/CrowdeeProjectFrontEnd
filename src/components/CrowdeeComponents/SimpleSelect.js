@@ -18,12 +18,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleSelect(props) {
   const classes = useStyles();
-  const [category, setCategory] = useState('');
-
+ 
   const handleChange = (event) => {
-  
-    setCategory(event.target.value);
-    props.handleState(category);  
+    console.log(event.target.value)
+
+    props.handleState(event.target.value);  
 
   };
 
@@ -34,7 +33,7 @@ export default function SimpleSelect(props) {
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={category}
+          
           onChange={handleChange}
           label="concert"
           style={{width:'300px', height:'50px'}}

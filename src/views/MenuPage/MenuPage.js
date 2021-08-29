@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import Header from 'components/Header/Header';
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
@@ -6,13 +6,68 @@ import Footer from 'components/Footer/Footer';
 import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
 export default function MenuPage() {
-
+    const [checkMember,setCheckMember] = useState();
     const history = useHistory();
 
     const buttonClick = (url) =>{
     
         history.push(url);
     };
+
+    const logout = () =>{
+        if(window.confirm("로그아웃하시겠습니까?")){
+            console.log("로그아웃들어오나")
+            localStorage.removeItem("token")
+            localStorage.removeItem("userNickName")
+            history.push("/")
+        }
+    }
+
+    useEffect(() => {
+        setCheckMember(check)
+        
+    }, [])
+    const check = () =>{
+        if(localStorage.getItem("token")){
+            return(
+                <div style={{marginTop:'60px'}}>
+                    <div>
+                        <Button style={{marginBottom:'-30px'}}
+                            onClick={()=>buttonClick("/myPage")}>
+                            <h3 style={{fontWeight:'bold'}}>마이 페이지</h3>
+                        </Button>
+                    </div>
+                    <div>
+                    <Button style={{marginBottom:'-30px'}}
+                        onClick={logout}>
+                        <h3 style={{fontWeight:'bold'}}>로그아웃하기</h3>
+                    </Button>
+                    </div>
+                </div>
+            )
+                
+        }
+        else{
+            return(
+                <div style={{marginTop:'60px'}}>
+                    <div>
+                        <Button style={{marginBottom:'-30px'}}
+                            onClick={()=>buttonClick("/signUp")}>
+                            <h3 style={{fontWeight:'bold'}}>회원가입하기</h3>
+                        </Button>
+                    </div>
+                    <div>
+                    <Button style={{marginBottom:'-30px'}}
+                        onClick={()=>buttonClick("/login-page")}>
+                        <h3 style={{fontWeight:'bold'}}>로그인하기</h3>
+                    </Button>
+                    </div>
+                </div>
+            )
+           
+        }
+    }
+   
 
     return (
         <div style={{backgroundColor:'white'}}>
@@ -79,6 +134,7 @@ export default function MenuPage() {
                             </div>
                         </div>
                     </div>
+                    {checkMember}
                 </div>
                
             </div>

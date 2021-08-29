@@ -11,30 +11,30 @@ import WriteStory from './WriteComponent/WriteStory';
 import { ACCESS_TOKEN } from 'export/export';
 export default function WritePage(props) {
  
-    const JWT = localStorage.getItem("token")
-    const [token,setToken] = useState(JWT)
+    
+    const [token,setToken] = useState(localStorage.getItem("token"))
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
-    const [path,setPath] = useState();
-    const [nextPath,setNextPath] = useState();
-    const [formData,setFormData] = useState({});
+    const [path,setPath] = useState(`/creator/create/thumbNail/${manageUrl}`);
+    const [nextPath,setNextPath] = useState(`/write-page/funding/${manageUrl}`);
+    const [formData,setFormData] = useState();
     const changeDef = () =>{
         setPath(`/creator/create/thumbNail/${manageUrl}`)
         
-         setNextPath(`${props.match.path}/funding/${manageUrl}`)
-         props.history.push({nextPath})
+       
+         props.history.push(`/write-page/${manageUrl}`)
         
     }
     const changeFun = () =>{
         setPath(`/creator/create/fundingPlan/${manageUrl}`)
         
-        setNextPath(`${props.match.path}/story/${manageUrl}`)
-        props.history.push({nextPath})
+      
+        props.history.push(`/write-page/funding/${manageUrl}`)
     }
     const changeSto = () =>{
         setPath(`/creator/create/detail/${manageUrl}`)
        
-        setNextPath(`${props.match.path}${manageUrl}`)
-         props.history.push({nextPath})
+       
+         props.history.push(`/write-page/story/${manageUrl}`)
     }
     const move = () =>{
         props.history.push("/")
@@ -58,25 +58,32 @@ export default function WritePage(props) {
 
     
     const onSubmit = () =>{
-        
-        fetch(`http://localhost:8081${path}`,{
-            method  : post,
-            headers : {
-                "Authorization" : `Bearer ${token}`
-            },
-            body : {
-                data
-
-            }
+        if(confirm("저장하시겠습니까?")){
+            fetch(`http://localhost:8081${path}`,{
+                method  : "post",
+                headers : {
+                    "Authorization" : `Bearer ${token}`,
+                    "Content-Type" : "application/json;charset=utf-8"
+                },
+                body : 
+                JSON.stringify(formData)
                 
-        }).
-        then((res)=>{
-            if(!res.status==200){
-                throw new Error('http에러')
-            }
-         
-
-        })
+    
+                
+                    
+            }).
+            then((res)=>{
+                console.log(JSON.stringify(formData))
+                if(!res.status==200){
+                    throw new Error('http에러')
+                }
+               
+    
+            }).catch((e)=>{
+                alert("데이터 전송 중 에러 발생"+e.message)
+            })
+        }
+       
     }
 
     return (

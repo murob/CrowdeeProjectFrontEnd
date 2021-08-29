@@ -4,15 +4,13 @@ import React,{useState} from 'react';
 
 
 
-export default function WriteFunding() {
+export default function WriteFunding(props) {
     
-    const [form,setForm] = useState({
-
-    });
+    const [form,setForm] = useState();
     const FormValueHandler = (e) =>{
         setForm({
             ...form,
-            [e.target.name] : [e.target.value]
+            [e.target.name] : e.target.value
         })
        props.save(form)
     }

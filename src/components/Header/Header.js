@@ -19,6 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 // core components
 import styles from "assets/jss/material-kit-react/components/headerStyle.js";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
@@ -77,14 +78,25 @@ export default function Header(props) {
     </Link>
   
   const menuIcon = 
-      
         <MenuIcon
         color="white"
         className={classes.navLink}
         onClick={()=>buttonClick("/menu-page")}
+        style={{
+          cursor:"pointer"
+        }}
         >
         <AccountCircleRoundedIcon	 className={classes.inputIconsColor} />
         </MenuIcon>
+  
+  const writeFunding = 
+
+    <Typography
+      variant="subtitle1"
+      style={{cursor:"pointer",}}
+      onClick={()=>buttonClick("/project-start")}
+      >펀딩 등록하기</Typography>
+      
      
       
    
@@ -92,6 +104,10 @@ export default function Header(props) {
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
        {menuIcon}
+       <div style={{marginLeft :"50px"}}>
+       {writeFunding}
+       </div>
+       
         <div className={classes.flex} style={{justifyContent:"center",display:"flex"}}>
           <div style={{}}>
           {brandComponent}

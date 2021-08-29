@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import Header from "components/Header/Header.js";
 import HeaderLinks from 'components/Header/HeaderLinks';
 import styles from "assets/jss/material-kit-react/views/components.js";
@@ -7,65 +7,97 @@ import Footer from 'components/Footer/Footer';
 import Card from 'components/Card/Card';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import { Button } from '@material-ui/core';
-import { request } from "Utils/Utils";
-import { Link, Switch } from 'react-router-dom';
+
+import CustomInput from "components/CustomInput/CustomInput.js";
 
 const useStyles = makeStyles(styles);
 
 export default function ProjectStartPage(props) {
+    
     const classes = useStyles();
     const { ...rest } = props;
-    const [manageUrl,setManageUrl] = useState()
+    const [token,setToken] = useState(localStorage.getItem("token"))
+   
     const [projectUrl,setProjectUrl] = useState({projectUrl:""})
-
+    const [urlCheck,setUrlCheck] = useState(false)
+    const [urlText,setUrlText] = useState("www.Crowdee.com/고객님의 URL")
+    const [confirm , setConfirm] = useState(false)
+    const [start , setStart] = useState('none')
     const urlChange = (e) => {
         setProjectUrl(
             e.target.value
         );
-        console.log(projectUrl)
+        setStart('none')
+        setConfirm(false)
+        setUrlText("www.Crowdee.com/고객님의 URL")
     }
 
     const doubleCheck = () => {
         console.log('중복확인')
-        fetch(`http://localhost:8081/creator/checkUrl/${projectUrl}`, {
-            headers:{
-              
+        fetch(`http://localhost:8081/creator/checkUrl/${projectUrl}`).
+        then((res)=>{
+            if(res.status==400||res.status==500){
+                setUrlText("URL이 중복됩니다.")
+                setUrlCheck(true)
             }
-        }).then((res)=>{
-            if(res.status==200){
-                console.log('중복URL 없음')
-                alert('사용할 수 있는 url입니다.')
-            }
-            else if(res.status==400||res.status==401||res.status==403||res.status==404){
-                console.log('URL이 중복됩니다.')
-                alert('url이 중복됩니다.')
+            else {
+                setUrlText('사용가능한 URL입니다.')
+                setUrlCheck(false)
+                setStart('flex')
+                setConfirm(true)
             }
         })
     }
-
-    const submitStart = () => {
-        const token = localStorage.getItem(ACCESS_TOKEN)
-        fetch(`http://localhost:8081/create/funding/${projectUrl}`, {
+    useEffect(() => {
+      
+        fetch(`http://localhost:8081/creator/project-start`,{
             headers:{
-              "Authorization" : token
+                "Authorization" : `Bearer ${token}`
             }
+        }).
+        then((res)=>{
+            if(res.status==403){
+                props.history.push("/login-page")
+            }
+            else if(res.status==401){
+               alert("크리에이터 등록페이지로 넘어갑니다.")
+            }
+            
+        })
+       
+    }, [])
+    const submitStart = () => {
+        console.log("token값" + {token})
+        fetch(`http://localhost:8081/creator/create/funding/${projectUrl}`, {
+            headers:{
+                "Authorization" : `Bearer ${token}`
+            },
+            method :
+                'post'
         }).
         then((res)=>{
             if(!res.status==200){
+                console.log("에러 진입")
                 throw new Error("에러임")
             }
-            res.json();
+          return res.json()
+            
         }).
         then((res)=>{
-            setManageUrl(res.tempFundingDTO.manageUrl)
-            props.history.push(`/write-page/${manageUrl}`)
-        })
+            if(confirm){
+                console.log(res.manageUrl)
+                return res.manageUrl
+            }
+        }).then((res)=>{
+              
+           
+            props.history.push(`/write-page/${res}`)
+        }).
+        catch((e) =>{
+            alert("펀딩 생성 중 에러 발생 "+ e.message);
+        });
     }
-    const subStart = () => {
-        console.log('default페이지로 이동')       
-        props.history.push("/write-page")
-        
-    }
+    
     return (
         <div style={{backgroundColor:'white'}}>
             <Header
@@ -99,11 +131,28 @@ export default function ProjectStartPage(props) {
                             <h6>프로젝트 페이지로 접속하기 위한 웹페이지 주소(URL)를 설정 해주세요.</h6>
                         </div>
                         <div>
-                            <input type="text" name="projectUrl" onChange={urlChange} style={{border:'1px solid #EDEBEB', borderRadius:'3px', width:'200px', height:'40px'}} placeholder={'URL을 입력해주세요'}></input>
-                            <Button variant="contained" style={{marginLeft:'10px'}} onClick={doubleCheck}>중복확인</Button>
+                        <CustomInput
+                      labelText={urlText}
+                      error ={urlCheck}
+                      id="url"
+                      underlineClasses={classes.underlineSuccess}
+                      formControlProps={{
+                        fullWidth: false,
+                        style :{hidden:"true",width:"300px"}
+                      }}
+                      inputProps={{
+                        type: "string",
+                        
+                        onChange: urlChange,
+                       
+                        autoComplete: "off",
+                      }}
+                    />
+                            {/* <input type="text" name="projectUrl" onChange={urlChange} style={{border:'1px solid #EDEBEB', borderRadius:'3px', width:'200px', height:'40px'}} placeholder={'URL을 입력해주세요'}></input> */}
+                            <Button variant="contained" style={{marginLeft:'10px', marginTop:"20px"}} onClick={doubleCheck}>중복확인</Button>
                         </div>
                         <div style={{display:'flex', justifyContent:'', paddingTop:'50px'}}>
-                            <Button style={{fontWeight:'bold'}} variant="contained" color="secondary" onClick={submitStart}>시작하기</Button>
+                            <Button style={{fontWeight:'bold',display:`${start}`}} variant="contained" color="secondary" onClick={submitStart}>시작하기</Button>
                         </div>
                     </div>
                 </div>
