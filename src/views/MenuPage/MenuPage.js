@@ -117,19 +117,19 @@ export default function MenuPage() {
                         <h5 style={{marginLeft:'10px', fontWeight:'bold', color:'#B2B2B2'}}>카테고리</h5>
                         <div style={{display:'flex', justifyContent:'space-evenly', marginLeft:'-50px'}}>
                             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                                <Button><Avatar alt="Remy Sharp" src={require('./dancing.png').default} style={{width:"150px",height:"150px"}} /></Button>
+                                <Button onClick={()=>buttonClick("/category/:param")}><Avatar alt="Remy Sharp" src={require('./dancing.png').default} style={{width:"150px",height:"150px"}} /></Button>
                                 <h4 style={{fontWeight:'bold'}}>무용</h4>
                             </div>
                             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                                <Button><Avatar alt="Remy Sharp" src={require('./theatre.png').default} style={{width:"150px",height:"150px"}} /></Button>
+                                <Button onClick={()=>buttonClick("/category/:param")}><Avatar alt="Remy Sharp" src={require('./theatre.png').default} style={{width:"150px",height:"150px"}} /></Button>
                                 <h4 style={{fontWeight:'bold'}}>연극</h4>
                             </div>
                             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                                <Button><Avatar alt="Remy Sharp" src={require('./musical.png').default} style={{width:"150px",height:"150px"}} /></Button>
+                                <Button onClick={()=>buttonClick("/category/:param")}><Avatar alt="Remy Sharp" src={require('./musical.png').default} style={{width:"150px",height:"150px"}} /></Button>
                                 <h4 style={{fontWeight:'bold'}}>뮤지컬</h4>
                             </div>
                             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                                <Button><Avatar alt="Remy Sharp" src={require('./concert.png').default} style={{width:"150px",height:"150px"}} /></Button>
+                                <Button onClick={()=>buttonClick("/category/:param")}><Avatar alt="Remy Sharp" src={require('./concert.png').default} style={{width:"150px",height:"150px"}} /></Button>
                                 <h4 style={{fontWeight:'bold'}}>연주</h4>
                             </div>
                         </div>

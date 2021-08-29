@@ -52,6 +52,10 @@ export default function Components(props) {
         }}
         {...rest}
       />
+
+      <div style={{position:'fixed', color:'transparent', height:'347px', backgroundColor:'white', width:'100%'}}>
+
+      </div>
       <Parallax image={
         [require("assets/img/bg4.jpg").default,
         require("assets/img/bg2.jpg").default]}>
