@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import { useHistory } from 'react-router';
 import { makeStyles } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -87,7 +88,13 @@ export default function ViewDetails(props) {
       
       const classes = useStyles();
 
-     
+      const history = useHistory();
+
+      const buttonClick = (url) =>{
+      
+          history.push(url);
+      };
+  
    
     return (
     <div className={classes.paper}>
@@ -127,7 +134,7 @@ export default function ViewDetails(props) {
             
                         <Button style={{marginRight:"30px"}} variant="outlined" color="secondary"><FavoriteBorderIcon />찜하기</Button>
                         
-                        <Button variant="outlined"  color="primary">
+                        <Button variant="outlined"  color="primary"  onClick={()=>buttonClick(`/view/${projectUrl}`)}>
                             자세히보기
                         </Button>
                     </div>
