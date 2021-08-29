@@ -38,7 +38,7 @@ export default function Components(props) {
   }, [])
   return (
     <Container>
-      {/* <Header
+      <Header
         brand="Crowdee"
         leftLinks={<MenuLink/>}
         rightLinks={<HeaderLinks />}
@@ -51,7 +51,7 @@ export default function Components(props) {
           color: "white",
         }}
         {...rest}
-      /> */}
+      />
 
       <div style={{position:'fixed', color:'transparent', height:'347px', backgroundColor:'white', width:'100%'}}>
 
