@@ -72,7 +72,8 @@ export default function ProductSection() {
                            category={funding.category}
                            totalFundraising={funding.totalFundraising}
                            goalFundraising={funding.goalFundraising}
-                           ROA={funding.rateOfAchievement} />
+                           ROA={funding.rateOfAchievement}
+                           projectUrl={funding.projectUrl} />
                          ))}
                          
                       </GridContainer>

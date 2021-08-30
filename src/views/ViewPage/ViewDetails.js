@@ -36,10 +36,7 @@ function valuetext(value) {
   }
   
 export default function ViewDetails(props) {
-    //const [projectUrl,setProjectUrl] = useState(props.match.params.projectUrl)
     
-    
-
     const useStyles = makeStyles((theme)=>({
         grapbutton: {
             display: 'flex',
@@ -134,9 +131,9 @@ export default function ViewDetails(props) {
                     
                     <div className={classes.fundingButton} style={{marginTop:"100px"}}>
             
-                        <Button style={{marginRight:"30px"}} variant="outlined" color="secondary"><FavoriteBorderIcon />찜하기</Button>
                         
-                        <Button variant="outlined"  color="primary"  onClick={()=>buttonClick(`/view/${projectUrl}`)}>
+                        
+                        <Button variant="outlined"  color="primary"  onClick={()=>buttonClick(`/view/${props.projectUrl}`)}>
                             자세히보기
                         </Button>
                     </div>

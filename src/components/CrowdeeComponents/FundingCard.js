@@ -61,7 +61,8 @@ export default function FundingCard(props) {
     title:props.title,
     summary:props.summary,
     restDate:props.restDate,
-    category:props.category
+    category:props.category,
+    projectUrl:props.projectUrl
   }
   );
   const comma = (obj) => {
@@ -143,6 +144,7 @@ useEffect(() => {
              totalFundraising={funding.totalFundraising}
              goalFundraising={funding.goalFundraising}
              rateOfAchievment={funding.rateOfAchievement}
+             projectUrl={funding.projectUrl}
           ></ViewDetails>
          
       </Modal>
