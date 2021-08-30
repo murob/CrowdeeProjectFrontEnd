@@ -92,17 +92,11 @@ export default function ViewPage(props) {
   });
       
     useEffect(() => {
-<<<<<<< HEAD
       fetch(`http://localhost:8081/contents/${projectUrl}`, {
         headers : {
             "Authorization" : `Bearer ${token}`
         }
       }).then(res=>res.json()).then(res=>{
-=======
-      fetch(`http://localhost:8081/view/${projectUrl}`).
-        then(res=>res.json()).
-        then(res=>{
->>>>>>> ef8ec3fcf77c28b64bedf0137f3e1a901c0306f6
           setView(res);
       })
     },[])
