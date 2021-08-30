@@ -118,6 +118,10 @@ export default function WriteDefault(props) {
           }).
           then((res)=>{
             setImgUrl(res.url)
+            setForm({
+                ...form,
+                "thumbNailUrl" : res.url
+            })
           })
       }
       

@@ -20,6 +20,7 @@ export default function WritePageNav(props){
             <div>
                 <Button variant="outlined" size='large'>취소</Button>{' '}
                 <Button variant="contained" color="secondary" size='large'>저장</Button>{' '}
+               
             </div>
         </div>
     )
