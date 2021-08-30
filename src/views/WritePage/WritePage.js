@@ -56,7 +56,7 @@ export default function WritePage(props) {
     }
 
     
-
+    
     
     const onSubmit = () =>{
         if(confirm("저장하시겠습니까?")){
@@ -97,8 +97,9 @@ export default function WritePage(props) {
                         <Button fontSize="large" size='large' onClick={move}><ArrowBackIcon fontSize="large"/></Button>{' '}
                     </div>
                     <div>
-                        <Button variant="outlined" size='large'>취소</Button>{' '}
+                        {/* <Button variant="outlined" size='large'>취소</Button>{' '} */}
                         <Button variant="contained" color="secondary" size='large' onClick={onSubmit}>저장</Button>{' '}
+                        <Button variant="contained" color="secondary" size='large' onClick={onSubmit}>미리보기</Button>{' '}
                     </div>
                 </div>
                 <div style={{display:'flex',marginTop:'20px', paddingTop:'80px'}}>
