@@ -44,7 +44,7 @@ ReactDOM.render(
       <Route path="/signUp" component={SignUpPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/login-page" component={LoginPage} />
-      <Route path="/view/:id" component={ViewPage}/>
+      <Route path="/view/:projectUrl" component={ViewPage}/>
       <Route path="/write-page/:manageUrl" component={WritePage} />
       <Route path="/project-start" component={ProjectStartPage} />
       <Route path="/menu-page" component={MenuPage} />

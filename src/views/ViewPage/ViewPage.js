@@ -51,7 +51,9 @@ export default function ViewPage(props) {
   });
       
     useEffect(() => {
-      fetch(`http://localhost:8081/view/${projectUrl}`).then(res=>res.json()).then(res=>{
+      fetch(`http://localhost:8081/view/${projectUrl}`).
+        then(res=>res.json()).
+        then(res=>{
           setView(res);
       })
     },[])
