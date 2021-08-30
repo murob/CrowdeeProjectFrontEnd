@@ -1,5 +1,5 @@
 import { Container } from '@material-ui/core';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 
 import Write from 'views/Components/Editor/Write';
 
@@ -10,7 +10,7 @@ export default function WriteStory(props) {
     const [schedule,setSchedule] = useState();
     const [aboutUs,setAboutUs] = useState();
     //const [data,setData] = useState();
-    const [totalForm,setTotalForm] = useState();
+    const [totalForm,setTotalForm] = useState("");
 
     // const FormValueHandler = (formData) =>{
     //     setData({
@@ -21,49 +21,64 @@ export default function WriteStory(props) {
     //     props.save(data)      
     // }
 
+    
 
-    const contentValueHandler = (data) =>{
+    const contentValueHandler =(data) =>{
+        
+        console.log("핸들러 data" + data)
         setContent(
-           data
+            data
         )
+   
+  
+      
         setTotalForm({
-            ...totalForm,
-            content}
-            )
+             ...totalForm,
+             "content" : data})
+
+
         props.save(totalForm)
+        console.log(totalForm)
     }
+    
     const budgetValueHandler = (data) =>{
+       
         setBudget(
             data
         )
         setTotalForm({
             ...totalForm,
-            budget
+            "budget" : data
         })
        props.save(totalForm)
+       console.log(totalForm)
     }
     const scheduleValueHandler = (data) =>{
+      
         setSchedule(
           data
         )
         setTotalForm(
             {
                 ...totalForm,
-                schedule
+                "schedule" : data
             })
        props.save(totalForm)
+       console.log(totalForm)
     }
     const aboutUsValueHandler = (data) =>{
+      
         setAboutUs(
            data
         )
         setTotalForm(
             {
                 ...totalForm,
-                aboutUs
+                "aboutUs" : data
             }
             )
        props.save(totalForm)
+       console.log(totalForm)
     }
     return (
         <div style={{paddingTop:'30px', paddingBottom:'30px', backgroundColor:'#FCFCFC',}}>
@@ -71,7 +86,7 @@ export default function WriteStory(props) {
                     <div style={{borderBottom:'1px solid #CECECE', paddingBottom:'40px', marginBottom:'40px', }}>
                         <h3 style={{fontWeight:'bold'}}>프로젝트 내용</h3>
                         <h5>무엇을 만들기 위한 프로젝트인지 분명히 알려주세요.</h5>
-                        <Write api="content"  onSave={contentValueHandler}></Write>
+                        <Write onSave={contentValueHandler}></Write>
                     </div>
                     <div style={{borderBottom:'1px solid #CECECE', paddingBottom:'40px', marginBottom:'40px'}}>
                         <h3 style={{fontWeight:'bold'}}>프로젝트 예산</h3>

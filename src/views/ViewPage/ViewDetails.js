@@ -15,6 +15,7 @@ import LinearWithValueLabel from "components/CrowdeeComponents/LinearProgressWit
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 //달성률버튼 퍼센트
+
 const marks = [
 {
     value: 0,
@@ -35,9 +36,10 @@ function valuetext(value) {
   }
   
 export default function ViewDetails(props) {
-
+    //const [projectUrl,setProjectUrl] = useState(props.match.params.projectUrl)
     
-   
+    
+
     const useStyles = makeStyles((theme)=>({
         grapbutton: {
             display: 'flex',

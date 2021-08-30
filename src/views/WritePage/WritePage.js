@@ -51,6 +51,7 @@ export default function WritePage(props) {
     //     setLastData(data)
     // }
     const form = data =>{
+        
         setFormData(data)
     }
 

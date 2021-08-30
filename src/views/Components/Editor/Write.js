@@ -39,10 +39,10 @@ export default function Write(props) {
         }
     }
     
-    const handleEditorChange = (event, editor) => {
-        setContent(editor.getData());
-        //console.log(content)
-        props.onSave(content)
+    const handleEditorChange = (data) => {
+        
+        //console.log(data)
+        
     }
     
     const handleTitleChange = (event) => {
@@ -106,16 +106,21 @@ export default function Write(props) {
                 
               }}
               onChange={(event,editor)=>{
+                setContent(editor.getData())
+                  props.onSave(content)
                 
-              
+                
+                
                 
               }}
               onBlur={ ( event, editor ) => {
-                  //console.log( 'Blur.', editor.getData() );
-                  handleEditorChange(event,editor)
+                  console.log( 'Blur.', editor.getData() );
+                  setContent(editor.getData())
+                  props.onSave(content)
               } }
               onFocus={ ( event, editor ) => {
-                 
+                setContent(editor.getData())
+                props.onSave(content)
               } }
               onReady={(editor) => {
    

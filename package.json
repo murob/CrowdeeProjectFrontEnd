@@ -5,6 +5,7 @@
   "private": true,
   "main": "src/index.js",
   "dependencies": {
+    
     "@babel/core": "7.14.0",
     "@ckeditor/ckeditor5-build-classic": "^29.1.0",
     "@ckeditor/ckeditor5-react": "^3.0.2",
