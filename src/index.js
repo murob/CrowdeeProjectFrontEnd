@@ -1,4 +1,3 @@
-
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
@@ -24,6 +23,12 @@ import CreatorInspectionAdmin from "views/AdminPage/components/CreatorInspection
 import FundingView from "views/AdminPage/components/FundingView";
 import FundingInspectionAdmin from "views/AdminPage/components/FundingInspectionAdmin";
 
+import MenuPage from "views/MenuPage/MenuPage";
+import CategoryPage from "views/CategoryPage/CategoryPage";
+import ProjectStartPage from "views/WritePage/ProjectStartPage";
+import MyPage from "views/MyPage/MyPage";
+import SearchPage from "views/SearchPage/SearchPage";
+import ViewDetails from "views/ViewPage/ViewDetails";
 
 var hist = createBrowserHistory();
 
@@ -60,13 +65,18 @@ ReactDOM.render(
       <Route path="/admin-creator-inspection" component={CreatorInspectionAdmin} /> 
       <Route path="/admin-fundingView" component={FundingView} /> 
       <Route path="/admin-funding-inspection" component={FundingInspectionAdmin} /> 
+      <Route path="/view/:projectUrl" component={ViewPage}/>
+      <Route path="/write-page/:manageUrl" component={WritePage} />
+      <Route path="/project-start" component={ProjectStartPage} />
+      <Route path="/menu-page" component={MenuPage} />
+      <Route path="/category/:param" component={CategoryPage} />
+      <Route path="/my/:creatorId" component={MyPage} />
+      <Route path="/search" component={SearchPage} />
       <Route exact path="/" component={Components} />
 
     </Switch>
-   
-    
   </Router>, 
   document.getElementById("root")
   
   
-);
+); 

@@ -13,118 +13,102 @@ const useStyles = makeStyles(styles);
 
 export default function ProductSection() {
   const classes = useStyles();
-
+  const fund = []
   const [fundings, setFundings] = useState([]);
-
+  const [fundingsKey,setFundingsKey] = useState([]);
+  const [categoryTitle,setCategoryTitle] = useState([
+     "신규 추천 펀딩" , "달성 임박 펀딩" ,"달성 완료 펀딩" , "인기 추천 펀딩"
+  ])
   //함수 실행시 최초 한번 실행되는 것
   useEffect(() => {
     fetch("http://localhost:8081/contents")
     .then((res)=>{
-      console.log(res)
+      
       if(!res.status==200){
         throw new Error('http 오류');
       }
       return res.json()})
       .then((res)=>{
-        
-      setFundings(res);
-  
+        console.log(res)
+        res.map((funding)=>{
+          fund.push(funding)
+        })
+        setFundings(fund);
+        setFundingsKey(Object.keys(fundings))
+    
       })
       .catch((e) =>{
         alert("게시물 조회 중 에러발생 "+ e.message);
       });
   },[])
-  const [title,setTitle] = useState();
-  const modalControl = (funding) =>{
+  
+
     
-  }
+  
   return (
     <div>
       <div className={classes.section}>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={8}>
-            <Typography>주목할 만한 펀딩</Typography>
-          </GridItem>
-        </GridContainer>
-   
-
-          <GridContainer justify="center">
-            <GridItem>
-              <GridContainer justify="center">
-              {fundings.map((funding) => (
-                <FundingCard 
-                  id={funding.funding_id}
-                  title={funding.title}
-                  imgUrl={funding.thumbNailUrl}
-                  summary={funding.summery}
-                  restDate={funding.restDate}
-                  category={funding.category}
-                  goalFundraising={funding.goalFundraising}
-                  ROA={funding.rateOfAchievment}
-                ></FundingCard>
-              ))} 
-              </GridContainer>
-            </GridItem>
-             {/* <GridItem>
-              GridItem : 행
-              GridContainer : 열
-              <GridContainer justify="center">
-               <FundingCard 
-                  id='1'
-                  title='펀딩타이틀1'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물1'
-                  
-                />
-                <FundingCard 
-                  id='2'
-                  title='펀딩타이틀2'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물2'
-                />
-                  <FundingCard 
-                  id='3'
-                  title='펀딩타이틀3'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물3'
-                />
-                <FundingCard 
-                  id='3'
-                  title='펀딩타이틀3'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물3'
-                />
-              </GridContainer>
-              
-            </GridItem>
-            <GridItem>
-              <GridContainer justify="center">
-               <FundingCard 
-                  id='4'
-                  title='펀딩타이틀4'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물4'
-                />
-                <FundingCard 
-                  id='5'
-                  title='펀딩타이틀5'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물5'
-                />
-                  <FundingCard 
-                  id='6'
-                  title='펀딩타이틀6'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물6'
-                />
-                <FundingCard 
-                  id='3'
-                  title='펀딩타이틀3'
-                  imgUrl='/Users/moon/Crowdee/src/main/resources/file/20210819/0c1aaf6db59540e9805a19cba2057c17.png'
-                  summary='펀딩게시물3'
-                />
-              </GridContainer> */}
-          </GridContainer>
+       
+        
+              {fundings.map((target,idx) => (
+                
+                
+                  <>
+                 <GridContainer justify="center" style={{marginTop:"30px"}}>
+                  <GridItem xs={12} sm={12} md={8}>
+                  <Typography>{categoryTitle[idx]}</Typography>
+                  </GridItem>
+                 </GridContainer>
+                   <GridContainer justify="center">
+                     <GridItem>
+                       <GridContainer justify="center">
+                         {target.map((funding)=>(
+                           <FundingCard 
+                           id={funding.funding_id}
+                           title={funding.title}
+                           imgUrl={funding.thumbNailUrl}
+                           summary={funding.summary}
+                           restDate={funding.restDate}
+                           category={funding.category}
+                           totalFundraising={funding.totalFundraising}
+                           goalFundraising={funding.goalFundraising}
+                           ROA={funding.rateOfAchievement} />
+                         ))}
+                         
+                      </GridContainer>
+                     </GridItem>
+                   </GridContainer>
+                   </>
+                )
+               
+              )} 
+              {/* {fundings.new.map((funding) => (
+                <>
+                 <GridContainer justify="center">
+                  <GridItem xs={12} sm={12} md={8}>
+                  <Typography>신규 추천 펀딩</Typography>
+                </GridItem>
+                 </GridContainer>
+            
+                <GridContainer justify="center">
+                  <GridItem>
+                    <GridContainer justify="center">
+                      <FundingCard 
+                        id={funding.funding_id}
+                        title={funding.title}
+                        imgUrl={funding.thumbNailUrl}
+                        summary={funding.summary}
+                        restDate={funding.restDate}
+                        category={funding.category}
+                        totalFundraising={funding.totalFundraising}
+                        goalFundraising={funding.goalFundraising}
+                        ROA={funding.rateOfAchievement} />
+                   </GridContainer>
+                  </GridItem>
+                </GridContainer>
+                </>
+              ))}  */}
+             
       </div>
     </div>
   );

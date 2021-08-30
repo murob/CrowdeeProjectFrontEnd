@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/components.js";
 import { Button } from "@material-ui/core";
-export default function Write() {
+export default function Write(props) {
     const useStyles = makeStyles(styles);
     const classes = useStyles();
     const [title, setTitle] = useState("");
@@ -39,8 +39,10 @@ export default function Write() {
         }
     }
     
-    const handleEditorChange = (event, editor) => {
-        setContent(editor.getData());
+    const handleEditorChange = (data) => {
+        
+        //console.log(data)
+        
     }
     
     const handleTitleChange = (event) => {
@@ -64,8 +66,9 @@ export default function Write() {
               editor={ Editor }
               
               config={{
-                placeholder: "기모치맨!",
-                title: {isEnabled:false},
+                
+                placeholder: "내용을 입력해주세요!",
+                
                 image: {
                     styles: ['alignLeft', 'alignCenter', 'alignRight'],
                     resizeUnit: 'px',
@@ -93,25 +96,34 @@ export default function Write() {
                 'bulletedList', 'numberedList','TodoList','Underline', 'blockquote', 'link', 'code', 'codeblock', '|',
                 'imageupload','MediaEmbed', 'imagestyle:alignLeft', 'imagestyle:alignCenter', 'imagestyle:alignRight', '|',
                 'undo', 'redo','resizeImage:50','resizeImage:75','resizeImage:original','FontColor','FontFamily','FontSize','FontBackgroundColor',
-                'Table','TableToolbar','TextTransformation'
+                'Table','TableToolbar'
                 ],
                 
                
                  simpleUpload: {
-                    uploadUrl: 'http://localhost:8081/api/image/',
+                    uploadUrl: 'http://localhost:8081/api/image',
                 }
                 
               }}
-              onChange={handleEditorChange}
+              onChange={(event,editor)=>{
+                setContent(editor.getData())
+                  props.onSave(content)
+                
+                
+                
+                
+              }}
               onBlur={ ( event, editor ) => {
-                  console.log( 'Blur.', editor );
+                  console.log( 'Blur.', editor.getData() );
+                  setContent(editor.getData())
+                  props.onSave(content)
               } }
               onFocus={ ( event, editor ) => {
-                  console.log( 'Focus.', editor );
+                setContent(editor.getData())
+                props.onSave(content)
               } }
               onReady={(editor) => {
-                console.log(editor.ui.componentFactory);
-                console.log("시작한다", editor);
+   
               }}
           />
             </div>
