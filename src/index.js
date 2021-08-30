@@ -14,6 +14,16 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import SignUpPage from "views/SignUpPage/SignUpPage.js";
 import WritePage from "views/WritePage/WritePage";
 import ViewPage from "views/ViewPage/ViewPage.js";
+import AdminPage from "views/AdminPage/AdminPage";
+import FundingAdmin from "views/AdminPage/components/FundingAdmin";
+import BackerAdmin from "views/AdminPage/components/BackerAdmin";
+import BackerView from "views/AdminPage/components/BackerView";
+import CreatorView from "views/AdminPage/components/CreatorView";
+import CreatorAdmin from "views/AdminPage/components/CreatorAdmin";
+import CreatorInspectionAdmin from "views/AdminPage/components/CreatorInspectionAdmin";
+import FundingView from "views/AdminPage/components/FundingView";
+import FundingInspectionAdmin from "views/AdminPage/components/FundingInspectionAdmin";
+
 
 var hist = createBrowserHistory();
 
@@ -41,7 +51,17 @@ ReactDOM.render(
       <Route path="/login-page" component={LoginPage} />
       <Route path="/view/:id" component={ViewPage}/>
       <Route path="/write-page" component={WritePage} />
+      <Route path="/admin-page" component={AdminPage} />
+      <Route path="/admin-backer" component={BackerAdmin} />
+      <Route path="/admin-creator" component={CreatorAdmin} />
+      <Route path="/admin-funding" component={FundingAdmin} /> 
+      <Route path="/admin-backerView" component={BackerView} /> 
+      <Route path="/admin-creatorView" component={CreatorView} /> 
+      <Route path="/admin-creator-inspection" component={CreatorInspectionAdmin} /> 
+      <Route path="/admin-fundingView" component={FundingView} /> 
+      <Route path="/admin-funding-inspection" component={FundingInspectionAdmin} /> 
       <Route exact path="/" component={Components} />
+
     </Switch>
    
     
