@@ -4,9 +4,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
@@ -92,18 +90,13 @@ export default function ViewPage(props) {
   });
       
     useEffect(() => {
-<<<<<<< HEAD
-      fetch(`http://localhost:8081/contents/${projectUrl}`, {
+      // fetch(`http://localhost:8081/contents/${projectUrl}`, {
+      fetch("http://localhost:8081/contents/summerNight", {
         headers : {
             "Authorization" : `Bearer ${token}`
         }
       }).then(res=>res.json()).then(res=>{
-=======
-      fetch(`http://localhost:8081/view/${projectUrl}`).
-        then(res=>res.json()).
-        then(res=>{
->>>>>>> ef8ec3fcf77c28b64bedf0137f3e1a901c0306f6
-          setView(res);
+          setView(res)
       })
     },[])
 
