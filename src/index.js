@@ -54,8 +54,6 @@ ReactDOM.render(
       <Route path="/signUp" component={SignUpPage} />
       <Route path="/profile-page" component={ProfilePage} />
       <Route path="/login-page" component={LoginPage} />
-      <Route path="/view/:id" component={ViewPage}/>
-      <Route path="/write-page" component={WritePage} />
       <Route path="/admin-page" component={AdminPage} />
       <Route path="/admin-backer" component={BackerAdmin} />
       <Route path="/admin-creator" component={CreatorAdmin} />

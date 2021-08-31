@@ -7,13 +7,15 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Box } from '@material-ui/core';
 import WritePageNav from './WritePageNav';
 import Modal from '@material-ui/core/Modal';
-import previewPage from 'views/ViewPage/previewPage';
+import PreviewPage from 'views/ViewPage/PreviewPage';
 export default function WritePage(props) {
  
     var saveCheck = 0;
 
     const [token,setToken] = useState(localStorage.getItem("token"))
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
+    const [target,setTarget] = useState(props.match.params)
+    console.log("target=====",target.manageUrl)
     const [path,setPath] = useState(`/creator/create/thumbNail/${manageUrl}`);
     const [nextPath,setNextPath] = useState(`/write-page/funding/${manageUrl}`);
     const [formData,setFormData] = useState();

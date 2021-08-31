@@ -31,6 +31,7 @@ export default function ViewPage(props) {
   color="secondary"
 />
   const projectUrl = props.match.params.projectUrl;
+  console.log(projectUrl)
   const memberId = props.match.params.memberId;
   const [token,setToken] = useState(localStorage.getItem("token"))
   const [wishcontroller,setWishController] = useState();
