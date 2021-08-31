@@ -1,64 +1,118 @@
 import React , {useEffect,useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import WritePageRouter from './WritePageRouter';
 import { Button } from '@material-ui/core'; 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Box } from '@material-ui/core';
 import WritePageNav from './WritePageNav';
-import WriteDefault from './WriteComponent/WriteDefault';
-import WriteFunding from './WriteComponent/WriteFunding';
-import WriteStory from './WriteComponent/WriteStory';
-import { ACCESS_TOKEN } from 'export/export';
+import Modal from '@material-ui/core/Modal';
+import ViewPage from 'views/ViewPage/ViewPage';
 export default function WritePage(props) {
  
-    
+    var saveCheck = 0;
+
     const [token,setToken] = useState(localStorage.getItem("token"))
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
     const [path,setPath] = useState(`/creator/create/thumbNail/${manageUrl}`);
     const [nextPath,setNextPath] = useState(`/write-page/funding/${manageUrl}`);
     const [formData,setFormData] = useState();
-    const changeDef = () =>{
-        setPath(`/creator/create/thumbNail/${manageUrl}`)
-        
+    const [open, setOpen] =useState(false);
+    const [modalData,setModalData] = useState();
+
+
+    const useStyles = makeStyles((theme)=>({
        
-         props.history.push(`/write-page/${manageUrl}`)
+        modal: {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height : '850px',
         
+        },
+      }));
+      
+      const handleOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
+      const classes = useStyles();
+
+    const changeDef = () =>{
+        if(saveCheck){
+            setPath(`/creator/create/thumbNail/${manageUrl}`)
+            props.history.push(`/write-page/${manageUrl}`)
+        }
+        else{
+            if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                props.history.push(`/write-page/${manageUrl}`)
+            }
+        }
     }
     const changeFun = () =>{
-        setPath(`/creator/create/fundingPlan/${manageUrl}`)
+        if(saveCheck){
+            setPath(`/creator/create/fundingPlan/${manageUrl}`)
+            props.history.push(`/write-page/funding/${manageUrl}`)
+        }
+        else{
+            if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                props.history.push(`/write-page/funding/${manageUrl}`)
+            }
+        }
         
-      
-        props.history.push(`/write-page/funding/${manageUrl}`)
+        
     }
     const changeSto = () =>{
-        setPath(`/creator/create/detail/${manageUrl}`)
-       
-       
-         props.history.push(`/write-page/story/${manageUrl}`)
+        if(saveCheck){
+            setPath(`/creator/create/detail/${manageUrl}`)
+            props.history.push(`/write-page/story/${manageUrl}`)
+        }
+        else{
+            if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                props.history.push(`/write-page/story/${manageUrl}`)
+            }
+        }
+         
     }
     const move = () =>{
         props.history.push("/")
     }
-    // const firstForm = (data) =>{
-    //     setFirstData(data)
-    // }
-
-    // const secondForm = (data) =>{
-    //     setSecondData(data)
-    // }
-
-    // const lastForm = (data) =>{
-    //     setLastData(data)
-    // }
     const form = data =>{
         
         setFormData(data)
     }
 
     
-    
+    const preview = () =>{
+       
+        fetch(`http://localhost:8081/creator/create/preview/${manageUrl}`,{
+            
+            headers : {
+                "Authorization" : `Bearer ${token}`
+            }
+
+        }).
+        then((res)=>{
+            if(res.status==200){
+                return res.json();
+            }
+            else{
+                throw new Error("미리보기 조회 중 에러 발생")
+            }
+            
+        }).then((res)=>{
+            setModalData(res)
+            setOpen(true);
+        }).catch(e=>{
+            alert("미리보기 조회 중 에러 발생" + e.message)
+        })
+    }
     
     const onSubmit = () =>{
+        
         if(confirm("저장하시겠습니까?")){
             fetch(`http://localhost:8081${path}`,{
                 method  : "post",
@@ -67,24 +121,18 @@ export default function WritePage(props) {
                     "Content-Type" : "application/json;charset=utf-8"
                 },
                 body : 
-                JSON.stringify(formData)
-                
-    
-                
-                    
+                JSON.stringify(formData)       
             }).
             then((res)=>{
-                console.log(JSON.stringify(formData))
+                
                 if(!res.status==200){
                     throw new Error('http에러')
                 }
-               
-    
+               saveCheck=1;
             }).catch((e)=>{
                 alert("데이터 전송 중 에러 발생"+e.message)
             })
         }
-       
     }
 
     return (
@@ -99,7 +147,7 @@ export default function WritePage(props) {
                     <div>
                         {/* <Button variant="outlined" size='large'>취소</Button>{' '} */}
                         <Button variant="contained" color="secondary" size='large' onClick={onSubmit}>저장</Button>{' '}
-                        <Button variant="contained" color="secondary" size='large' onClick={onSubmit}>미리보기</Button>{' '}
+                        <Button variant="contained" color="secondary" size='large' onClick={handleOpen}>미리보기</Button>{' '}
                     </div>
                 </div>
                 <div style={{display:'flex',marginTop:'20px', paddingTop:'80px'}}>
@@ -120,6 +168,17 @@ export default function WritePage(props) {
                <WritePageRouter form={form} />
         </div>
         </Container>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            className={classes.modal}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description">
+            <ViewPage
+                data={modalData}
+            />
+        </Modal>
     </div>
+    
     );
 };
