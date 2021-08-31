@@ -28,8 +28,8 @@ import CategoryPage from "views/CategoryPage/CategoryPage";
 import ProjectStartPage from "views/WritePage/ProjectStartPage";
 import MyPage from "views/MyPage/MyPage";
 import SearchPage from "views/SearchPage/SearchPage";
-import ViewDetails from "views/ViewPage/ViewDetails";
-import CategoryViewPage from "views/CategoryViewPage/CategoryViewPage";
+
+
 
 var hist = createBrowserHistory();
 

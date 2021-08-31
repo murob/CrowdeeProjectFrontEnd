@@ -148,14 +148,22 @@ export default function ViewPage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-
   
-     
+  
+  const modifyUrl = (url) =>{
+    let endpoint = url;
+    endpoint = endpoint.replace('oembed', 'iframe');
+    endpoint = endpoint.replace('url', 'src');
+    endpoint = endpoint.replace('watch?v=', 'embed/');
+    endpoint = endpoint.replace('oembed', 'iframe');
+    return endpoint;
+  }
+
   const contentField = () =>
   {
     var htmlCode =
     
-      view.content
+    modifyUrl(view.content)
     return(
       <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
            
@@ -166,7 +174,9 @@ export default function ViewPage(props) {
   {
     var htmlCode =
     
-      view.budget
+    modifyUrl(view.budget)
+
+  
     return(
       <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
            
@@ -177,7 +187,7 @@ export default function ViewPage(props) {
   {
     var htmlCode =
     
-      view.schedule
+    modifyUrl(view.schedule)
     return(
       <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
            
@@ -188,7 +198,7 @@ export default function ViewPage(props) {
   {
     var htmlCode =
     
-      view.aboutUs
+    modifyUrl(view.aboutUs)
     return(
       <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
            
