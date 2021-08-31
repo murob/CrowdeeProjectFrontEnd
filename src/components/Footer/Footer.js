@@ -67,6 +67,15 @@ export default function Footer(props) {
                 Licenses
               </a>
             </ListItem>
+            <ListItem className={classes.inlineBlock}>
+              <a
+                href="/admin-page"
+                className={classes.block}
+                target="_blank"
+              >
+                admin
+              </a>
+            </ListItem>
           </List>
         </div>
         <div className={classes.right}>
