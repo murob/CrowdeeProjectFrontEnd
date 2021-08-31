@@ -15,6 +15,7 @@ function fundingView(list) {
       summary : list[i].summary, 
       category : list[i].category, 
       postDate : list[i].postDate,
+      manageUrl : list[i].manageUrl,
       status : list[i].status
       }
     );
@@ -25,7 +26,9 @@ function fundingView(list) {
 //펀딩 상세보기로 이동
   function fundingSelect(e,params) {
     e.preventDefault();
-    window.location.href = "/admin-fundingView/"+params.id;
+    // console.log("값을 찍어보자"+rows)
+    console.log("값을 찍어보자"+params.getValue(params.id, 'manageUrl'))
+    window.location.href = "/admin-fundingView/"+params.getValue(params.id, 'manageUrl');
   }
   
   export default function FundingAdmin() {
@@ -35,40 +38,47 @@ function fundingView(list) {
     const columns = [
       {
         field: 'id',
-        headerName: 'id',
+        headerName: '아이디',
         type: 'number',
-        width: 90 },
+        width: 120 },
       {
         field: 'title',
-        headerName: 'title',
+        headerName: '제목',
         width: 150,
         type: 'text',
         editable: true,
       },
       {
           field: 'summary',
-          headerName: 'summary',
+          headerName: '요약',
           type: 'text',
-          width: 120,
+          width: 180,
           editable: true,
         },
         {
           field: 'postDate',
-          headerName: 'postDate',
+          headerName: '게시일',
           type: 'text',
           width: 200,
           editable: true,
         },
         {
           field: 'category',
-          headerName: 'category',
+          headerName: '카테고리',
           type: 'text',
           width: 150,
           editable: true,
         },
         {
+          field: 'manageUrl',
+          headerName: 'url',
+          type: 'text',
+          width: 170,
+          editable: true,
+        },
+        {
           field: 'status',
-          headerName: 'status',
+          headerName: '상태',
           type: 'text',
           width: 150,
           editable: true,
@@ -114,7 +124,6 @@ function fundingView(list) {
           rows={rows}
           columns={columns}
           pageSize={10}
-          checkboxSelection
           disableSelectionOnClick/>
         </div>
       </div>

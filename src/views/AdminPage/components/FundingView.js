@@ -86,9 +86,11 @@ function backerDataList(list) {
 
 export default function BackerView() {
     const [rows,setRows] = React.useState([])
-    const viewId = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1)
+    const manageUrl = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1)
     useEffect(() => {
-        fetch('http://localhost:8081/admin/backerView/'+viewId)
+      //태환오빠 요청명으로 변경
+        // fetch('http://localhost:8081/admin/backerView/'+viewId)
+        fetch('http://localhost:8081/creator/create/preview/'+manageUrl)
         .then(res => res.json())
         .then((res) => {
           console.log("아래")

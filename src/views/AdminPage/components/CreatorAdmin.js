@@ -30,27 +30,27 @@ function CreatorView(list) {
     const columns = [
       {
         field: 'id',
-        headerName: 'Creatorid',
+        headerName: '아이디',
         type: 'number',
-        width: 150 ,
+        width: 120 ,
       },
       {
         field: 'Business_number',
-        headerName: 'Business_number',
+        headerName: '사업자번호',
         width: 180,
         type: 'text',
         editable: true,
       },
         {
           field: 'creator_nickname',
-          headerName: 'creator_nickname',
+          headerName: '닉네임',
           type: 'text',
           width: 170,
           editable: true,
         },
         {
           field: 'status',
-          headerName: 'status',
+          headerName: '상태',
           type: 'text',
           width: 150,
           editable: true,
@@ -95,7 +95,6 @@ function CreatorView(list) {
                 rows={rows}
                 columns={columns}
                 pageSize={10}
-                checkboxSelection
                 disableSelectionOnClick
                 />
             </div>

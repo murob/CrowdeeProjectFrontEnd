@@ -7,61 +7,54 @@ import * as React from 'react';
 const columns = [
     {
       field: 'id',
-      headerName: 'id',
+      headerName: '아이디',
       type: 'number',
-      width: 90 },
+      width: 120 },
     {
       field: 'userName',
-      headerName: 'userName',
-      width: 120,
+      headerName: '이름',
+      width: 110,
       type: 'text',
       editable: true,
     },
     {
       field: 'nickName',
-      headerName: 'nickName',
+      headerName: '닉네임',
       width: 120,
       type: 'text',
       editable: true,
     },
     {
       field: 'mobile',
-      headerName: 'mobile',
+      headerName: '휴대폰번호',
       type: 'text',
       sortable: false,
       width: 140
     },
     {
       field: 'email',
-      headerName: 'email',
+      headerName: '이메일',
       type: 'text',
       width: 150,
       editable: true,
     },
     {
-      field: 'emailCert',
-      headerName: 'emailCert',
-      type: 'text',
-      width: 140,
-      editable: true,
-    },
-    {
       field: 'registDate',
-      headerName: 'registDate',
+      headerName: '가입일',
       type: 'text',
       width: 200,
       editable: true,
     },
     {
       field: 'secessionDate',
-      headerName: 'secessionDate',
+      headerName: '탈퇴일',
       type: 'object',
       width: 160,
       editable: true,
     },
     {
       field: 'authoritiy',
-      headerName: 'authoritiy',
+      headerName: '권한',
       type: 'object',
       width: 120,
       editable: true,
@@ -70,14 +63,11 @@ const columns = [
 
 function backerDataList(list) {
     var backerTempList = []
-    console.log("가져오니?")
-    console.log(list.memberId)
-    console.log("여기 제발와줘")
     for(var i in list){
       backerTempList.push({id : list.memberId,
         userName : list.userName, nickName : list.nickName,
         mobile : list.mobile,  email : list.email, 
-        emailCert : list.emailCert, registDate : list.registDate, 
+        registDate : list.registDate, 
         secessionDate : list.secessionDate, userState : list.userState,
         authoritiy : list.authorities});
       }
@@ -113,7 +103,6 @@ export default function BackerView() {
            rows={rows}
            columns={columns}
            pageSize={10}
-           checkboxSelection
            disableSelectionOnClick
            />
         </div>

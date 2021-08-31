@@ -14,6 +14,7 @@ function createData(list) {
       summary : list[i].summary, 
       category : list[i].category, 
       postDate : list[i].postDate,
+      manageUrl : list[i].manageUrl,
       status : list[i].status
       }
     );
@@ -25,6 +26,12 @@ function createData(list) {
   export default function FundingInspectionAdmin() {
     
     const [rows,setRows] = React.useState([])
+
+    //펀딩 상세보기로 이동
+    function fundingSelect(e,params) {
+      e.preventDefault();
+      window.location.href = "/admin-fundingView/"+params.getValue(params.id, 'manageUrl');
+    }
 
     function fundingOk(e, params) {
       e.preventDefault();
@@ -42,40 +49,47 @@ function createData(list) {
     const columns = [
       {
         field: 'id',
-        headerName: 'id',
+        headerName: '아이디',
         type: 'number',
-        width: 90 },
+        width: 120 },
       {
         field: 'title',
-        headerName: 'title',
+        headerName: '제목',
         width: 150,
         type: 'text',
         editable: true,
       },
       {
           field: 'summary',
-          headerName: 'summary',
+          headerName: '요약',
           type: 'text',
-          width: 120,
+          width: 180,
           editable: true,
         },
         {
           field: 'postDate',
-          headerName: 'postDate',
+          headerName: '게시일',
           type: 'text',
           width: 200,
           editable: true,
         },
         {
           field: 'category',
-          headerName: 'category',
+          headerName: '카테고리',
+          type: 'text',
+          width: 150,
+          editable: true,
+        },
+        {
+          field: 'manageUrl',
+          headerName: 'url',
           type: 'text',
           width: 150,
           editable: true,
         },
         {
           field: 'status',
-          headerName: 'status',
+          headerName: '상태',
           type: 'text',
           width: 150,
           editable: true,
@@ -92,7 +106,7 @@ function createData(list) {
               color="primary"
               size="small"
               style={{marginLeft:16}}
-              onClick={(e) => {backerSelect(e, params)}}
+              onClick={(e) => {fundingSelect(e, params)}}
             >상세보기</Button>
           )
         },
@@ -184,7 +198,6 @@ function createData(list) {
             rows={rows}
             columns={columns}
             pageSize={10}
-            checkboxSelection
             disableSelectionOnClick/>
           </div>
         </div>

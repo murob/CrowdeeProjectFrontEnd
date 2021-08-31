@@ -2,7 +2,6 @@ import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import MenuAppBar from './MenuAppBar';
 import { useEffect, useState } from "react";
-import BackerView from './BackerView';
 import { Button } from '@material-ui/core';
 
 
@@ -24,6 +23,7 @@ function backerView(list) {
 
   function backerSelect(e,params) {
     e.preventDefault();
+    console.log("딴거 찍을수있는지 확인해봅시다."+params.status)
     window.location.href = "/admin-backerView/"+params.id;
   }
   
@@ -34,40 +34,41 @@ function backerView(list) {
     const columns = [
       {
         field: 'id',
-        headerName: 'id',
+        headerName: '아이디',
         type: 'number',
-        width: 90 },
+        textAlign : 'center',
+        width: 120 },
       {
         field: 'userName',
-        headerName: 'userName',
-        width: 150,
+        headerName: '이름',
+        width: 120,
         type: 'text',
         editable: true,
       },
       {
           field: 'email',
-          headerName: 'email',
+          headerName: '이메일',
           type: 'text',
           width: 120,
           editable: true,
         },
         {
           field: 'registDate',
-          headerName: 'registDate',
+          headerName: '가입일',
           type: 'text',
           width: 200,
           editable: true,
         },
         {
           field: 'authority',
-          headerName: 'authority',
+          headerName: '권한',
           type: 'text',
           width: 150,
           editable: true,
         },
         {
           field: 'status',
-          headerName: 'status',
+          headerName: '상태',
           type: 'text',
           width: 150,
           editable: true,
@@ -114,7 +115,6 @@ function backerView(list) {
           rows={rows}
           columns={columns}
           pageSize={10}
-          checkboxSelection
           disableSelectionOnClick/>
         </div>
       </div>
