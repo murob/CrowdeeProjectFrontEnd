@@ -296,17 +296,17 @@ export default function ViewPage(props) {
         </div>
       </div>
       <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px',alignItems:"center"}}>
-        <div style={{width:'65%', paddingLeft:'30px', border:'1px solid black', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
+        <div style={{width:'65%', paddingLeft:'30px', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
           {contentField()}
-          <Typography variant="h6">프로젝트 예산</Typography>
+          <h4>프로젝트 예산</h4>
           {budgetField()}
-          <Typography variant="h6">프로젝트 일정</Typography>
+          <h4>프로젝트 일정</h4>
           {scheduleField()}
-          <Typography variant="h6">팀 소개</Typography>
+          <h4>팀소개</h4>
           {aboutUsField()}
         </div>
       
-        <div style={{width:'35%', paddingLeft:'10px', paddingRight:'30px'}}>
+        <div style={{width:'30%', paddingLeft:'10px', paddingRight:'30px'}}>
           <div style={{border:'1px solid #E9E9E5', borderBottom:'2px solid #F0F1EC', borderRadius:'5px', padding:'20px', position:'sticky', top:'80px'}}>
             <h5 style={{fontWeight:'bold'}}>크리에이터 소개</h5>
             <div style={{display:'flex', alignItems:'center'}}>

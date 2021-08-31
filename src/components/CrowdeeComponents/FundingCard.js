@@ -96,7 +96,10 @@ useEffect(() => {
         <CardMedia
           component="img"
           alt="펀딩 사진"
-          height="160"
+          style={{
+            height:"160px",
+            maxHeight:"160px"
+          }}
           image={funding.imgUrl}
           title="펀딩 사진"
         />
