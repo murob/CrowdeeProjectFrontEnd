@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Footer from "components/Footer/Footer.js";
 import { useHistory } from 'react-router';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -28,6 +28,7 @@ export default function ViewPage(props) {
   color="secondary"
 />
   const projectUrl = props.match.params.projectUrl;
+  console.log(projectUrl)
   const memberId = props.match.params.memberId;
   const [token,setToken] = useState(localStorage.getItem("token"))
   const [wishcontroller,setWishController] = useState();
@@ -111,7 +112,7 @@ export default function ViewPage(props) {
   );
       
   useEffect(() => {
-    if(!props.data){
+    
       fetch(`http://localhost:8081/contents/${projectUrl}`, {
         headers : {
             "Authorization" : `Bearer ${token}`
@@ -123,6 +124,7 @@ export default function ViewPage(props) {
       then(res=>{
         console.log(res)
         setView(res)
+        console.log(res.contents)
         if(res.wish){
           setWishController(fullHeart)
          }
@@ -130,10 +132,7 @@ export default function ViewPage(props) {
          setWishController(outlineHeart)
         }
       })
-    }
-    else{
-      setView(props.data)
-    }
+  
   },[])
 
   const classes = useStyles();
@@ -145,7 +144,52 @@ export default function ViewPage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-
+  
+     
+  const contentField = () =>
+  {
+    var htmlCode =
+    
+      view.content
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+           
+      </div>
+    )
+  }
+  const budgetField = () =>
+  {
+    var htmlCode =
+    
+      view.budget
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+           
+      </div>
+    )
+  }
+  const scheduleField = () =>
+  {
+    var htmlCode =
+    
+      view.schedule
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+           
+      </div>
+    )
+  }
+  const aboutUsField = () =>
+  {
+    var htmlCode =
+    
+      view.aboutUs
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+           
+      </div>
+    )
+  }
 
   return (
     <div style={{backgroundColor:'white'}}>
@@ -242,11 +286,18 @@ export default function ViewPage(props) {
           <h4 style={{fontWeight:'bold'}}>프로젝트 계획</h4>
         </div>
       </div>
-      <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px'}}>
-        <div style={{width:'60%', paddingLeft:'30px'}}>
-          {view.contents}
+      <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px',alignItems:"center"}}>
+        <div style={{width:'65%', paddingLeft:'30px', border:'1px solid black', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
+          {contentField()}
+          <Typography variant="h6">프로젝트 예산</Typography>
+          {budgetField()}
+          <Typography variant="h6">프로젝트 일정</Typography>
+          {scheduleField()}
+          <Typography variant="h6">팀 소개</Typography>
+          {aboutUsField()}
         </div>
-        <div style={{width:'20%', paddingLeft:'10px', paddingRight:'30px'}}>
+      
+        <div style={{width:'35%', paddingLeft:'10px', paddingRight:'30px'}}>
           <div style={{border:'1px solid #E9E9E5', borderBottom:'2px solid #F0F1EC', borderRadius:'5px', padding:'20px', position:'sticky', top:'80px'}}>
             <h5 style={{fontWeight:'bold'}}>크리에이터 소개</h5>
             <div style={{display:'flex', alignItems:'center'}}>

@@ -7,19 +7,23 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Box } from '@material-ui/core';
 import WritePageNav from './WritePageNav';
 import Modal from '@material-ui/core/Modal';
-import ViewPage from 'views/ViewPage/ViewPage';
+import PreviewPage from 'views/ViewPage/PreviewPage';
 export default function WritePage(props) {
  
     var saveCheck = 0;
 
     const [token,setToken] = useState(localStorage.getItem("token"))
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
+    
+    
     const [path,setPath] = useState(`/creator/create/thumbNail/${manageUrl}`);
     const [nextPath,setNextPath] = useState(`/write-page/funding/${manageUrl}`);
     const [formData,setFormData] = useState();
     const [open, setOpen] =useState(false);
     const [modalData,setModalData] = useState();
-
+    const [first,setFirst] = useState(true)
+    const [second,setSecond] = useState(false)
+    const [third,setThird] = useState(false)
 
     const useStyles = makeStyles((theme)=>({
        
@@ -43,6 +47,7 @@ export default function WritePage(props) {
 
     const changeDef = () =>{
         if(saveCheck){
+            setFirst(true)
             setPath(`/creator/create/thumbNail/${manageUrl}`)
             props.history.push(`/write-page/${manageUrl}`)
         }
@@ -51,9 +56,11 @@ export default function WritePage(props) {
                 props.history.push(`/write-page/${manageUrl}`)
             }
         }
+        saveCheck =0
     }
     const changeFun = () =>{
         if(saveCheck){
+            setSecond(true)
             setPath(`/creator/create/fundingPlan/${manageUrl}`)
             props.history.push(`/write-page/funding/${manageUrl}`)
         }
@@ -62,11 +69,12 @@ export default function WritePage(props) {
                 props.history.push(`/write-page/funding/${manageUrl}`)
             }
         }
-        
-        
+     
+        saveCheck =0
     }
     const changeSto = () =>{
         if(saveCheck){
+            setThird(true)
             setPath(`/creator/create/detail/${manageUrl}`)
             props.history.push(`/write-page/story/${manageUrl}`)
         }
@@ -75,7 +83,7 @@ export default function WritePage(props) {
                 props.history.push(`/write-page/story/${manageUrl}`)
             }
         }
-         
+        saveCheck =0
     }
     const move = () =>{
         props.history.push("/")
@@ -129,6 +137,10 @@ export default function WritePage(props) {
                     throw new Error('http에러')
                 }
                saveCheck=1;
+               if({first}&&{second}&&{third}){
+                alert("저장하신 펀딩은 관리자의 검수 후 등록 될 예정입니다!")
+                props.history.push("/")
+               }
             }).catch((e)=>{
                 alert("데이터 전송 중 에러 발생"+e.message)
             })
@@ -147,7 +159,17 @@ export default function WritePage(props) {
                     <div>
                         {/* <Button variant="outlined" size='large'>취소</Button>{' '} */}
                         <Button variant="contained" color="secondary" size='large' onClick={onSubmit}>저장</Button>{' '}
-                        <Button variant="contained" color="secondary" size='large' onClick={handleOpen}>미리보기</Button>{' '}
+                        <Button variant="contained" color="secondary" size='large' onClick={preview}>미리보기</Button>{' '}
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            className={classes.modal}
+                            aria-labelledby="simple-modal-title"
+                            aria-describedby="simple-modal-description">
+                        <PreviewPage 
+                            data={modalData}
+                        ></PreviewPage>
+                    </Modal>
                     </div>
                 </div>
                 <div style={{display:'flex',marginTop:'20px', paddingTop:'80px'}}>
@@ -168,16 +190,7 @@ export default function WritePage(props) {
                <WritePageRouter form={form} />
         </div>
         </Container>
-        <Modal
-            open={open}
-            onClose={handleClose}
-            className={classes.modal}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description">
-            <ViewPage
-                data={modalData}
-            />
-        </Modal>
+       
     </div>
     
     );
