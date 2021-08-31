@@ -14,6 +14,7 @@ export default function Write(props) {
     const inputRef = useRef();
     
     
+    
     // useEffect(()=>{
     //     // 저장 후 목록으로 이동
        

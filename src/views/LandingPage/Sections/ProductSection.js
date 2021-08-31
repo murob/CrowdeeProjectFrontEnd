@@ -56,7 +56,7 @@ export default function ProductSection() {
                   <>
                  <GridContainer justify="center" style={{marginTop:"30px"}}>
                   <GridItem xs={12} sm={12} md={8}>
-                  <Typography>{categoryTitle[idx]}</Typography>
+                  <h4>{categoryTitle[idx]}</h4>
                   </GridItem>
                  </GridContainer>
                    <GridContainer justify="center">

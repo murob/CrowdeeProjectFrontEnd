@@ -48,6 +48,7 @@ import Title from '@ckeditor/ckeditor5-heading/src/title.js';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import { Input } from '@ckeditor/ckeditor5-typing';
+
 class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.

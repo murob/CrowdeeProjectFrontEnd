@@ -157,7 +157,7 @@ export default function ViewPage(props) {
     
       view.content
     return(
-      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
            
       </div>
     )
@@ -168,7 +168,7 @@ export default function ViewPage(props) {
     
       view.budget
     return(
-      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
            
       </div>
     )
@@ -179,7 +179,7 @@ export default function ViewPage(props) {
     
       view.schedule
     return(
-      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
            
       </div>
     )
