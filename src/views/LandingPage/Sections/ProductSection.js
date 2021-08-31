@@ -56,7 +56,7 @@ export default function ProductSection() {
                   <>
                  <GridContainer justify="center" style={{marginTop:"30px"}}>
                   <GridItem xs={12} sm={12} md={8}>
-                  <Typography>{categoryTitle[idx]}</Typography>
+                  <h4>{categoryTitle[idx]}</h4>
                   </GridItem>
                  </GridContainer>
                    <GridContainer justify="center">
@@ -83,32 +83,6 @@ export default function ProductSection() {
                 )
                
               )} 
-              {/* {fundings.new.map((funding) => (
-                <>
-                 <GridContainer justify="center">
-                  <GridItem xs={12} sm={12} md={8}>
-                  <Typography>신규 추천 펀딩</Typography>
-                </GridItem>
-                 </GridContainer>
-            
-                <GridContainer justify="center">
-                  <GridItem>
-                    <GridContainer justify="center">
-                      <FundingCard 
-                        id={funding.funding_id}
-                        title={funding.title}
-                        imgUrl={funding.thumbNailUrl}
-                        summary={funding.summary}
-                        restDate={funding.restDate}
-                        category={funding.category}
-                        totalFundraising={funding.totalFundraising}
-                        goalFundraising={funding.goalFundraising}
-                        ROA={funding.rateOfAchievement} />
-                   </GridContainer>
-                  </GridItem>
-                </GridContainer>
-                </>
-              ))}  */}
              
       </div>
     </div>
