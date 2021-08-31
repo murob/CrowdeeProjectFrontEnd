@@ -8,7 +8,7 @@ import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import { useHistory } from 'react-router';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -127,6 +127,7 @@ export default function ViewPage(props) {
       then(res=>{
         console.log(res)
         setView(res)
+        console.log(res.contents)
         if(res.wish){
           setWishController(fullHeart)
          }
@@ -148,7 +149,52 @@ export default function ViewPage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-
+  
+     
+  const contentField = () =>
+  {
+    var htmlCode =
+    
+      view.content
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+           
+      </div>
+    )
+  }
+  const budgetField = () =>
+  {
+    var htmlCode =
+    
+      view.budget
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+           
+      </div>
+    )
+  }
+  const scheduleField = () =>
+  {
+    var htmlCode =
+    
+      view.schedule
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+           
+      </div>
+    )
+  }
+  const aboutUsField = () =>
+  {
+    var htmlCode =
+    
+      view.aboutUs
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+           
+      </div>
+    )
+  }
 
   return (
     <div style={{backgroundColor:'white'}}>
@@ -249,11 +295,17 @@ export default function ViewPage(props) {
           <h4 style={{fontWeight:'bold'}}>프로젝트 계획</h4>
         </div>
       </div>
-      <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px'}}>
-        <div style={{width:'65%', paddingLeft:'30px'}}>
-          
-          {view.contents}
+      <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px',alignItems:"center"}}>
+        <div style={{width:'65%', paddingLeft:'30px', border:'1px solid black', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
+          {contentField()}
+          <Typography variant="h6">프로젝트 예산</Typography>
+          {budgetField()}
+          <Typography variant="h6">프로젝트 일정</Typography>
+          {scheduleField()}
+          <Typography variant="h6">팀 소개</Typography>
+          {aboutUsField()}
         </div>
+      
         <div style={{width:'35%', paddingLeft:'10px', paddingRight:'30px'}}>
           <div style={{border:'1px solid #E9E9E5', borderBottom:'2px solid #F0F1EC', borderRadius:'5px', padding:'20px', position:'sticky', top:'80px'}}>
             <h5 style={{fontWeight:'bold'}}>크리에이터 소개</h5>

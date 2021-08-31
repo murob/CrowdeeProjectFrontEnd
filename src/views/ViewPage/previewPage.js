@@ -50,6 +50,7 @@ export default function PreviewPage(props) {
   return (
       
     <div style={{backgroundColor:'white'}}>
+      <div style={{overflowY:"scroll"}}>
       <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white', position:'fixed', zIndex:'1'}}>
           
           <div style={{position:'fixed'}}>
@@ -142,7 +143,7 @@ export default function PreviewPage(props) {
       </div>
       <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderTop:'1.9px solid #E9E9E5',  borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white'}}>
         <div>
-          <h4 style={{fontWeight:'bold'}}>프로젝트 계획</h4>
+          <h4 style={{fontWeight:'bold' , overflowY:"auto"}}>프로젝트 계획</h4>
         </div>
       </div>
       <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px'}}>
@@ -180,6 +181,8 @@ export default function PreviewPage(props) {
         </div>
       </div>
       <Footer />
+      </div>
+      
     </div>
    
     
