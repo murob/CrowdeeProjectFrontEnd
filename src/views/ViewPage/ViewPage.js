@@ -4,11 +4,14 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
+import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
+import HeaderLinks from "components/Header/HeaderLinks.js";
 import { useHistory } from 'react-router';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -28,6 +31,7 @@ export default function ViewPage(props) {
   color="secondary"
 />
   const projectUrl = props.match.params.projectUrl;
+  console.log(projectUrl)
   const memberId = props.match.params.memberId;
   const [token,setToken] = useState(localStorage.getItem("token"))
   const [wishcontroller,setWishController] = useState();
@@ -111,7 +115,7 @@ export default function ViewPage(props) {
   );
       
   useEffect(() => {
-    if(!props.data){
+    
       fetch(`http://localhost:8081/contents/${projectUrl}`, {
         headers : {
             "Authorization" : `Bearer ${token}`
@@ -123,17 +127,17 @@ export default function ViewPage(props) {
       then(res=>{
         console.log(res)
         setView(res)
+        console.log(res.contents)
         if(res.wish){
           setWishController(fullHeart)
          }
         else{
          setWishController(outlineHeart)
+          
         }
+       
       })
-    }
-    else{
-      setView(props.data)
-    }
+  
   },[])
 
   const classes = useStyles();
@@ -145,12 +149,57 @@ export default function ViewPage(props) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-
+  
+     
+  const contentField = () =>
+  {
+    var htmlCode =
+    
+      view.content
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
+           
+      </div>
+    )
+  }
+  const budgetField = () =>
+  {
+    var htmlCode =
+    
+      view.budget
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
+           
+      </div>
+    )
+  }
+  const scheduleField = () =>
+  {
+    var htmlCode =
+    
+      view.schedule
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
+           
+      </div>
+    )
+  }
+  const aboutUsField = () =>
+  {
+    var htmlCode =
+    
+      view.aboutUs
+    return(
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+           
+      </div>
+    )
+  }
 
   return (
     <div style={{backgroundColor:'white'}}>
       <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white', position:'fixed', zIndex:'1'}}>
-          <div style={{marginLeft:'-80%', position:'fixed'}}>
+          <div style={{marginLeft:'-90%', position:'fixed'}}>
               <Button onClick={()=>buttonClick("/")}>
                   <CloseIcon/>
               </Button>
@@ -160,14 +209,15 @@ export default function ViewPage(props) {
                 <h4 style={{fontWeight:'bold'}}>Crowdee</h4>
               </Button>
           </div>
-          <div style={{marginRight:'-65%', position:'fixed'}}>
+          <div style={{marginRight:'-70%', position:'fixed'}}>
             <Button onClick={()=>buttonClick("/search")}>
               <SearchIcon/>
             </Button>
           </div>
-          <div style={{marginRight:'-75%', display:'flex', alignItems:'center'}}>
+          <div style={{marginRight:'-85%', display:'flex', alignItems:'center'}}>
             <Button onClick={()=>buttonClick(`/my/${memberId}`)}>
               <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}>C</Avatar>
+              
             </Button>
           </div>
       </div>
@@ -175,19 +225,22 @@ export default function ViewPage(props) {
         <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'25%', width:'92%'}}>
           <Button onClick={()=>buttonClick(`/category/${category}`)} style={{marginBottom:'-20px'}}>
             <div style={{fontWeight:'bold', color:'gray'}}>{view.category}</div>
+            
           </Button>
           <div style={{marginBottom:'-15px'}}>
             <h2 style={{fontWeight:'bold'}}>{view.title}</h2>
+            
           </div>
           <div style={{display:'flex', alignItems:'center'}}>
             <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'-10px'}}>C</Avatar>
             <Button onClick={()=>buttonClick(`/my/:memberId`)}>
               <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
+              
             </Button>
           </div>
         </div>
-        <div style={{display:'flex', justifyContent:'center', height:'69%', width:'100%'}}>
-          <div style={{border:'1px solid gray', height:'495px', width:'650px'}}>
+        <div style={{display:'flex', height:'63%', width:'92%'}}>
+          <div style={{border:'1px solid black', height:'495px', width:'650px'}}>
             <img style={{width:'100%', height:'100%'}} src={view.thumbNailUrl} />
             
           </div>
@@ -242,29 +295,40 @@ export default function ViewPage(props) {
           <h4 style={{fontWeight:'bold'}}>프로젝트 계획</h4>
         </div>
       </div>
-      <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px'}}>
-        <div style={{width:'60%', paddingLeft:'30px'}}>
-          {view.contents}
+      <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px',alignItems:"center"}}>
+        <div style={{width:'65%', paddingLeft:'30px', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
+          {contentField()}
+          <h4>프로젝트 예산</h4>
+          {budgetField()}
+          <h4>프로젝트 일정</h4>
+          {scheduleField()}
+          <h4>팀소개</h4>
+          {aboutUsField()}
         </div>
-        <div style={{width:'20%', paddingLeft:'10px', paddingRight:'30px'}}>
+      
+        <div style={{width:'30%', paddingLeft:'10px', paddingRight:'30px'}}>
           <div style={{border:'1px solid #E9E9E5', borderBottom:'2px solid #F0F1EC', borderRadius:'5px', padding:'20px', position:'sticky', top:'80px'}}>
             <h5 style={{fontWeight:'bold'}}>크리에이터 소개</h5>
             <div style={{display:'flex', alignItems:'center'}}>
               <Button onClick={()=>buttonClick(`/my/intro/:memberId`)}>
                 <Avatar style={{width:'40px', height:'40px', fontSize:'12px', fontWeight:'bold', marginRight:'10px'}}>E</Avatar>
                 <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
+
               </Button>
             </div>
             <div style={{marginTop:'15px'}}>
               <p style={{fontWeight:'normal', color:'gray'}}>{view.aboutMe}</p>
+              
             </div>
             <div style={{display:'flex', alignItems:'center'}}>
-              {/* {view.fundingList.map((url)=>(
+              {view.fundingList.map((url)=>(
                 <Button onClick={()=>buttonClick(`/view/${url.projectUrl}`)}>
                   <Avatar alt="Remy Sharp" src={url.thumbNailUrl} style={{width:"70px",height:"70px"}} />
                 </Button>
-              ))} */}
+              ))}
+              
               <Button onClick={()=>buttonClick(`/my/created/:memberId`)}>
+              
                 <ArrowForwardIosIcon/>
               </Button>
             </div>

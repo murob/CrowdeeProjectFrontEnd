@@ -1,9 +1,20 @@
+@font-face {
+  font-family: 'nanum';
+  src: url('/assets/font/NanumSquareRegular.ttf') format('truetype');
+  src: url('/assets/font/NanumSquareLight.ttf') format('truetype');
+  src: url('/assets/font/NanumSquareBold.ttf') format('truetype');
+  src: url('/assets/font/NanumSquareExtraBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 body {
   font-size: 1rem;
+  font-family: 'nanum';
 }
 body,
 h1,
@@ -12,7 +23,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: "nanum";
   font-weight: 300;
   line-height: 1.5em;
 }
@@ -62,18 +73,20 @@ h6 {
   font-weight: 500;
 }
 p {
+  font-family: 'nanum';
   font-size: 14px;
   margin: 0 0 10px;
 }
 html {
-  font-family: sans-serif;
+  font-family: 'nanum';
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  -ms-overflow-style: scrollbar;
+  -ms-overflow-style: 'scrollbar';
   -webkit-tap-highlight-color: transparent;
 }
 body {
+  font-family: 'nanum';
   background-color: #e5e5e5;
   color: $black-color;
   margin: 0;
@@ -82,6 +95,7 @@ body {
 }
 
 legend {
+  font-family: 'nanum';
   border-bottom: 0;
 }
 
@@ -96,6 +110,7 @@ legend {
 }
 
 a {
+  font-family: 'nanum';
   color: $link-color;
   text-decoration: none;
   background-color: transparent;
@@ -107,20 +122,24 @@ a {
 }
 
 label {
+  font-family: 'nanum';
   font-size: 14px;
   line-height: 1.42857;
   color: $checkboxes-text-color;
   font-weight: 400;
 }
 small {
+  font-family: 'nanum';
   font-size: 75%;
   color: #777;
   font-weight: 400;
 }
 img {
+  max-width: 100%;
   vertical-align: middle;
   border-style: none;
 }
 form {
+  font-family: 'nanum';
   margin-bottom: 1.125rem;
 }
