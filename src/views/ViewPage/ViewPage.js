@@ -9,7 +9,6 @@ import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -111,18 +110,6 @@ export default function ViewPage(props) {
   }
   );
       
-<<<<<<< HEAD
-    useEffect(() => {
-      // fetch(`http://localhost:8081/contents/${projectUrl}`, {
-      fetch("http://localhost:8081/contents/summerNight", {
-        headers : {
-            "Authorization" : `Bearer ${token}`
-        }
-      }).then(res=>res.json()).then(res=>{
-          setView(res)
-      })
-    },[])
-=======
   useEffect(() => {
     
     fetch(`http://localhost:8081/contents/${projectUrl}`, {
@@ -146,7 +133,6 @@ export default function ViewPage(props) {
      
     })
   },[])
->>>>>>> 1ac164555f72a8f2377886f55173df13d83d7204
 
   const classes = useStyles();
   const { ...rest } = props;

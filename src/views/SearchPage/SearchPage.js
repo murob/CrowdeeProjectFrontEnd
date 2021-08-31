@@ -15,14 +15,14 @@ export default function SearchPage(props) {
 
     return (
         <div style={{backgroundColor:'white', height:'1000px'}}>
-            <div style={{display:'flex', alignItems:'center', paddingLeft:'50px', borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white', position:'fixed', zIndex:'1'}}>
+            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', paddingLeft:'50px', borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white', position:'fixed', zIndex:'1'}}>
                 <div style={{marginTop:'10px'}}>
                     <SearchIcon fontSize={'large'}/>
                 </div>
-                <div>
+                <div style={{marginLeft:'-25%'}}>
                     <input style={{height:'40px', fontSize:'25px', width:'850px', marginLeft:'20px', border:'1px solid white'}} placeholder={'검색어를 입력해주세요.'}></input>
                 </div>
-                <div style={{marginLeft:'60px'}}>
+                <div style={{paddingRight:'5%'}}>
                     <Button onClick={()=>buttonClick("/")}>
                         <CloseIcon fontSize={'large'}/>
                     </Button>
