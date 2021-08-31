@@ -114,27 +114,32 @@ export default function ViewPage(props) {
   );
       
   useEffect(() => {
-    
-    fetch(`http://localhost:8081/contents/${projectUrl}`, {
-      headers : {
-          "Authorization" : `Bearer ${token}`
-      }
-    }).
-    then(
-      res=>res.json()
-    ).
-    then(res=>{
-      console.log(res)
-      setView(res)
-      if(res.wish){
-        setWishController(fullHeart)
-       }
-      else{
-       setWishController(outlineHeart)
-        
-      }
-     
-    })
+    if(!props.data){
+      fetch(`http://localhost:8081/contents/${projectUrl}`, {
+        headers : {
+            "Authorization" : `Bearer ${token}`
+        }
+      }).
+      then(
+        res=>res.json()
+      ).
+      then(res=>{
+        console.log(res)
+        setView(res)
+        if(res.wish){
+          setWishController(fullHeart)
+         }
+        else{
+         setWishController(outlineHeart)
+          
+        }
+       
+      })
+    }
+    else{
+      setView(props.data)
+    }
+  
   },[])
 
   const classes = useStyles();
