@@ -16,12 +16,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import SearchIcon from '@material-ui/icons/Search';
-
+import { Container } from "@material-ui/core";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
 const useStyles = makeStyles(styles);
 
-export default function ViewPage(props) {
+export default function previewPage(props) {
   const fullHeart =
   <FavoriteIcon
    color="secondary"
@@ -30,10 +30,6 @@ export default function ViewPage(props) {
   <FavoriteBorderOutlinedIcon
   color="secondary"
 />
-  const projectUrl = props.match.params.projectUrl;
-  const memberId = props.match.params.memberId;
-  const [token,setToken] = useState(localStorage.getItem("token"))
-  const [wishcontroller,setWishController] = useState();
   const history = useHistory();
 
     const buttonClick = (url) =>{
@@ -41,102 +37,13 @@ export default function ViewPage(props) {
         history.push(url);
     };
   
-  const [isWishAdd, setIsWishAdd] = useState(false)
-  
-  const wishAddHandler = () => {
-    setIsWishAdd(!isWishAdd)
-  }
 
-  const wishCountHandler = () => {
-    
-    wishAddHandler()
-    if(localStorage.getItem("token")){
-      fetch("http://localhost:8081/contents/wishOrUnWish", {
-        method:'POST',
-        headers : {
-          "Authorization" : `Bearer ${token}`,
-          "content-type" : "application/json"
-        },
-        body: view.fundingId,
-      }).
-      then((res)=>{
-        return res.json();
-        
-      }).then((res)=>{
-        console.log(res.wish)
-        if(res.wish){
-          setWishController(fullHeart)
-        }else{
-          setWishController(outlineHeart)
-        }
-      })
-    }else{
-      alert("찜하기를 위해서는 로그인이 필요합니다.");
-    }
-  }
 
-  const[view, setView] = useState({
-
-    fundingId:0,
-    projectUrl:"",
-    manageUrl:"",
-    title:"",
-    subTitle:"",
-    summary:"",
-    thumbNailUrl:"",
-    category:"",
-    tag:"",
-    content:"",
-    budget:"",
-    schedule:"",
-    aboutUs:"",
-    goalFundraising:0,
-    minFundraising:0,
-    startDate:"",
-    endDate:"",
-    maxBacker:0,
-    totalBacker:0,
-    visitCount:0,
-    totalFundraising:0,
-    status:"",
-    aboutMe:"",
-    profileImgUrl:"",
-    career:"",
-    creatorNickName:"",
-    restDate:0,
-    fundingList:[{
-      projectUrl:"",
-      thumbNailUrl:""
-    }],
-    memberList:"",
-    wish:false
-  }
+  const[view, setView] = useState(
+      props.data
   );
       
-  useEffect(() => {
-    
-      fetch(`http://localhost:8081/contents/${projectUrl}`, {
-        headers : {
-            "Authorization" : `Bearer ${token}`
-        }
-      }).
-      then(
-        res=>res.json()
-      ).
-      then(res=>{
-        console.log(res)
-        setView(res)
-        if(res.wish){
-          setWishController(fullHeart)
-         }
-        else{
-         setWishController(outlineHeart)
-          
-        }
-       
-      })
   
-  },[])
 
   const classes = useStyles();
   const { ...rest } = props;
@@ -150,25 +57,22 @@ export default function ViewPage(props) {
 
 
   return (
-    <div style={{backgroundColor:'white'}}>
+      
+          <div style={{backgroundColor:'white'}}>
       <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white', position:'fixed', zIndex:'1'}}>
-          <div style={{marginLeft:'-90%', position:'fixed'}}>
-              <Button onClick={()=>buttonClick("/")}>
-                  <CloseIcon/>
-              </Button>
-          </div>
+          
           <div style={{position:'fixed'}}>
-              <Button onClick={()=>buttonClick("/")}>
+              <Button>
                 <h4 style={{fontWeight:'bold'}}>Crowdee</h4>
               </Button>
           </div>
           <div style={{marginRight:'-70%', position:'fixed'}}>
-            <Button onClick={()=>buttonClick("/search")}>
+            <Button>
               <SearchIcon/>
             </Button>
           </div>
           <div style={{marginRight:'-85%', display:'flex', alignItems:'center'}}>
-            <Button onClick={()=>buttonClick(`/my/${memberId}`)}>
+            <Button>
               <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}>C</Avatar>
               
             </Button>
@@ -176,7 +80,7 @@ export default function ViewPage(props) {
       </div>
       <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'850px', width:'100%', paddingTop:'130px'}}>
         <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'25%', width:'92%'}}>
-          <Button onClick={()=>buttonClick(`/category/${category}`)} style={{marginBottom:'-20px'}}>
+          <Button style={{marginBottom:'-20px'}}>
             <div style={{fontWeight:'bold', color:'gray'}}>{view.category}</div>
             
           </Button>
@@ -186,7 +90,7 @@ export default function ViewPage(props) {
           </div>
           <div style={{display:'flex', alignItems:'center'}}>
             <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'-10px'}}>C</Avatar>
-            <Button onClick={()=>buttonClick(`/my/:memberId`)}>
+            <Button>
               <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
               
             </Button>
@@ -228,8 +132,10 @@ export default function ViewPage(props) {
               size="small"
               variant="outlined"
               style={{height:'50px', width:'50px', marginRight:'10px'}}
-              onClick={wishCountHandler}
-              >{wishcontroller}
+            
+              ><FavoriteIcon
+              color="secondary"
+             />
               </Button>
               <Button
               variant="contained"
@@ -257,7 +163,7 @@ export default function ViewPage(props) {
           <div style={{border:'1px solid #E9E9E5', borderBottom:'2px solid #F0F1EC', borderRadius:'5px', padding:'20px', position:'sticky', top:'80px'}}>
             <h5 style={{fontWeight:'bold'}}>크리에이터 소개</h5>
             <div style={{display:'flex', alignItems:'center'}}>
-              <Button onClick={()=>buttonClick(`/my/intro/:memberId`)}>
+              <Button >
                 <Avatar style={{width:'40px', height:'40px', fontSize:'12px', fontWeight:'bold', marginRight:'10px'}}>E</Avatar>
                 <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
 
@@ -269,12 +175,12 @@ export default function ViewPage(props) {
             </div>
             <div style={{display:'flex', alignItems:'center'}}>
               {view.fundingList.map((url)=>(
-                <Button onClick={()=>buttonClick(`/view/${url.projectUrl}`)}>
+                <Button>
                   <Avatar alt="Remy Sharp" src={url.thumbNailUrl} style={{width:"70px",height:"70px"}} />
                 </Button>
               ))}
               
-              <Button onClick={()=>buttonClick(`/my/created/:memberId`)}>
+              <Button>
               
                 <ArrowForwardIosIcon/>
               </Button>
@@ -284,5 +190,7 @@ export default function ViewPage(props) {
       </div>
       <Footer />
     </div>
+   
+    
   );
 }

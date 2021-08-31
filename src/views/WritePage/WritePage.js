@@ -7,7 +7,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Box } from '@material-ui/core';
 import WritePageNav from './WritePageNav';
 import Modal from '@material-ui/core/Modal';
-import ViewPage from 'views/ViewPage/ViewPage';
+import previewPage from 'views/ViewPage/previewPage';
 export default function WritePage(props) {
  
     var saveCheck = 0;
@@ -174,9 +174,9 @@ export default function WritePage(props) {
             className={classes.modal}
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description">
-            <ViewPage
-                data={modalData}
-            />
+           <previewPage 
+            data={modalData}
+           />
         </Modal>
     </div>
     
