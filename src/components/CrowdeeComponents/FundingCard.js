@@ -76,7 +76,7 @@ export default function FundingCard(props) {
         obj = strArr[0];
     
     return obj;//문자열 반환
-}
+  }
 
 useEffect(() => {
   setFunding({

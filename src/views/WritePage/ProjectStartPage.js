@@ -112,8 +112,8 @@ export default function ProjectStartPage(props) {
             />
 
             <div style={{marginTop:'5%', marginLeft:'-100px', width:'100%', height:'700px', display:'flex', justifyContent:'space-evenly', alignItems:'center'}}>
-                <div style={{marginLeft:'100px',width:'100px', display:'flex', justifyContent:'center', alignItems:'flex-start'}}>
-                    <img style={{width:'400px'}} src={require('./crowdee-logo.png').default} />
+                <div style={{marginLeft:'100px',width:'400px', display:'flex', justifyContent:'center', alignItems:'flex-start'}}>
+                    <img style={{width:'100%'}} src={require('./crowdee-logo.png').default} />
                 </div>
                 <div style={{}}>
                     <div style={{width:'300px'}}>

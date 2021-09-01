@@ -28,12 +28,7 @@ import CategoryPage from "views/CategoryPage/CategoryPage";
 import ProjectStartPage from "views/WritePage/ProjectStartPage";
 import MyPage from "views/MyPage/MyPage";
 import SearchPage from "views/SearchPage/SearchPage";
-<<<<<<< HEAD
 import ViewDetails from "views/ViewPage/ViewDetails";
-=======
-
-
->>>>>>> 4d5d3f46a62be9b43333b35b2b94d883272cc35b
 
 var hist = createBrowserHistory();
 

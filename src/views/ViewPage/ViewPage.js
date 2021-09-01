@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Footer from "components/Footer/Footer.js";
 
 import { useHistory } from 'react-router';
-import { Button } from '@material-ui/core';
+import { Button, Container } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -31,7 +31,6 @@ export default function ViewPage(props) {
   color="secondary"
 />
   const projectUrl = props.match.params.projectUrl;
-  console.log(projectUrl)
   const memberId = props.match.params.memberId;
   const [token,setToken] = useState(localStorage.getItem("token"))
   const [wishcontroller,setWishController] = useState();
@@ -206,6 +205,29 @@ export default function ViewPage(props) {
     )
   }
 
+  const comma = (obj) => {
+    var regx = new RegExp(/(-?\d+)(\d{3})/);
+   
+    var strArr = `${obj}`.split('.');
+    while (regx.test(strArr[0])) {//문자열에 정규식 특수문자가 포함되어 있는지 체크
+        //정수 부분에만 콤마 달기 
+        strArr[0] = strArr[0].replace(regx, "$1,$2");//콤마추가하기
+    }
+        obj = strArr[0];
+    
+    return obj;//문자열 반환
+  }
+
+  // useEffect(() => {
+  //   setView({
+  //     ...view,
+  //     totalFundraising:comma(props.totalFundraising),
+  //     goalFundraising:comma(props.goalFundraising),
+      
+  //   })
+    
+  // }, [])
+
   return (
     <div style={{backgroundColor:'white'}}>
       <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white', position:'fixed', zIndex:'1'}}>
@@ -231,124 +253,123 @@ export default function ViewPage(props) {
             </Button>
           </div>
       </div>
-      <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'850px', width:'100%', paddingTop:'130px'}}>
-        <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'25%', width:'92%'}}>
-          <Button onClick={()=>buttonClick(`/category/${category}`)} style={{marginBottom:'-20px'}}>
-            <div style={{fontWeight:'bold', color:'gray'}}>{view.category}</div>
-            
-          </Button>
-          <div style={{marginBottom:'-15px'}}>
-            <h2 style={{fontWeight:'bold'}}>{view.title}</h2>
-            
-          </div>
-          <div style={{display:'flex', alignItems:'center'}}>
-            <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'-10px'}}>C</Avatar>
-            <Button onClick={()=>buttonClick(`/my/:memberId`)}>
-              <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
+      <Container>
+
+        <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'850px', width:'100%', paddingTop:'130px'}}>
+          <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'25%', width:'92%'}}>
+            <Button onClick={()=>buttonClick(`/category/${category}`)} style={{marginBottom:'-20px'}}>
+              <div style={{fontWeight:'bold', color:'gray'}}>{view.category}</div>
               
             </Button>
-          </div>
-        </div>
-        <div style={{display:'flex', height:'63%', width:'92%'}}>
-          <div style={{border:'1px solid black', height:'495px', width:'650px'}}>
-            <img style={{width:'100%', height:'100%'}} src={view.thumbNailUrl} />
-            
-          </div>
-          <div style={{paddingLeft:'30px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
-            <div style={{marginBottom:'-25px'}}>
-              <h4 style={{fontWeight:'bold', color:'gray'}}>펀딩상황</h4>
-            </div>
-
-            <div style={{display:'flex', alignItems:'center'}}>
-              <h2 style={{fontWeight:'bold'}}>{view.totalFundraising}</h2>
+            <div style={{marginBottom:'-15px'}}>
+              <h2 style={{fontWeight:'bold'}}>{view.title}</h2>
               
-              <h2 style={{fontWeight:'bold'}}>원</h2>
-              <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'22px'}}>펀딩 중</h5>
             </div>
-
-            <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>남은시간</h5>
             <div style={{display:'flex', alignItems:'center'}}>
-              <h2 style={{fontWeight:'bold'}}>{view.restDate}</h2>
-              
-              <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>일</h5>
-            </div>
-
-            <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>후원자</h5>
-            <div style={{display:'flex', alignItems:'center'}}>
-              <h2 style={{fontWeight:'bold'}}>{view.totalBacker}</h2>
-              
-              <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>명</h5>
-            </div>
-
-            <div style={{display:'flex', justifyContent:'center', width:'300px', paddingTop:'100px'}}>
-              <Button 
-              size="small"
-              variant="outlined"
-              style={{height:'50px', width:'50px', marginRight:'10px'}}
-              onClick={wishCountHandler}
-              >{wishcontroller}
-              </Button>
-              <Button
-              variant="contained"
-              color="secondary"
-              style={{height:'50px'}}
-              
-              >
-                <h4 style={{fontWeight:'bold'}}>펀딩하기</h4>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderTop:'1.9px solid #E9E9E5',  borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white'}}>
-        <div>
-          <h4 style={{fontWeight:'bold'}}>프로젝트 계획</h4>
-        </div>
-      </div>
-      <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px',alignItems:"center"}}>
-        <div style={{width:'65%', paddingLeft:'30px', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
-          {contentField()}
-          <h4>프로젝트 예산</h4>
-          {budgetField()}
-          <h4>프로젝트 일정</h4>
-          {scheduleField()}
-          <h4>팀소개</h4>
-          {aboutUsField()}
-        </div>
-      
-<<<<<<< HEAD
-        <div style={{width:'35%', paddingLeft:'10px', paddingRight:'30px'}}>
-=======
-        <div style={{width:'30%', paddingLeft:'10px', paddingRight:'30px'}}>
->>>>>>> 4d5d3f46a62be9b43333b35b2b94d883272cc35b
-          <div style={{border:'1px solid #E9E9E5', borderBottom:'2px solid #F0F1EC', borderRadius:'5px', padding:'20px', position:'sticky', top:'80px'}}>
-            <h5 style={{fontWeight:'bold'}}>크리에이터 소개</h5>
-            <div style={{display:'flex', alignItems:'center'}}>
-              <Button onClick={()=>buttonClick(`/my/intro/:memberId`)}>
-                <Avatar style={{width:'40px', height:'40px', fontSize:'12px', fontWeight:'bold', marginRight:'10px'}}>E</Avatar>
+              <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'-10px'}}>C</Avatar>
+              <Button onClick={()=>buttonClick(`/my/:memberId`)}>
                 <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
-
-              </Button>
-            </div>
-            <div style={{marginTop:'15px'}}>
-              <p style={{fontWeight:'normal', color:'gray'}}>{view.aboutMe}</p>
-              
-            </div>
-            <div style={{display:'flex', alignItems:'center'}}>
-              {view.fundingList.map((url)=>(
-                <Button onClick={()=>buttonClick(`/view/${url.projectUrl}`)}>
-                  <Avatar alt="Remy Sharp" src={url.thumbNailUrl} style={{width:"70px",height:"70px"}} />
-                </Button>
-              ))}
-              
-              <Button onClick={()=>buttonClick(`/my/created/:memberId`)}>
-              
-                <ArrowForwardIosIcon/>
+                
               </Button>
             </div>
           </div>
+          <div style={{display:'flex', justifyContent:'', height:'69%', width:'100%'}}>
+            <div style={{border:'1px solid black', height:'495px', width:'650px', border:'1px solid black'}}>
+              <img style={{width:'100%', height:'100%'}} src={view.thumbNailUrl} />
+            </div>
+            <div style={{paddingLeft:'30px', display:'flex', flexDirection:'column', justifyContent:'center', paddingLeft:'40px'}}>
+              <div style={{marginBottom:'-25px'}}>
+                <h4 style={{fontWeight:'bold', color:'gray'}}>펀딩상황</h4>
+              </div>
+
+              <div style={{display:'flex', alignItems:'center'}}>
+                <h2 style={{fontWeight:'bold'}}>{comma(view.totalFundraising)}</h2>
+                
+                <h2 style={{fontWeight:'bold'}}>원</h2>
+                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'22px'}}>펀딩 중</h5>
+              </div>
+
+              <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>남은시간</h5>
+              <div style={{display:'flex', alignItems:'center'}}>
+                <h2 style={{fontWeight:'bold'}}>{view.restDate}</h2>
+                
+                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>일</h5>
+              </div>
+
+              <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>후원자</h5>
+              <div style={{display:'flex', alignItems:'center'}}>
+                <h2 style={{fontWeight:'bold'}}>{view.totalBacker}</h2>
+                
+                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>명</h5>
+              </div>
+
+              <div style={{display:'flex', justifyContent:'center', width:'300px', paddingTop:'100px'}}>
+                <Button 
+                size="small"
+                variant="outlined"
+                style={{height:'50px', width:'50px', marginRight:'10px'}}
+                onClick={wishCountHandler}
+                >{wishcontroller}
+                </Button>
+                <Button
+                variant="contained"
+                color="secondary"
+                style={{height:'50px'}}
+                
+                >
+                  <h4 style={{fontWeight:'bold'}}>펀딩하기</h4>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+        <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderTop:'1.9px solid #E9E9E5',  borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white'}}>
+          <div>
+            <h4 style={{fontWeight:'bold'}}>프로젝트 계획</h4>
+          </div>
+        </div>
+        <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px'}}>
+          <div style={{width:'65%', paddingLeft:'30px', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
+            {contentField()}
+            <h4>프로젝트 예산</h4>
+            {budgetField()}
+            <h4>프로젝트 일정</h4>
+            {scheduleField()}
+            <h4>팀소개</h4>
+            {aboutUsField()}
+            <div style={{height:'1000px'}}></div>
+          </div>
+        
+          <div style={{width:'30%', paddingLeft:'10px', paddingRight:'30px'}}>
+            <div style={{border:'1px solid #E9E9E5', borderBottom:'2px solid #F0F1EC', borderRadius:'5px', padding:'20px', position:'sticky', top:'80px'}}>
+              <h5 style={{fontWeight:'bold'}}>크리에이터 소개</h5>
+              <div style={{display:'flex', alignItems:'center'}}>
+                <Button onClick={()=>buttonClick(`/my/intro/:memberId`)}>
+                  <Avatar style={{width:'40px', height:'40px', fontSize:'12px', fontWeight:'bold', marginRight:'10px'}}>E</Avatar>
+                  <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
+
+                </Button>
+              </div>
+              <div style={{marginTop:'15px'}}>
+                <p style={{fontWeight:'normal', color:'gray'}}>{view.aboutMe}</p>
+                
+              </div>
+              <div style={{display:'flex', alignItems:'center'}}>
+                {view.fundingList.map((url)=>(
+                  <Button onClick={()=>buttonClick(`/view/${url.projectUrl}`)}>
+                    <Avatar alt="Remy Sharp" src={url.thumbNailUrl} style={{width:"70px",height:"70px"}} />
+                  </Button>
+                ))}
+                
+                <Button onClick={()=>buttonClick(`/my/created/:memberId`)}>
+                
+                  <ArrowForwardIosIcon/>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
       <Footer />
     </div>
   );
