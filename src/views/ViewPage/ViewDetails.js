@@ -112,19 +112,23 @@ export default function ViewDetails(props) {
             </Grid>
             <Grid item xs={5}>
                 <Paper className={classes.topmain}>
-                    <Typography variant="h4" gutterBottom>
-                        {props.title}
-                    </Typography>
-                    <Typography variant="subtitle1" gutterBottom>
-                     남은 기간  {props.restDate}일
-                    </Typography>
+                    <h4>
+                    {props.title}
+                    </h4>
+                        
+                   
+                    <h5>
+                    남은 기간  {props.restDate}일
+                    </h5>
                     
-                    <Typography style={{marginTop:"15px"}} variant="caption" display="block" gutterBottom>
+                 
+                    
+                    <h6 style={{marginTop:"15px" ,display:"block"}} >
                         이만큼 모였어요.  /  이만큼 모아야 해요.
-                    </Typography>
-                    <Typography style={{marginTop:"15px"}} variant="caption" display="block" gutterBottom>
+                    </h6>
+                    <h6 style={{marginTop:"15px" ,display:"block"}} >
                     {props.totalFundraising} 원  /  {props.goalFundraising} 원 
-                    </Typography>
+                    </h6>
                     <div style={{marginTop:"65px"}}>
                     <LinearWithValueLabel  value={props.rateOfAchievment} />
                     </div>
@@ -144,7 +148,7 @@ export default function ViewDetails(props) {
                     <Button  size="large"  >
                        프로젝트스토리  프로젝트 안내
                     </Button>
-                    <Typography>{props.summary}</Typography>
+                    <h6>{props.summary}</h6>
                 </Paper>
             </Grid>
            

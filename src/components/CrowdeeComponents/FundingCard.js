@@ -96,26 +96,29 @@ useEffect(() => {
         <CardMedia
           component="img"
           alt="펀딩 사진"
-          height="160"
+          style={{
+            height:"160px",
+            maxHeight:"160px"
+          }}
           image={funding.imgUrl}
           title="펀딩 사진"
         />
         <CardContent>
-          <Typography gutterBottom variant="h6" component="h6">
-            {funding.title}
-          </Typography>
-          <Typography variant="caption" display="block" gutterBottom>
-            {funding.summary}
-          </Typography>
-          <Typography variant="caption" display="block" gutterBottom>
-            카테고리 : {funding.category}
-          </Typography>
-          <Typography variant="caption" display="block" gutterBottom>
-            남은날짜 : {funding.restDate}
-          </Typography>
-          <Typography variant="caption" display="block" gutterBottom>
-           목표금액 : {funding.goalFundraising} 원
-          </Typography>
+          <h6>{funding.title}</h6>
+
+          <h6 style={{display:"block"}}>{funding.summary}</h6>
+          
+          <h6 style={{display:"block"}}> 
+          카테고리 : {funding.category}
+          </h6>
+
+          <p style={{display:"block",fontSize:"12px"}}> 
+          남은날짜 : {funding.restDate}
+          </p>
+          
+          <p style={{display:"block",fontSize:"12px"}}> 
+          목표금액 : {funding.goalFundraising} 원
+          </p>
           <LinearWithValueLabel value={funding.rateOfAchievement} />
         </CardContent>
       </CardActionArea>

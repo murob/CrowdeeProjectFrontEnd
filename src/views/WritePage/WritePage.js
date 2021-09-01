@@ -137,7 +137,7 @@ export default function WritePage(props) {
                     throw new Error('http에러')
                 }
                saveCheck=1;
-               if({first}&&{second}&&{third}){
+               if(first&&second&&third){
                 alert("저장하신 펀딩은 관리자의 검수 후 등록 될 예정입니다!")
                 props.history.push("/")
                }

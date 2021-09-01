@@ -27,21 +27,16 @@ export default function SearchPage(props) {
                     <input style={{height:'40px', fontSize:'25px', width:'450px', marginLeft:'20px', border:'1px solid white'}} placeholder={'검색어를 입력해주세요.'}></input>
                 </div>
                 <div style={{marginLeft:'60px'}}>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d5d3f46a62be9b43333b35b2b94d883272cc35b
                     <Button onClick={()=>buttonClick("/")}>
                         <SearchIcon fontSize={'large'}/>
                     </Button>
                 </div>
-                <div style={{display:'flex', alignItems:'center'}}>
-                    <input style={{height:'40px', fontSize:'25px', width:'850px', marginLeft:'30px', border:'1px solid white'}} placeholder={'검색어를 입력해주세요.'}></input>
-                    <Button>
-                        <CancelIcon/>
-                    </Button>
-                    <SearchIcon fontSize={'large'}/>
-                </div>
-                <div style={{display:'flex', alignItems:'center'}}>
-                </div>
-                <div style={{display:'flex', alignItems:'center', paddingRight:'5%'}}>
-                </div>
+                
+               
             </div>
             <div style={{display:'flex', height:'63%', width:'92%'}}></div>
         </div>
