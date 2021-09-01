@@ -27,7 +27,6 @@ export default function SearchPage(props) {
                     <input style={{height:'40px', fontSize:'25px', width:'450px', marginLeft:'20px', border:'1px solid white'}} placeholder={'검색어를 입력해주세요.'}></input>
                 </div>
                 <div style={{marginLeft:'60px'}}>
-
                     <Button onClick={()=>buttonClick("/")}>
                         <SearchIcon fontSize={'large'}/>
                     </Button>
