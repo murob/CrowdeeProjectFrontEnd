@@ -138,8 +138,20 @@ export default function WritePage(props) {
                 }
                saveCheck=1;
                if(first&&second&&third){
-                alert("저장하신 펀딩은 관리자의 검수 후 등록 될 예정입니다!")
-                props.history.push("/")
+                fetch(`http://localhost:8081/creator/create/${manageUrl}`,{
+            
+                headers : {
+                    "Authorization" : `Bearer ${token}`
+                }
+                }).
+                then((res)=>{
+                    if(!res.status==200){
+                        throw new Error('http에러')
+                    }
+                    alert("저장하신 펀딩은 관리자의 검수 후 등록 될 예정입니다!")
+                    props.history.push("/")
+                })
+                
                }
             }).catch((e)=>{
                 alert("데이터 전송 중 에러 발생"+e.message)
