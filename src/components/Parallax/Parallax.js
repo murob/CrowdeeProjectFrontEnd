@@ -5,7 +5,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+import SimpleImageSlider from "react-simple-image-slider"
 // core components
 import styles from "assets/jss/material-kit-react/components/parallaxStyle.js";
 
@@ -14,16 +14,16 @@ const useStyles = makeStyles(styles);
 export default function Parallax(props) {
   const [index,setIndex] = useState(0)
   const indexRef = useRef(0)
-    
+  
   const changeIndex = () =>{
- 
-    if(index==0){
+  
+    if(index<props.image.length-1){
       setIndex(index+1)
       //indexRef.current+=1
     }  
-    if(index==1){
-      setIndex(index-1)
-      //indexRef.current-=1
+    else{
+      setIndex(0)
+      // indexRef.current=0
     }
   }
   
@@ -35,7 +35,7 @@ export default function Parallax(props) {
 
   })
 
-
+ 
   
   
   let windowScrollTop;
@@ -71,12 +71,13 @@ export default function Parallax(props) {
   });
   return (
     <div
+      id="img"
       className={parallaxClasses}
       style={{
-        ...style,
+        ...styles,
         marginTop:"77px",
         backgroundImage: "url(" + image[index] + ")",
-        transform: transform,
+        
       }}
     >
       {children}
