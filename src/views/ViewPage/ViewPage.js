@@ -4,7 +4,6 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-
 import Footer from "components/Footer/Footer.js";
 
 import { useHistory } from 'react-router';
@@ -18,8 +17,19 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import SearchIcon from '@material-ui/icons/Search';
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
-
-const useStyles = makeStyles(styles);
+import Modal from '@material-ui/core/Modal';
+import JoinFundingModal from "./JoinFundingModal";
+const useStyles = makeStyles(()=>({
+  
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height : '850px',
+    
+  },
+ 
+}));
 
 export default function ViewPage(props) {
   const fullHeart =
@@ -30,6 +40,15 @@ export default function ViewPage(props) {
   <FavoriteBorderOutlinedIcon
   color="secondary"
 />
+const [open, setOpen] = useState(false);
+const handleOpen = () => {
+  console.log("클릭되냐")
+  setOpen(true);
+};
+
+const handleClose = () => {
+  setOpen(false);
+};
   const projectUrl = props.match.params.projectUrl;
   const memberId = props.match.params.memberId;
   const [token,setToken] = useState(localStorage.getItem("token"))
@@ -217,17 +236,6 @@ export default function ViewPage(props) {
     
     return obj;//문자열 반환
   }
-
-  // useEffect(() => {
-  //   setView({
-  //     ...view,
-  //     totalFundraising:comma(props.totalFundraising),
-  //     goalFundraising:comma(props.goalFundraising),
-      
-  //   })
-    
-  // }, [])
-
   return (
     <div style={{backgroundColor:'white'}}>
       <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white', position:'fixed', zIndex:'1'}}>
@@ -274,7 +282,7 @@ export default function ViewPage(props) {
             </div>
           </div>
           <div style={{display:'flex', justifyContent:'', height:'69%', width:'100%'}}>
-            <div style={{border:'1px solid black', height:'495px', width:'650px', border:'1px solid black'}}>
+            <div style={{border:'1px solid black', height:'495px', width:'650px',}}>
               <img style={{width:'100%', height:'100%'}} src={view.thumbNailUrl} />
             </div>
             <div style={{paddingLeft:'30px', display:'flex', flexDirection:'column', justifyContent:'center', paddingLeft:'40px'}}>
@@ -287,6 +295,13 @@ export default function ViewPage(props) {
                 
                 <h2 style={{fontWeight:'bold'}}>원</h2>
                 <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'22px'}}>펀딩 중</h5>
+              </div>
+
+              <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>목표금액</h5>
+              <div style={{display:'flex', alignItems:'center'}}>
+                <h2 style={{fontWeight:'bold'}}>{view.goalFundraising}</h2>
+                
+                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>일</h5>
               </div>
 
               <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>남은시간</h5>
@@ -303,6 +318,13 @@ export default function ViewPage(props) {
                 <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>명</h5>
               </div>
 
+              <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>남은 티켓</h5>
+              <div style={{display:'flex', alignItems:'center'}}>
+                <h2 style={{fontWeight:'bold'}}>{view.maxBacker-view.totalBacker}</h2>
+                
+                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>장</h5>
+              </div>
+
               <div style={{display:'flex', justifyContent:'center', width:'300px', paddingTop:'100px'}}>
                 <Button 
                 size="small"
@@ -315,10 +337,25 @@ export default function ViewPage(props) {
                 variant="contained"
                 color="secondary"
                 style={{height:'50px'}}
-                
+                onClick={handleOpen}
                 >
-                  <h4 style={{fontWeight:'bold'}}>펀딩하기</h4>
+                <h4 style={{fontWeight:'bold'}}>펀딩하기</h4>
                 </Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  className={classes.modal}
+                  aria-labelledby="simple-modal-title"
+                  aria-describedby="simple-modal-description">
+                      
+                  <JoinFundingModal
+                    title={view.title}
+                    creatorNickName={view.creatorNickName}
+                    maxBacker={view.maxBacker}
+                    totalBacker={view.totalBacker}
+                    totalFundraising={view.totalFundraising}
+                  ></JoinFundingModal>
+                </Modal>
               </div>
             </div>
           </div>
@@ -346,7 +383,7 @@ export default function ViewPage(props) {
           </div>
           
           {aboutUsField()}
-            <div style={{height:'1000px'}}></div>
+      
           </div>
         
           <div style={{width:'30%', paddingLeft:'10px', paddingRight:'30px'}}>
