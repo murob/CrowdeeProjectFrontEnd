@@ -1,43 +1,94 @@
-import React from 'react';
-import { Button } from '@material-ui/core';
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+// core components
 import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 
-import FundingCard from "components/CrowdeeComponents/FundingCard";
-import { Typography } from "@material-ui/core";
+import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+import { useEffect, useState } from "react";
+import MyFundingCard from "components/CrowdeeComponents/MyFundingCard";
 
-export default function MyBacked() {
+const useStyles = makeStyles(styles);
+
+export default function MyCreated() {
+
+    const classes = useStyles();
+    const [result,setResult] = useState();
+    const [token,setToken] = useState(localStorage.getItem("token"))
+   
+
+    const [funding, setFunding] = useState({
+        fundingId:0,
+        creatorId:0,
+        projectUrl:"",
+        thumbNailUrl:"",
+        title:"",
+        subTitle:"",
+        summary:"",
+        tag:"",
+        rateOfAchievement:0,
+        goalFundraising:0,
+        totalFundraising:0,
+        category:"",
+        restDate:0,
+        participant:0,
+        result:false,
+        isWish:false
+    });
+    
+    //함수 실행시 최초 한번 실행되는 것
+    useEffect(() => {
+        console.log("asdlkj"+localStorage.getItem("token"))
+        fetch("http://localhost:8081/member/myPage/fundingList", {
+        headers : {
+          "Authorization" : `Bearer ${token}`
+        }
+        }).
+        then(
+            res=>res.json(),
+        )
+        .then(res=>{
+            console.log(res)
+            if(res){
+                setFunding(res);
+                setResult(
+                    <div className={classes.section}>
+                        <GridContainer justify="center">
+                            {funding.map((funding)=>(
+                            <MyFundingCard 
+                            id={funding.fundingId}
+                            title={funding.title}
+                            imgUrl={funding.thumbNailUrl}
+                            summary={funding.summary}
+                            restDate={funding.restDate}
+                            category={funding.category}
+                            totalFundraising={funding.totalFundraising}
+                            goalFundraising={funding.goalFundraising}
+                            ROA={funding.rateOfAchievement}
+                            projectUrl={funding.projectUrl} />
+                            ))}
+                        </GridContainer>
+                    </div>
+                )
+                console.log(result)
+            }else{
+                setResult(
+                    <div>
+                        <h5 style={{fontWeight:'bold', color:'gray'}}>
+                            후원한 프로젝트가 없습니다.
+                        </h5>
+                    </div>
+                )
+            }  
+        })
+        .catch((e) =>{
+            alert("게시물 조회 중 에러발생 "+ e.message);
+        });
+    },[])
+    console.log(funding)
+
     return (
         <div>
-            <h5 style={{fontWeight:'bold', color:'gray'}}>
-                후원중인 프로젝트가 없습니다.
-            </h5>
-            <div>
-                꺄르르
-                <div style={{width:'330px', height:'465px'}}>
-                    <div style={{border:'1px solid black', borderRadius:'5px', width:'330px', height:'245px'}}>
-                        여긴뭐지
-                    </div>
-                    <div style={{border:'1px solid black', width:'330px', height:'220px'}}>
-                        <div>                            
-                            <h4 style={{fontWeight:'bold', color:'black', fontSize:'20px'}}>(불안과 경쟁 없는 이곳에서) 자연농 농부 인터뷰집</h4>
-                        </div>
-                        <div style={{display:'flex', alignItems:'center', height:'25px'}}>
-                            <h6>카테고리</h6>
-                            <h6>&nbsp;|&nbsp;</h6>
-                            <h6>크리에이터닉네임</h6>
-                        </div>
-                        <div style={{display:'flex', alignItems:'center', minHeight:'50px', maxHeight:'100%'}}>
-                            <h5 style={{fontWeight:'bold', fontSize:'15px'}}>
-                                프로젝트 요약입니다. 한국, 미국, 일본의 자연농 농부들에게 '지구에서 즐겁게 사는 법'을 듣습니다.
-                            </h5>
-                        </div>
-                        <div style={{border:'1px solid black'}}>
-                            펀딩진행률
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {result}
         </div>
     );
 };

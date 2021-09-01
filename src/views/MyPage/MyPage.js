@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router';
 import { Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
@@ -9,7 +9,7 @@ import MyPageRouter from './MyPageRouter';
 
 export default function MyPage(props) {
 
-    const [path,setPath] = useState('/my/intro/:memberId');
+    const [path,setPath] = useState('/my/intro');
 
     // const [path,setPath] = useState(`/my/${memberId}`);
 
@@ -17,26 +17,30 @@ export default function MyPage(props) {
 
     const [formData,setFormData] = useState();
 
+    const [fundingList, setFundingList] = useState({
+        
+    });
+
     const buttonClick = (url) =>{
     
         history.push(url);
     };
     
     const changeIntro = () =>{
-        setPath('/my/intro/:memberId')
-        props.history.push('/my/intro/:memberId')
+        setPath('/my/intro')
+        props.history.push('/my/intro')
     }
     const changeBacked = () =>{
-        setPath('/my/backed/:memberId')
-        props.history.push('/my/backed/:memberId')
+        setPath('/my/backed')
+        props.history.push('/my/backed')
     }
     const changeCreated = () =>{
-        setPath('/my/created/:memberId')
-        props.history.push('/my/created/:memberId')
+        setPath('/my/created')
+        props.history.push('/my/created')
     }
     const changeWish = () =>{
-        setPath('/my/wish/:memberId')  
-        props.history.push('/my/wish/:memberId')
+        setPath('/my/wish')  
+        props.history.push('/my/wish')
     }
 
     // const changeIntro = () =>{
@@ -62,6 +66,21 @@ export default function MyPage(props) {
         setFormData(data)
     }
 
+    // useEffect(() => {
+    //     fetch("http://localhost:8081/member/myPage/fundingList")
+    //     .then((res)=>{
+        
+    //     if(!res.status==200){
+    //         throw new Error('http 오류');
+    //     }
+    //     return res.json()})
+    //     .then((res)=>{
+    //     })
+    //     .catch((e) =>{
+    //         alert("게시물 조회 중 에러발생 "+ e.message);
+    //     });
+    // },[])
+
     return (
         <div style={{backgroundColor:'white', width:'100%', height:'100%'}}>
             <div style={{display:'flex', justifyContent:'center', alignItems:'center', borderBottom:'2px solid #F0F1EC', height:'10%', width:'100%', backgroundColor:'white', position:'fixed', zIndex:'1'}}>
@@ -81,7 +100,7 @@ export default function MyPage(props) {
                     </Button>
                 </div>
                 <div style={{marginRight:'-75%', display:'flex', alignItems:'center'}}>
-                    <Button onClick={()=>buttonClick(`/my/${memberId}`)}>
+                    <Button onClick={()=>buttonClick("/my")}>
                     <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}>C</Avatar>
                     </Button>
                 </div>
