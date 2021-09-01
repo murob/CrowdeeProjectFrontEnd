@@ -27,9 +27,9 @@ export default function Header(props) {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   React.useEffect(() => {
-    if (props.changeColorOnScroll) {
-      window.addEventListener("scroll", headerColorChange);
-    }
+    // if (props.changeColorOnScroll) {
+    //   window.addEventListener("scroll", headerColorChange);
+    // }
     return function cleanup() {
       if (props.changeColorOnScroll) {
         window.removeEventListener("scroll", headerColorChange);
@@ -91,11 +91,10 @@ export default function Header(props) {
   
   const writeFunding = 
 
-    <Typography
-      variant="subtitle1"
+    <h5
       style={{cursor:"pointer",}}
       onClick={()=>buttonClick("/project-start")}
-      >펀딩 등록하기</Typography>
+      >펀딩 등록하기</h5>
       
      
       
