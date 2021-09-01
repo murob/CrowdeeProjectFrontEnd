@@ -238,7 +238,7 @@ export default function ViewPage(props) {
           </div>
           <div style={{position:'fixed'}}>
               <Button onClick={()=>buttonClick("/")}>
-                <h4 style={{fontWeight:'bold'}}>Crowdee</h4>
+               <img src={require('components/Header/CrowdeeLogoFinal2.png').default}/>
               </Button>
           </div>
           <div style={{marginRight:'-70%', position:'fixed'}}>
@@ -330,13 +330,22 @@ export default function ViewPage(props) {
         </div>
         <div style={{display:'flex', justifyContent:'center', height:'100%', width:'100%', paddingTop:'30px'}}>
           <div style={{width:'65%', paddingLeft:'30px', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}}>
-            {contentField()}
+          {contentField()}
+          <div style={{justifyContent:"left", width:"100%"}}>
             <h4>프로젝트 예산</h4>
-            {budgetField()}
+          </div>
+          
+          {budgetField()}
+          <div style={{justifyContent:"left", width:"100%"}}>
             <h4>프로젝트 일정</h4>
-            {scheduleField()}
+          </div>
+         
+          {scheduleField()}
+          <div style={{justifyContent:"left", width:"100%"}}>
             <h4>팀소개</h4>
-            {aboutUsField()}
+          </div>
+          
+          {aboutUsField()}
             <div style={{height:'1000px'}}></div>
           </div>
         
