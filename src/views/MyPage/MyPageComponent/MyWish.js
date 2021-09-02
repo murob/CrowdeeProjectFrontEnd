@@ -17,7 +17,9 @@ export default function MyCreated() {
     const [token,setToken] = useState(localStorage.getItem("token"))
     
     //함수 실행시 최초 한번 실행되는 것
-    const [funding, setFunding] = useState({
+    const [funding, setFunding] = useState(
+        
+        {
         fundingId:0,
         creatorId:0,
         projectUrl:"",
@@ -34,11 +36,13 @@ export default function MyCreated() {
         participant:0,
         result:false,
         isWish:false
-    });
+        }
+    
+    );
     
     //함수 실행시 최초 한번 실행되는 것
     useEffect(() => {
-        console.log("asdlkj"+localStorage.getItem("token"))
+        
         fetch("http://localhost:8081/member/myPage/wishList", {
         headers : {
           "Authorization" : `Bearer ${token}`
