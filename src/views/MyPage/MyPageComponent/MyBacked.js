@@ -9,7 +9,9 @@ import MyFundingCard from "components/CrowdeeComponents/MyFundingCard";
 
 const useStyles = makeStyles(styles);
 
+
 export default function MyCreated(props) {
+
     return (
         <div>
             {props.data}

@@ -12,29 +12,58 @@ const useStyles = makeStyles(styles);
 export default function MyCreated() {
 
     const classes = useStyles();
-    const fund = []
     const [fundings, setFundings] = useState([]);
-    const [fundingsKey,setFundingsKey] = useState([]);
     const [result,setResult] = useState()
+    const [token,setToken] = useState(localStorage.getItem("token"))
+    
+    //함수 실행시 최초 한번 실행되는 것
+    const [funding, setFunding] = useState({
+        fundingId:0,
+        creatorId:0,
+        projectUrl:"",
+        thumbNailUrl:"",
+        title:"",
+        subTitle:"",
+        summary:"",
+        tag:"",
+        rateOfAchievement:0,
+        goalFundraising:0,
+        totalFundraising:0,
+        category:"",
+        restDate:0,
+        participant:0,
+        result:false,
+        isWish:false
+    });
     
     //함수 실행시 최초 한번 실행되는 것
     useEffect(() => {
-        fetch("http://localhost:8081/contents")
-        .then((res)=>{
-        
-        if(!res.status==200){
-            throw new Error('http 오류');
+        console.log("asdlkj"+localStorage.getItem("token"))
+        fetch("http://localhost:8081/creator/myFundingList", {
+        headers : {
+          "Authorization" : `Bearer ${token}`
         }
-        return res.json()})
-        .then((res)=>{
-            if(res){
-                setFundings(res);
+        }).
+        then((res) =>{
+            if(res.status==200){
+                return res.json()
+            }
+           else{
+               throw Error("에러")
+           }
+
+        }
+        )
+        .then(res=>{
+            console.log(res)
+           
+                setFunding(res);
                 setResult(
                     <div className={classes.section}>
                         <GridContainer justify="center">
-                            {fundings.map((funding)=>(
+                            {funding.map((funding)=>(
                             <MyFundingCard 
-                            id={funding.funding_id}
+                            id={funding.fundingId}
                             title={funding.title}
                             imgUrl={funding.thumbNailUrl}
                             summary={funding.summary}
@@ -48,18 +77,17 @@ export default function MyCreated() {
                         </GridContainer>
                     </div>
                 )
-            }else{
-                setResult(
-                    <div>
-                        <h5 style={{fontWeight:'bold', color:'gray'}}>
-                            진행중인 프로젝트가 없습니다.
-                        </h5>
-                    </div>
-                )
-            }  
+                console.log(result)
+            
         })
         .catch((e) =>{
-            alert("게시물 조회 중 에러발생 "+ e.message);
+            setResult(
+                <div>
+                    <h5 style={{fontWeight:'bold', color:'gray'}}>
+                        진행중인 프로젝트가 없습니다.
+                    </h5>
+                </div>
+            )
         });
     },[])
     console.log(fundings)
