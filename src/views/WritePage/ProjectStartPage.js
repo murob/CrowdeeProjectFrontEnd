@@ -23,6 +23,10 @@ export default function ProjectStartPage(props) {
     const [urlText,setUrlText] = useState("www.Crowdee.com/고객님의 URL")
     const [confirm , setConfirm] = useState(false)
     const [start , setStart] = useState('none')
+    const fund = []
+    const [projectData, setProjectData] = useState([])
+    const [result, setResult] = useState()
+
     const urlChange = (e) => {
         setProjectUrl(
             e.target.value
@@ -48,6 +52,29 @@ export default function ProjectStartPage(props) {
             }
         })
     }
+
+    const check = () =>{
+        fetch("http://localhost:8081/creator/create/editingList", {
+            headers:{
+                "Authorization" : `Bearer ${token}`
+            }
+        }).
+        then((res) => {
+            if(res.status==400||res.status==500){
+                throw new Error('http 에러')
+            }
+            return res.json()})
+            .then((res) => {
+             
+                setProjectData(res)
+                console.log(projectData)
+               
+            })
+            .then(()=>{                
+           
+            })
+    }
+
     useEffect(() => {
       
         fetch(`http://localhost:8081/creator/project-start`,{
@@ -63,9 +90,34 @@ export default function ProjectStartPage(props) {
                alert("크리에이터 등록페이지로 넘어갑니다.")
             }
             
-        })
-       
+        });
+
+        fetch("http://localhost:8081/creator/create/editingList", {
+            headers:{
+                "Authorization" : `Bearer ${token}`
+            }
+        }).
+        then((res) => {
+            if(res.status==400||res.status==500){
+                throw new Error('http 에러')
+            }
+                return res.json()
+            })
+            .then((res)=>{
+                console.log(res)
+                setProjectData(res);
+                console.log("data",projectData)
+
+                
+             })
+            .catch((e) => {
+                alert("에러발생"+ e.message)
+            })
+
+
     }, [])
+
+  
     const submitStart = () => {
         console.log("token값" + {token})
         fetch(`http://localhost:8081/creator/create/funding/${projectUrl}`, {
@@ -99,7 +151,7 @@ export default function ProjectStartPage(props) {
     }
     
     return (
-        <div style={{backgroundColor:'white', height:'100vh'}}>
+        <div style={{backgroundColor:'white', height:'100vh', width:'100%', display:'flex', flexDirection:'column'}}>
             <Header
                 brand="Crowdee"
                 rightLinks={<HeaderLinks />}
@@ -111,20 +163,27 @@ export default function ProjectStartPage(props) {
                 {...rest}
             />
 
-            <div style={{marginTop:'5%', marginLeft:'-100px', width:'100%', height:'100vh', display:'flex', justifyContent:'space-evenly', alignItems:'center'}}>
-                <div style={{marginLeft:'100px',width:'400px', display:'flex', justifyContent:'center', alignItems:'flex-start'}}>
+            <div style={{marginTop:'5%', marginLeft:'', width:'100%', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center', border:'0px solid black'}}>
+                <div style={{width:'400px', display:'flex', border:'0px solid black'}}>
                     <img style={{width:'100%'}} src={require('./crowdee-logo.png').default} />
                 </div>
-                <div style={{}}>
-                    <div style={{width:'300px'}}>
-                        <h6 style={{fontWeight:'bold', color:'red'}}><FeedbackIcon fontSize="small"/> 작성 중인 프로젝트가 있습니다.</h6>
-                        <Card style={{height:'80px', width:'500px', display:'flex', justifyContent:'center', marginTop:'10px'}}>
-                            <Button style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
-                                <img src={require('./apple-icon.png').default}/>
-                                <h5 style={{fontWeight:'bold'}}>누구의 프로젝트</h5>
-                            </Button>
-                        </Card>
-                    </div>
+                
+                
+
+                <div style={{border:'px solid black', marginLeft:'100px'}}>
+                   
+                {projectData.map((funding) => {
+                      return <div style={{width:'100%'}}>
+                            <h6 style={{fontWeight:'bold', color:'red'}}><FeedbackIcon fontSize="small"/> 작성 중인 프로젝트가 있습니다.</h6>
+                            <Card style={{height:'80px', width:'500px', display:'flex', justifyContent:'center', marginTop:'10px'}}>
+                                <Button style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
+                                    
+                                    <h5 style={{fontWeight:'bold'}}>{funding.title}</h5>
+                                    <h5>{funding.postDate}</h5>
+                                </Button>
+                            </Card>
+                        </div>
+                    })}
                     <div style={{marginTop:'100px'}}>
                         <div>
                             <h3 style={{fontWeight:'bold'}}>프로젝트 페이지 주소</h3>
