@@ -43,43 +43,10 @@ export default function MyPage(props) {
         props.history.push('/my/wish')
     }
 
-    // const changeIntro = () =>{
-    //     setPath(`/my/intro/${memberId}`)
-        
-       
-    //      props.history.push(`/my/intro/${memberId}`)
-        
-    // }
-    // const changeBacked = () =>{
-    //     setPath(`/my/backed/${memberId}`)
-        
-      
-    //     props.history.push(`/my/backed/${memberId}`)
-    // }
-    // const changeCreated = () =>{
-    //     setPath(`/my/created/${memberId}`)
-       
-       
-    //      props.history.push(`/my/created/${memberId}`)
-    // }
     const form = data =>{
         setFormData(data)
     }
 
-    // useEffect(() => {
-    //     fetch("http://localhost:8081/member/myPage/fundingList")
-    //     .then((res)=>{
-        
-    //     if(!res.status==200){
-    //         throw new Error('http 오류');
-    //     }
-    //     return res.json()})
-    //     .then((res)=>{
-    //     })
-    //     .catch((e) =>{
-    //         alert("게시물 조회 중 에러발생 "+ e.message);
-    //     });
-    // },[])
 
     return (
         <div style={{backgroundColor:'white', width:'100%', height:'100%'}}>
@@ -91,7 +58,7 @@ export default function MyPage(props) {
                 </div>
                 <div style={{position:'fixed'}}>
                     <Button onClick={()=>buttonClick("/")}>
-                        <h4 style={{fontWeight:'bold'}}>Crowdee</h4>
+                        <img src={require('components/Header/CrowdeeLogoFinal2.png').default}/>
                     </Button>
                 </div>
                 <div style={{marginRight:'-65%', position:'fixed'}}>
