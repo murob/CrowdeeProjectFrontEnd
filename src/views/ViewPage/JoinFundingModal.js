@@ -153,7 +153,7 @@ export default function JoinFundingModal (props) {
                 <input name="buyer_name" 
                 onChange={FormValueHandler}
                 style={{border:'1px solid #B6B7B9',
-                value=`${name}`,
+                
                 borderRadius:'3px', 
                 width:'150px',
                 height:'40px', marginRight:'10px'}} 
@@ -169,7 +169,7 @@ export default function JoinFundingModal (props) {
                 <input name="buyer_email" 
                 onChange={FormValueHandler}
                 style={{border:'1px solid #B6B7B9',
-                value= `${email}`,
+               
                 borderRadius:'3px', 
                 width:'150px',
                 height:'40px', marginRight:'10px'}} 
@@ -202,7 +202,7 @@ export default function JoinFundingModal (props) {
                 variant="contained"
                 color="secondary"
                 style={{height:'50px', width:'100px'}}
-                onClick={}
+              
                 >
                 <h4 style={{fontWeight:'bold'}}>참여하기</h4>
                 </Button>
