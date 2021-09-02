@@ -5,65 +5,51 @@ import { useEffect, useState } from "react";
 import * as React from 'react';
 
 const columns = [
-    {
-      field: 'id',
-      headerName: 'id',
-      type: 'number',
-      width: 90 },
-    {
-      field: 'userName',
-      headerName: 'userName',
-      width: 120,
-      type: 'text',
-      editable: true,
-    },
+  {
+    field: 'id',
+    headerName: '아이디',
+    type: 'number',
+    width: 120 },
+  {
+    field: 'userName',
+    headerName: '이름',
+    width: 150,
+    type: 'text',
+    editable: true,
+  },
     {
       field: 'nickName',
-      headerName: 'nickName',
+      headerName: '닉네임',
       width: 120,
       type: 'text',
       editable: true,
     },
     {
       field: 'mobile',
-      headerName: 'mobile',
+      headerName: '휴대전화',
       type: 'text',
       sortable: false,
       width: 140
     },
     {
       field: 'email',
-      headerName: 'email',
+      headerName: '이메일',
       type: 'text',
       width: 150,
       editable: true,
     },
     {
-      field: 'emailCert',
-      headerName: 'emailCert',
-      type: 'text',
-      width: 140,
-      editable: true,
-    },
-    {
       field: 'registDate',
-      headerName: 'registDate',
+      headerName: '가입일',
       type: 'text',
       width: 200,
       editable: true,
     },
     {
       field: 'secessionDate',
-      headerName: 'secessionDate',
+      headerName: '탈퇴일',
       type: 'object',
       width: 160,
-      editable: true,
-    },
-    {
-      field: 'authoritiy',
-      headerName: 'authoritiy',
-      type: 'object',
-      width: 120,
       editable: true,
     },
   ];

@@ -14,6 +14,7 @@ function createData(list) {
       summary : list[i].summary, 
       category : list[i].category, 
       postDate : list[i].postDate,
+      manageUrl : list[i].manageUrl,
       status : list[i].status
       }
     );
@@ -37,45 +38,58 @@ function createData(list) {
       changereject(params.id)
           alert("승인 거절되었습니다.");
     }
-      
+
+    //펀딩 상세보기로 이동
+  function fundingSelect(e,params) {
+    e.preventDefault();
+    window.location.href = 
+      "/admin-fundingView/"+params.row.manageUrl;  
+  }
 
     const columns = [
       {
         field: 'id',
-        headerName: 'id',
+        headerName: '아아디',
         type: 'number',
-        width: 90 },
+        width: 120 },
       {
         field: 'title',
-        headerName: 'title',
+        headerName: '제목',
         width: 150,
         type: 'text',
         editable: true,
       },
       {
           field: 'summary',
-          headerName: 'summary',
+          headerName: '요약',
           type: 'text',
           width: 120,
           editable: true,
         },
         {
           field: 'postDate',
-          headerName: 'postDate',
+          headerName: '게시일',
           type: 'text',
           width: 200,
           editable: true,
         },
         {
           field: 'category',
-          headerName: 'category',
+          headerName: '카테고리',
+          type: 'text',
+          width: 150,
+          editable: true,
+        },
+        {
+          field: 'manageUrl',
+          headerName: 'Url',
           type: 'text',
           width: 150,
           editable: true,
         },
         {
           field: 'status',
-          headerName: 'status',
+          headerName: '상태',
           type: 'text',
           width: 150,
           editable: true,
@@ -92,7 +106,7 @@ function createData(list) {
               color="primary"
               size="small"
               style={{marginLeft:16}}
-              onClick={(e) => {backerSelect(e, params)}}
+              onClick={(e) => {fundingSelect(e, params)}}
             >상세보기</Button>
           )
         },

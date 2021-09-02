@@ -49,10 +49,14 @@ export default function LoginPage(props) {
     return request({
       url : "http://localhost:8081/admin/login",
       method : "POST",
-    // fetch("http://localhost:8081/member/login",{
+      headers: {
+        "Content-Type": `application/json`,
+      },
+      // fetch("http://localhost:8081/member/login",{
     //   method: "POST",
-    //   headers: {
-    //     "Content-type":"application/json;charset=utf-8"
+      // headers : {
+      // Authorization : localStorage.getItem("access_token")
+      // }, 
       body:JSON.stringify(login)
       
     }).then((res)=>res)

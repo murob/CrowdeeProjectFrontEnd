@@ -43,48 +43,48 @@ function createData(list) {
     const columns = [
       {
         field: 'id',
-        headerName: 'id',
+        headerName: '아이디',
         type: 'text',
-        width: 90 
+        width: 120 
       },
       {
         field: 'creatorNickName',
-        headerName: 'creatorNickName',
+        headerName: '닉네임',
         width: 170,
         type: 'text',
         editable: true,
       },
       {
         field: 'bankBookImageUrl',
-        headerName: 'bankBookImageUrl',
+        headerName: '통장사본',
         width: 150,
         type: 'text',
         editable: true,
       },
       {
         field: 'bankName',
-        headerName: 'bankName',
+        headerName: '은행명',
         width: 150,
         type: 'text',
         editable: true,
       }, 
       {
         field: 'accountNumber',
-        headerName: 'accountNumber',
+        headerName: '계좌번호',
         width: 150,
         type: 'text',
         editable: true,
       },
       {
         field: 'businessNumber',
-        headerName: 'businessNumber',
+        headerName: '사업자번호',
         type: 'text',
         sortable: false,
         width: 140,
       },
       {
           field: 'status',
-          headerName: 'status',
+          headerName: '상태',
           type: 'text',
           width: 120,
           editable: true,
