@@ -28,7 +28,6 @@ import CategoryPage from "views/CategoryPage/CategoryPage";
 import ProjectStartPage from "views/WritePage/ProjectStartPage";
 import MyPage from "views/MyPage/MyPage";
 import SearchPage from "views/SearchPage/SearchPage";
-import ViewDetails from "views/ViewPage/ViewDetails";
 
 var hist = createBrowserHistory();
 
@@ -68,7 +67,7 @@ ReactDOM.render(
       <Route path="/project-start" component={ProjectStartPage} />
       <Route path="/menu-page" component={MenuPage} />
       <Route path="/category/:param" component={CategoryPage} />
-      <Route path="/my/:memberId" component={MyPage} />
+      <Route path="/my" component={MyPage} />
       {/* <Route path="/my/:memberId" component={MyPage} /> */}
       <Route path="/search" component={SearchPage} />
       <Route exact path="/" component={Components} />

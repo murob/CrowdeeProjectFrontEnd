@@ -8,6 +8,8 @@ import CloseIcon from '@material-ui/icons/Close';
 export default function MenuPage() {
     const [checkMember,setCheckMember] = useState();
     const history = useHistory();
+    const nickName = localStorage.getItem("token");
+    console.log(nickName)
 
     const buttonClick = (url) =>{
     
@@ -33,7 +35,7 @@ export default function MenuPage() {
                 <div style={{marginTop:'60px'}}>
                     <div>
                         <Button style={{marginBottom:'-30px'}}
-                            onClick={()=>buttonClick("/myPage")}>
+                            onClick={()=>buttonClick('/my')}>
                             <h3 style={{fontWeight:'bold'}}>마이 페이지</h3>
                         </Button>
                     </div>
