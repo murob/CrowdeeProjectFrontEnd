@@ -8,6 +8,8 @@ import { Box } from '@material-ui/core';
 import WritePageNav from './WritePageNav';
 import Modal from '@material-ui/core/Modal';
 import PreviewPage from 'views/ViewPage/PreviewPage';
+import queryString from 'query-string';
+
 export default function WritePage(props) {
  
     var saveCheck = 0;
@@ -15,6 +17,7 @@ export default function WritePage(props) {
     const [token,setToken] = useState(localStorage.getItem("token"))
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
     
+    const [creatorId,setCreatorId] = useState(queryString.parse(props.location.search))
     
     const [path,setPath] = useState(`/creator/create/thumbNail/${manageUrl}`);
     const [nextPath,setNextPath] = useState(`/write-page/funding/${manageUrl}`);
@@ -24,6 +27,7 @@ export default function WritePage(props) {
     const [first,setFirst] = useState(true)
     const [second,setSecond] = useState(false)
     const [third,setThird] = useState(false)
+    const [editDTO,setEditDTO] = useState({})
 
     const useStyles = makeStyles((theme)=>({
        
@@ -159,6 +163,32 @@ export default function WritePage(props) {
         }
     }
 
+    const edit = () =>{
+        console.log("실행")
+        fetch(`http://localhost:8081/creator/edit/${manageUrl}`,{
+            headers : {
+                "Authorization" : `Bearer ${token}`
+            }
+        }).then((res)=>{
+            if(!res.status==200){
+                throw new Error("http에러")
+            }
+            return res.json()
+        }).then((res)=>{
+            console.log(res)
+            setEditDTO(res)
+        }).catch((e)=>{
+            console.log(e.message)
+        })
+        
+    }
+
+    useEffect(() => {
+         if(creatorId){
+            edit();
+        }
+        
+    }, [])
     return (
     <div style={{height:'1500px'}}>
         <Container>
@@ -199,7 +229,7 @@ export default function WritePage(props) {
                     </Button>
                 </div>
             </div>
-               <WritePageRouter form={form} />
+               <WritePageRouter form={form} data={editDTO}  />
         </div>
         </Container>
        
