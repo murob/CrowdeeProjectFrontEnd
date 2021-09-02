@@ -279,7 +279,7 @@ const handleClose = () => {
                 <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
                 
               </Button>
-            </div>
+            </div> 
           </div>
           <div style={{display:'flex', justifyContent:'', height:'600px', width:'90%', border:'1px solid black'}}>
             <div style={{border:'1px solid black', height:'100%', width:'60%'}}>
