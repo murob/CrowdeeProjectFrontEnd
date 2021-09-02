@@ -12,10 +12,11 @@ const useStyles = makeStyles(styles);
 export default function MyCreated() {
 
     const classes = useStyles();
-    const [result,setResult] = useState();
+    const [fundings, setFundings] = useState([]);
+    const [result,setResult] = useState()
     const [token,setToken] = useState(localStorage.getItem("token"))
-   
-
+    
+    //함수 실행시 최초 한번 실행되는 것
     const [funding, setFunding] = useState({
         fundingId:0,
         creatorId:0,
@@ -43,12 +44,19 @@ export default function MyCreated() {
           "Authorization" : `Bearer ${token}`
         }
         }).
-        then(
-            res=>res.json(),
+        then((res) =>{
+            if(res.status==200){
+                return res.json()
+            }
+           else{
+               throw Error("에러")
+           }
+
+        }
         )
         .then(res=>{
             console.log(res)
-            if(res){
+           
                 setFunding(res);
                 setResult(
                     <div className={classes.section}>
@@ -70,21 +78,19 @@ export default function MyCreated() {
                     </div>
                 )
                 console.log(result)
-            }else{
-                setResult(
-                    <div>
-                        <h5 style={{fontWeight:'bold', color:'gray'}}>
-                            후원한 프로젝트가 없습니다.
-                        </h5>
-                    </div>
-                )
-            }  
+            
         })
         .catch((e) =>{
-            alert("게시물 조회 중 에러발생 "+ e.message);
+            setResult(
+                <div>
+                    <h5 style={{fontWeight:'bold', color:'gray'}}>
+                        후원한 프로젝트가 없습니다.
+                    </h5>
+                </div>
+            )
         });
     },[])
-    console.log(funding)
+    console.log(fundings)
 
     return (
         <div>

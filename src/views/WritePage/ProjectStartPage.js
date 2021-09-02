@@ -99,7 +99,7 @@ export default function ProjectStartPage(props) {
     }
     
     return (
-        <div style={{backgroundColor:'white'}}>
+        <div style={{backgroundColor:'white', height:'100vh'}}>
             <Header
                 brand="Crowdee"
                 rightLinks={<HeaderLinks />}
@@ -111,7 +111,7 @@ export default function ProjectStartPage(props) {
                 {...rest}
             />
 
-            <div style={{marginTop:'5%', marginLeft:'-100px', width:'100%', height:'700px', display:'flex', justifyContent:'space-evenly', alignItems:'center'}}>
+            <div style={{marginTop:'5%', marginLeft:'-100px', width:'100%', height:'100vh', display:'flex', justifyContent:'space-evenly', alignItems:'center'}}>
                 <div style={{marginLeft:'100px',width:'400px', display:'flex', justifyContent:'center', alignItems:'flex-start'}}>
                     <img style={{width:'100%'}} src={require('./crowdee-logo.png').default} />
                 </div>
@@ -157,7 +157,9 @@ export default function ProjectStartPage(props) {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <div style={{backgroundColor:'white'}}>
+                <Footer />
+            </div>
         </div>
     );
 };

@@ -256,14 +256,14 @@ const handleClose = () => {
           </div>
           <div style={{marginRight:'-85%', display:'flex', alignItems:'center'}}>
             <Button onClick={()=>buttonClick(`/my/${memberId}`)}>
-              <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}>C</Avatar>
+              <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}>{view.profileImgUrl}</Avatar>
               
             </Button>
           </div>
       </div>
       <Container>
 
-        <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'850px', width:'100%', paddingTop:'130px'}}>
+        <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'100%', width:'100%', paddingTop:'130px', border:'1px solid black'}}>
           <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'25%', width:'92%'}}>
             <Button onClick={()=>buttonClick(`/category/${category}`)} style={{marginBottom:'-20px'}}>
               <div style={{fontWeight:'bold', color:'gray'}}>{view.category}</div>
@@ -274,35 +274,37 @@ const handleClose = () => {
               
             </div>
             <div style={{display:'flex', alignItems:'center'}}>
-              <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'-10px'}}>C</Avatar>
+              <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold'}}>{view.profileImgUrl}</Avatar>
               <Button onClick={()=>buttonClick(`/my/:memberId`)}>
                 <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
                 
               </Button>
             </div>
           </div>
-          <div style={{display:'flex', justifyContent:'', height:'69%', width:'100%'}}>
-            <div style={{border:'1px solid black', height:'495px', width:'650px',}}>
+          <div style={{display:'flex', justifyContent:'', height:'600px', width:'90%', border:'1px solid black'}}>
+            <div style={{border:'1px solid black', height:'100%', width:'60%'}}>
               <img style={{width:'100%', height:'100%'}} src={view.thumbNailUrl} />
             </div>
-            <div style={{paddingLeft:'30px', display:'flex', flexDirection:'column', justifyContent:'center', paddingLeft:'40px'}}>
+            <div style={{paddingLeft:'30px', display:'flex', flexDirection:'column', justifyContent:'center', paddingLeft:'40px', border:'1px solid black', width:'40%', height:'100%'}}>
               <div style={{marginBottom:'-25px'}}>
                 <h4 style={{fontWeight:'bold', color:'gray'}}>펀딩상황</h4>
               </div>
 
               <div style={{display:'flex', alignItems:'center'}}>
-                <h2 style={{fontWeight:'bold'}}>{comma(view.totalFundraising)}</h2>
+                <h3 style={{fontWeight:'bold'}}>{view.totalBacker}</h3>
+                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'22px'}}>명이&nbsp;</h5>
+                <h3 style={{fontWeight:'bold'}}>{comma(view.totalFundraising)}</h3>
                 
-                <h2 style={{fontWeight:'bold'}}>원</h2>
-                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'22px'}}>펀딩 중</h5>
+                {/* <h2 style={{fontWeight:'bold'}}>원</h2> */}
+                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'22px'}}>원을 후원중 입니다.</h5>
               </div>
 
-              <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>목표금액</h5>
+              {/* <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>목표금액</h5>
               <div style={{display:'flex', alignItems:'center'}}>
-                <h2 style={{fontWeight:'bold'}}>{view.goalFundraising}</h2>
+                <h2 style={{fontWeight:'bold'}}>{comma(view.goalFundraising)}</h2>
                 
-                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>일</h5>
-              </div>
+                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>원</h5>
+              </div> */}
 
               <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>남은시간</h5>
               <div style={{display:'flex', alignItems:'center'}}>
@@ -311,12 +313,12 @@ const handleClose = () => {
                 <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>일</h5>
               </div>
 
-              <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>후원자</h5>
+              {/* <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>후원자</h5>
               <div style={{display:'flex', alignItems:'center'}}>
                 <h2 style={{fontWeight:'bold'}}>{view.totalBacker}</h2>
                 
                 <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>명</h5>
-              </div>
+              </div> */}
 
               <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>남은 티켓</h5>
               <div style={{display:'flex', alignItems:'center'}}>
@@ -325,7 +327,12 @@ const handleClose = () => {
                 <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>장</h5>
               </div>
 
-              <div style={{display:'flex', justifyContent:'center', width:'300px', paddingTop:'100px'}}>
+              <div style={{display:'flex', flexDirection:'column', border:'0px solid black', paddingLeft:'0px', paddingRight:'', width:'100%'}}>
+                <h5>펀딩 진행중</h5>
+                <p>목표 금액인 {comma(view.goalFundraising)}원이 모이거나 남은 티켓이 모두 <br/> 소진되었을 때 결제가 진행되어 안내 메일이 발송됩니다.<br/> 결제는 펀딩이 성공했을 때 다함께 진행됩니다.</p>
+              </div>
+
+              <div style={{display:'flex', justifyContent:'center', width:'90%', paddingTop:'', border:'0px solid black'}}>
                 <Button 
                 size="small"
                 variant="outlined"
@@ -336,7 +343,7 @@ const handleClose = () => {
                 <Button
                 variant="contained"
                 color="secondary"
-                style={{height:'50px'}}
+                style={{height:'50px', width:'100vw'}}
                 onClick={handleOpen}
                 >
                 <h4 style={{fontWeight:'bold'}}>펀딩하기</h4>
