@@ -41,7 +41,7 @@ export default function SectionCarousel(props) {
     <div className={classes.parallaxClasses} style={{
       ...styles,
         marginTop:"77px",
-        maxWidth : "1000px",
+        maxWidth : "100%",
         maxHeight : "550px",
         position : "relative",
         display : "flex",

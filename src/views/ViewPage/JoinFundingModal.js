@@ -29,9 +29,11 @@ export default function JoinFundingModal (props) {
     const [token,setToken] = useState(localStorage.getItem("token"))
 
     useEffect(() => {
-        fetch('http://localhost:8081/contents/participation',{
+        console.log("토큰",token)
+        fetch('http://localhost:8081/contents/preOrder',{
             headers : {
-                "Authorization" : `Bearer ${token}`}
+                "Authorization" : `Bearer ${token}`},
+            method : "POST"
               }).
               then((res)=>{
                   if(res.status==200){
@@ -41,11 +43,12 @@ export default function JoinFundingModal (props) {
                       throw Error()
                   }
               }).then((res)=>{
-                  setName(res.buyer_name)
-                  setEmail(res.buyer_email)
-                  setTel(res.buyer_tel)
+                  console.log(res)
+                  setForm(
+                      res
+                  )
               }).catch(e=>{
-                  e.message
+                  console.log(e.message)
               })
         
         
@@ -53,8 +56,11 @@ export default function JoinFundingModal (props) {
     const FormValueHandler = (e) =>{
         setForm({
             ...form,
+            name : props.title,
+            fundingId : props.fundingId,
             [e.target.name] : e.target.value
         })
+        console.log(form)
     }
     const buttonClick = (url) =>{
     
@@ -74,23 +80,43 @@ export default function JoinFundingModal (props) {
         return obj;//문자열 반환
       }
       const submit = () =>{
+          if(document.querySelector('input[name="amount"]').value<props.minFundraising){
+              return alert("최소 펀딩 참여 금액보다 적은 금액으로 참여하실 수 없습니다.")
+          }
+          console.log(props.title)
+          setForm({
+            ...form,
+            buyer_name : document.querySelector('input[name="buyer_name"]').value,
+            buyer_email : document.querySelector('input[name="buyer_email"]').value,
+            buyer_tel : document.querySelector('input[name="buyer_tel"]').value,
+            amount : document.querySelector('input[name="amount"]').value,
+            
+            
+          })
+          console.log(form)
           fetch("http://localhost:8081/contents/participation",{
             headers : {
-                "Authorization" : `Bearer ${token}`},
+                "Authorization" : `Bearer ${token}`,
+                "Content-type" : "application/json" },
             method : "POST",
             body :
                 JSON.stringify(form)
             }).then((res)=>{
                 if(res.status==200){
                     alert("펀딩 참여가 성공적으로 완료되었습니다.")
-                    
+                    history.push(`/view/${form.projectUrl}`)
                 }
+                else{
+                    throw new Error("error")
+                }
+            }).catch((e)=>{
+                console.log(e.message)
             })
         }
       
   return (
     
-         <div style={{backgroundColor:'white',width:"70%",height:"70%"}}>
+         <div style={{backgroundColor:'white',width:"70%",height:"90%"}}>
             <Container>
             <div style={{display:"flex",justifyContent:"center"}}>
                 <h3>펀딩 참여하기</h3>
@@ -129,12 +155,20 @@ export default function JoinFundingModal (props) {
                 </div>
 
             </div>
+            <div style={{display:'flex', justifyContent:'space-between'}}>
+                <div style={{marginLeft:"100px"}}><h4>최소 펀딩 참여 금액</h4></div>
+                <div style={{display:'flex', alignItems:'center',marginRight:"100px"}}>
+                    <h4>{props.minFundraising} 원</h4>      
+                </div>
+
+            </div>
 
             <div style={{display:'flex', justifyContent:'space-between'}}>
                 
                 <div style={{marginLeft:"100px"}}><h4>펀딩 참여 금액</h4></div>
                 <div style={{display:'flex', alignItems:'center',marginRight:"100px"}}>
                 <input name="amount" 
+               
                 onChange={FormValueHandler}
                 style={{border:'1px solid #B6B7B9',
                 borderRadius:'3px', 
@@ -151,9 +185,9 @@ export default function JoinFundingModal (props) {
                 <div style={{marginLeft:"100px"}}><h4>참여자 이름</h4></div>
                 <div style={{display:'flex', alignItems:'center',marginRight:"100px"}}>
                 <input name="buyer_name" 
+                 value={form.buyer_name}
                 onChange={FormValueHandler}
                 style={{border:'1px solid #B6B7B9',
-                
                 borderRadius:'3px', 
                 width:'150px',
                 height:'40px', marginRight:'10px'}} 
@@ -168,8 +202,8 @@ export default function JoinFundingModal (props) {
                 <div style={{display:'flex', alignItems:'center',marginRight:"100px"}}>
                 <input name="buyer_email" 
                 onChange={FormValueHandler}
+                value={form.buyer_email}
                 style={{border:'1px solid #B6B7B9',
-               
                 borderRadius:'3px', 
                 width:'150px',
                 height:'40px', marginRight:'10px'}} 
@@ -182,7 +216,8 @@ export default function JoinFundingModal (props) {
                 
                 <div style={{marginLeft:"100px"}}><h4>참여자 전화번호</h4></div>
                 <div style={{display:'flex', alignItems:'center',marginRight:"100px"}}>
-                <input name="buyer_tel" 
+                <input name="buyer_tel"
+                value={form.buyer_tel} 
                 onChange={FormValueHandler}
                 style={{border:'1px solid #B6B7B9',
                 
@@ -202,7 +237,7 @@ export default function JoinFundingModal (props) {
                 variant="contained"
                 color="secondary"
                 style={{height:'50px', width:'100px'}}
-              
+                onClick={submit}
                 >
                 <h4 style={{fontWeight:'bold'}}>참여하기</h4>
                 </Button>

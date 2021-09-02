@@ -7,9 +7,9 @@ import WriteStory from './WriteComponent/WriteStory';
 function WritePageRouter(props){
   return (
     <Switch>
-        <Route exact path="/write-page/:manageUrl" render={()=><WriteDefault save={props.form} />} />
-        <Route path="/write-page/funding/:manageUrl" render={()=><WriteFunding save={props.form} />} />
-        <Route path="/write-page/story/:manageUrl" render={()=><WriteStory save={props.form} />} />
+        <Route exact path="/write-page/:manageUrl" render={()=><WriteDefault save={props.form} data={props.data} />} />
+        <Route path="/write-page/funding/:manageUrl" render={()=><WriteFunding save={props.form} data={props.data} />} />
+        <Route path="/write-page/story/:manageUrl" render={()=><WriteStory save={props.form} data={props.data} />} />
     </Switch>
   );
 };

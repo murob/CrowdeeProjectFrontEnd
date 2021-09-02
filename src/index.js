@@ -64,6 +64,7 @@ ReactDOM.render(
       <Route path="/admin-funding-inspection" component={FundingInspectionAdmin} /> 
       <Route path="/view/:projectUrl" component={ViewPage}/>
       <Route path="/write-page/:manageUrl" component={WritePage} />
+      {/* <Route path="/write-page/:manageUrl/:creatorId" component={WritePage} /> */}
       <Route path="/project-start" component={ProjectStartPage} />
       <Route path="/menu-page" component={MenuPage} />
       <Route path="/category/:param" component={CategoryPage} />

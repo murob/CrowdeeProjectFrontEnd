@@ -42,7 +42,7 @@ export default function ViewPage(props) {
 />
 const [open, setOpen] = useState(false);
 const handleOpen = () => {
-  console.log("클릭되냐")
+  
   setOpen(true);
 };
 
@@ -145,7 +145,7 @@ const handleClose = () => {
       then(res=>{
         console.log(res)
         setView(res)
-        console.log(res.contents)
+        
         if(res.wish){
           setWishController(fullHeart)
          }
@@ -297,7 +297,7 @@ const handleClose = () => {
               <div style={{display:'flex', alignItems:'center'}}>
                 <h>
                   <h style={{display:'flex'}}>
-                    <h2 style={{fontWeight:'bold'}}>10{view.totalBacker}</h2>
+                    <h2 style={{fontWeight:'bold'}}>{view.totalBacker}</h2>
                     <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'27px'}}>명이&nbsp;</h5>
                   </h>
                   <h style={{display:'flex', marginTop:'-40px'}}>
@@ -310,13 +310,7 @@ const handleClose = () => {
 
               </div>
 
-              {/* <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>목표금액</h5>
-              <div style={{display:'flex', alignItems:'center'}}>
-                <h2 style={{fontWeight:'bold'}}>{comma(view.goalFundraising)}</h2>
-                
-                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>원</h5>
-              </div> */}
-
+          
               <h3 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>남은시간</h3>
               <div style={{display:'flex', alignItems:'center'}}>
                 <h2 style={{fontWeight:'bold'}}>{view.restDate}</h2>
@@ -324,12 +318,6 @@ const handleClose = () => {
                 <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>일</h5>
               </div>
 
-              {/* <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>후원자</h5>
-              <div style={{display:'flex', alignItems:'center'}}>
-                <h2 style={{fontWeight:'bold'}}>{view.totalBacker}</h2>
-                
-                <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'17px'}}>명</h5>
-              </div> */}
 
               <h3 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>남은 티켓</h3>
               <div style={{display:'flex', alignItems:'center'}}>
@@ -368,12 +356,14 @@ const handleClose = () => {
                   aria-describedby="simple-modal-description">
                       
                   <JoinFundingModal
+                    fundingId={view.fundingId}
                     title={view.title}
                     creatorNickName={view.creatorNickName}
                     maxBacker={view.maxBacker}
                     totalBacker={view.totalBacker}
                     totalFundraising={view.totalFundraising}
                     goalFundraising={view.goalFundraising}
+                    minFundraising={view.minFundraising}
                   ></JoinFundingModal>
                 </Modal>
               </div>

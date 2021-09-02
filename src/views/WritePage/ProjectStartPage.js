@@ -101,6 +101,7 @@ export default function ProjectStartPage(props) {
             if(res.status==400||res.status==500){
                 throw new Error('http 에러')
             }
+            
                 return res.json()
             })
             .then((res)=>{
@@ -111,7 +112,7 @@ export default function ProjectStartPage(props) {
                 
              })
             .catch((e) => {
-                alert("에러발생"+ e.message)
+                console.log(e.message)
             })
 
 
@@ -149,7 +150,10 @@ export default function ProjectStartPage(props) {
             alert("펀딩 생성 중 에러 발생 "+ e.message);
         });
     }
-    
+    const temporarySave = (url) =>{
+       
+        props.history.push(url)
+    }
     return (
         <div style={{backgroundColor:'white', height:'100vh', width:'100%', display:'flex', flexDirection:'column'}}>
             <Header
@@ -176,7 +180,9 @@ export default function ProjectStartPage(props) {
                       return <div style={{width:'100%'}}>
                             <h6 style={{fontWeight:'bold', color:'red'}}><FeedbackIcon fontSize="small"/> 작성 중인 프로젝트가 있습니다.</h6>
                             <Card style={{height:'80px', width:'500px', display:'flex', justifyContent:'center', marginTop:'10px'}}>
-                                <Button style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
+                                <Button
+                                onClick={()=>{temporarySave(`/write-page/${funding.manageUrl}?creatorId=${funding.creatorId}`)}}
+                                style={{display:'flex', justifyContent:'space-around', alignItems:'center'}}>
                                     
                                     <h5 style={{fontWeight:'bold'}}>{funding.title}</h5>
                                     <h5>{funding.postDate}</h5>
