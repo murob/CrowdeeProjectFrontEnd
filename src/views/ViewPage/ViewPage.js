@@ -263,7 +263,10 @@ const handleClose = () => {
       </div>
       <Container>
 
+
         <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'100%', width:'100%', paddingTop:'130px', border:'0px solid black'}}>
+
+ 
           <div style={{display:'flex', alignItems:'center', flexDirection:'column', height:'25%', width:'92%'}}>
             <Button onClick={()=>buttonClick(`/category/${category}`)} style={{marginBottom:'-20px'}}>
               <div style={{fontWeight:'bold', color:'gray'}}>{view.category}</div>
@@ -281,6 +284,7 @@ const handleClose = () => {
               </Button>
             </div> 
           </div>
+
           <div style={{display:'flex', justifyContent:'center', height:'600px', width:'100%', marginTop:'40px', marginBottom:'20px', border:'0px solid blue'}}>
             <div style={{border:'0px solid black', height:'100%', width:'50%'}}>
               <img style={{width:'100%', height:'100%'}} src={view.thumbNailUrl} />
@@ -303,6 +307,7 @@ const handleClose = () => {
                     <h5 style={{fontWeight:'bold', marginLeft:'5px', paddingTop:'27px'}}>원을 후원중 입니다.</h5>
                   </h>
                 </h>
+
               </div>
 
               {/* <h5 style={{fontWeight:'bold', marginBottom:'-20px', color:'gray'}}>목표금액</h5>
@@ -339,6 +344,7 @@ const handleClose = () => {
               </div>
 
               <div style={{display:'flex', justifyContent:'center', width:'90%', paddingTop:'10px', marginTop:'10px'}}>
+
                 <Button 
                 size="small"
                 variant="outlined"
@@ -367,6 +373,7 @@ const handleClose = () => {
                     maxBacker={view.maxBacker}
                     totalBacker={view.totalBacker}
                     totalFundraising={view.totalFundraising}
+                    goalFundraising={view.goalFundraising}
                   ></JoinFundingModal>
                 </Modal>
               </div>

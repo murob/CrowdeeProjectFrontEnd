@@ -5,81 +5,199 @@ import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
 import Footer from 'components/Footer/Footer';
-import MyPageRouter from './MyPageRouter';
 
+import GridContainer from "components/Grid/GridContainer.js";
+import MyFundingCard from "components/CrowdeeComponents/MyFundingCard";
+import { makeStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+const useStyles = makeStyles(styles);
 export default function MyPage(props) {
+    const classes = useStyles();
 
-    const [path,setPath] = useState('/my/intro');
-
-    // const [path,setPath] = useState(`/my/${memberId}`);
 
     const history = useHistory();
-
-    const [formData,setFormData] = useState();
-
-    const [fundingList, setFundingList] = useState({
-        
-    });
-
     const buttonClick = (url) =>{
     
         history.push(url);
-    };
+      };
+
+    const [funding,setFunding] = useState();
+    const [result,setResult] = useState();
+    const [token,setToken] = useState(localStorage.getItem("token"))
+
+    useEffect(() => {
+        wish()
+        
+    }, [])
+
+  const wish = () =>{
+    fetch("http://localhost:8081/member/myPage/wishList", {
+        headers : {
+          "Authorization" : `Bearer ${token}`}
+        }).
+        then((res) =>{
+            if(res.status==200){
+                
+                return res.json()
+            }
+           else{
+               throw Error("에러")
+           }
+        })
+        .then((res)=>{
+            console.log(res)
+            setFunding(res);
+           
+            
+        }).then(res=>{
+            console.log(funding)
+            setResult(
+                <div className={classes.section}>
+                    <GridContainer justify="center">
+                        {funding.map((funding)=>(
+                        <MyFundingCard 
+                        id={funding.fundingId}
+                        title={funding.title}
+                        imgUrl={funding.thumbNailUrl}
+                        summary={funding.summary}
+                        restDate={funding.restDate}
+                        category={funding.category}
+                        totalFundraising={funding.totalFundraising}
+                        goalFundraising={funding.goalFundraising}
+                        ROA={funding.rateOfAchievement}
+                        projectUrl={funding.projectUrl} />
+                        ))}
+                    </GridContainer>
+                </div>
+              )
+        })
+        .catch((e) =>{
+            console.log(e.message)
+            setResult(
+                <div>
+                    <h5 style={{fontWeight:'bold', color:'gray'}}>
+                        찜한 프로젝트가 없습니다.
+                    </h5>
+                </div>
+            )
+        });
+  }
+
+  const participant = () =>{
+    fetch("http://localhost:8081/member/myPage/fundingList", {
+        headers : {
+          "Authorization" : `Bearer ${token}`}
+        }).
+        then((res) =>{
+            if(res.status==200){
+                return res.json()
+            }
+           else{
+               throw Error("에러")
+           }
+        })
+        .then(res=>{
+            setFunding(res);
+            setResult(
+              <div className={classes.section}>
+                  <GridContainer justify="center">
+                      {funding.map((funding)=>(
+                      <MyFundingCard 
+                      id={funding.fundingId}
+                      title={funding.title}
+                      imgUrl={funding.thumbNailUrl}
+                      summary={funding.summary}
+                      restDate={funding.restDate}
+                      category={funding.category}
+                      totalFundraising={funding.totalFundraising}
+                      goalFundraising={funding.goalFundraising}
+                      ROA={funding.rateOfAchievement}
+                      projectUrl={funding.projectUrl} />
+                      ))}
+                  </GridContainer>
+              </div>
+            )
+        })
+        .catch((e) =>{
+            setResult(
+                <div>
+                    <h5 style={{fontWeight:'bold', color:'gray'}}>
+                        후원한 프로젝트가 없습니다.
+                    </h5>
+                </div>
+            )
+        });
+  }
+  
+  const waiting = () =>{
+    fetch("http://localhost:8081/member/myPage/waitingForPayment", {
+        headers : {
+          "Authorization" : `Bearer ${token}`}
+        }).
+        then((res) =>{
+            if(res.status==200){
+                return res.json()
+            }
+           else{
+               throw Error("에러")
+           }
+        })
+        .then(res=>{
+            setFunding(res);
+            setResult(
+              <div className={classes.section}>
+                  <GridContainer justify="center">
+                      {funding.map((funding)=>(
+                      <MyFundingCard 
+                      id={funding.fundingId}
+                      title={funding.title}
+                      imgUrl={funding.thumbNailUrl}
+                      summary={funding.summary}
+                      restDate={funding.restDate}
+                      category={funding.category}
+                      totalFundraising={funding.totalFundraising}
+                      goalFundraising={funding.goalFundraising}
+                      ROA={funding.rateOfAchievement}
+                      projectUrl={funding.projectUrl} />
+                      ))}
+                  </GridContainer>
+              </div>
+            )
+        })
+        .catch((e) =>{
+            setResult(
+                <div>
+                    <h5 style={{fontWeight:'bold', color:'gray'}}>
+                        진행중인 프로젝트가 없습니다.
+                    </h5>
+                </div>
+            )
+        });
+  }
+  
+
+
+   
+    const [nickName,setNickName] = useState(localStorage.getItem("nickName"))
+
+ 
     
     const changeIntro = () =>{
         setPath('/my/intro')
         props.history.push('/my/intro')
     }
     const changeBacked = () =>{
-        setPath('/my/backed')
-        props.history.push('/my/backed')
+        participant()
     }
     const changeCreated = () =>{
-        setPath('/my/created')
-        props.history.push('/my/created')
+       waiting()
     }
     const changeWish = () =>{
-        setPath('/my/wish')  
-        props.history.push('/my/wish')
+        wish()
     }
 
-    // const changeIntro = () =>{
-    //     setPath(`/my/intro/${memberId}`)
-        
-       
-    //      props.history.push(`/my/intro/${memberId}`)
-        
-    // }
-    // const changeBacked = () =>{
-    //     setPath(`/my/backed/${memberId}`)
-        
-      
-    //     props.history.push(`/my/backed/${memberId}`)
-    // }
-    // const changeCreated = () =>{
-    //     setPath(`/my/created/${memberId}`)
-       
-       
-    //      props.history.push(`/my/created/${memberId}`)
-    // }
-    const form = data =>{
-        setFormData(data)
-    }
+   
 
-    // useEffect(() => {
-    //     fetch("http://localhost:8081/member/myPage/fundingList")
-    //     .then((res)=>{
-        
-    //     if(!res.status==200){
-    //         throw new Error('http 오류');
-    //     }
-    //     return res.json()})
-    //     .then((res)=>{
-    //     })
-    //     .catch((e) =>{
-    //         alert("게시물 조회 중 에러발생 "+ e.message);
-    //     });
-    // },[])
 
     return (
         <div style={{backgroundColor:'white', width:'100%', height:'100%'}}>
@@ -91,7 +209,7 @@ export default function MyPage(props) {
                 </div>
                 <div style={{position:'fixed'}}>
                     <Button onClick={()=>buttonClick("/")}>
-                        <h4 style={{fontWeight:'bold'}}>Crowdee</h4>
+                        <img src={require('components/Header/CrowdeeLogoFinal2.png').default}/>
                     </Button>
                 </div>
                 <div style={{marginRight:'-65%', position:'fixed'}}>
@@ -108,7 +226,7 @@ export default function MyPage(props) {
             <div style={{backgroundColor:'white', width:'100%', minHeight:'1000px', maxHeight:'100%'}}>
                 <div style={{display:'flex', flexDirection:'column', alignItems:'center', paddingTop:'130px'}}>
                     <Avatar alt="Remy Sharp" src={require('./sung.png').default} style={{width:"150px",height:"150px"}} />
-                    <h2 style={{fontWeight:'bold', fontSize:'35px'}}>성승현</h2>
+                    <h2 style={{fontWeight:'bold', fontSize:'35px'}}>{nickName}</h2>
                 </div>
                 <div style={{display:'flex', justifyContent:'space-evenly', marginTop:'45px', borderBottom:'1.8px solid #F0F1EC'}}>
                     <Button style={{fontSize:'25px', color:'gray'}} onClick={changeIntro}>소개</Button>
@@ -117,7 +235,9 @@ export default function MyPage(props) {
                     <Button style={{fontSize:'25px', color:'gray'}} onClick={changeWish}>찜한 프로젝트</Button>
                 </div>
                 <div style={{padding:'40px'}}>
-                    <MyPageRouter form={form} />
+                   <div>
+                        {result}
+                   </div>
                 </div>
             </div>
             <Footer />
