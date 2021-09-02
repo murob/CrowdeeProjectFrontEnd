@@ -11,7 +11,7 @@ function CreatorView(list) {
       {id : list[i].creatorId, Business_number : list[i].businessNumber,
       Account_number : list[i].accountNumber, Bank_book_image_url : list[i].bankBookImageUrl,
       Bank_name : list[i].bankName,  creator_nickname : list[i].creatorNickName, 
-      status : list[i].status
+      status : list[i].status, authority : list[i].authorities,
       }
     );
   }
@@ -30,27 +30,34 @@ function CreatorView(list) {
     const columns = [
       {
         field: 'id',
-        headerName: 'Creatorid',
+        headerName: '아이디',
         type: 'number',
-        width: 150 ,
+        width: 120 ,
       },
       {
         field: 'Business_number',
-        headerName: 'Business_number',
+        headerName: '사업자번호',
         width: 180,
         type: 'text',
         editable: true,
       },
         {
           field: 'creator_nickname',
-          headerName: 'creator_nickname',
+          headerName: '닉네임',
           type: 'text',
           width: 170,
           editable: true,
         },
         {
           field: 'status',
-          headerName: 'status',
+          headerName: '상태',
+          type: 'text',
+          width: 150,
+          editable: true,
+        },
+        {
+          field: 'authority',
+          headerName: '권한',
           type: 'text',
           width: 150,
           editable: true,
