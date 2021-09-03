@@ -3,6 +3,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import MenuAppBar from './MenuAppBar';
 import { useEffect, useState } from "react";
 import * as React from 'react';
+import { ACCESS_TOKEN } from "export/export";
 
 const columns = [
     {
@@ -75,9 +76,16 @@ function CreatorDataList(list) {
 
 export default function CreatorView() {
   const [rows,setRows] = React.useState([])
+  const [token,setToken] = useState(localStorage.getItem("token"))
   const viewId = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1)
+  
   useEffect(() => {
-      fetch('http://localhost:8081/admin/creatorView/'+viewId)
+      fetch('http://localhost:8081/admin/creatorView/'+viewId, {
+        headers: {
+          'content-type': 'application/json',
+          "Authorization" : 'Bearer '+ localStorage.getItem(ACCESS_TOKEN)
+        }
+      })  
       .then(res => res.json())
       .then((res) => {
         console.log("아래")
@@ -89,6 +97,7 @@ export default function CreatorView() {
         setRows(CreatorDataList(res));
       })
     }, []); 
+    
   return (
     <div>
       <MenuAppBar></MenuAppBar>

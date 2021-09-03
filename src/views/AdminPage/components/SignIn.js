@@ -103,11 +103,7 @@ export default function LoginPage(props) {
                       inputProps={{
                         type: "string",
                         onChange: ChangeValue,
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor}/>
-                          </InputAdornment>
-                        ),
+                        
                       }}
                     />
                     <CustomInput
@@ -119,13 +115,6 @@ export default function LoginPage(props) {
                       inputProps={{
                         type: "password",
                         onChange: ChangeValue,
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
                         autoComplete: "off",
                       }}
                     />
