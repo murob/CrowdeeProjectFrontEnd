@@ -155,7 +155,7 @@ export default function ProjectStartPage(props) {
         props.history.push(url)
     }
     return (
-        <div style={{backgroundColor:'white', height:'100vh', width:'100%', display:'flex', flexDirection:'column'}}>
+        <div style={{backgroundColor:'white', minHeight:'100vh', maxHeight:'100%', width:'100%', display:'flex', flexDirection:'column', justifyContent:'center'}}>
             <Header
                 brand="Crowdee"
                 rightLinks={<HeaderLinks />}
@@ -167,17 +167,14 @@ export default function ProjectStartPage(props) {
                 {...rest}
             />
 
-            <div style={{marginTop:'5%', marginLeft:'', width:'100%', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center', border:'0px solid black'}}>
+            <div style={{marginTop:'5%', marginLeft:'', width:'100%', minHeight:'100%', display:'flex', justifyContent:'center', alignItems:'center', border:'0px solid black'}}>
                 <div style={{width:'400px', display:'flex', border:'0px solid black'}}>
                     <img style={{width:'100%'}} src={require('./crowdee-logo.png').default} />
                 </div>
-                
-                
 
-                <div style={{border:'px solid black', marginLeft:'100px'}}>
-                   
-                {projectData.map((funding) => {
-                      return <div style={{width:'100%'}}>
+                <div style={{border:'0px solid black', marginLeft:'100px', marginTop:'100px'}}>
+                    {projectData.map((funding) => {
+                        return <div style={{width:'100%'}}>
                             <h6 style={{fontWeight:'bold', color:'red'}}><FeedbackIcon fontSize="small"/> 작성 중인 프로젝트가 있습니다.</h6>
                             <Card style={{height:'80px', width:'500px', display:'flex', justifyContent:'center', marginTop:'10px'}}>
                                 <Button
@@ -190,7 +187,7 @@ export default function ProjectStartPage(props) {
                             </Card>
                         </div>
                     })}
-                    <div style={{marginTop:'100px'}}>
+                    <div style={{marginTop:'80px'}}>
                         <div>
                             <h3 style={{fontWeight:'bold'}}>프로젝트 페이지 주소</h3>
                             <h6>프로젝트 페이지로 접속하기 위한 웹페이지 주소(URL)를 설정 해주세요.</h6>

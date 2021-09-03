@@ -82,7 +82,6 @@ export default function MyCreated() {
                     </div>
                 )
                 console.log(result)
-            
         })
         .catch((e) =>{
             setResult(
