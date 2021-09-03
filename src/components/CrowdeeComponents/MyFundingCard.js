@@ -52,17 +52,6 @@ export default function MyFundingCard(props) {
   };
   const classes = useStyles();
   
-  const [funding,setFunding] = useState({
-    imgUrl : props.imgUrl,
-    rateOfAchievement:props.ROA,
-    id:props.id,
-    title:props.title,
-    summary:props.summary,
-    restDate:props.restDate,
-    category:props.category,
-    projectUrl:props.projectUrl
-  }
-  );
   const comma = (obj) => {
     var regx = new RegExp(/(-?\d+)(\d{3})/);
    
@@ -74,16 +63,31 @@ export default function MyFundingCard(props) {
         obj = strArr[0];
     return obj;//문자열 반환
   }
+  
+  const [funding,setFunding] = useState({
+    imgUrl : props.imgUrl,
+    rateOfAchievement:props.ROA,
+    id:props.id,
+    title:props.title,
+    summary:props.summary,
+    restDate:props.restDate,
+    category:props.category,
+    projectUrl:props.projectUrl,
+    totalFundraising:comma(props.totalFundraising),
+    goalFundraising:comma(props.goalFundraising),
+  }
+  );
+  
 
-  useEffect(() => {
-    setFunding({
-      ...funding,
-      totalFundraising:comma(props.totalFundraising),
-      goalFundraising:comma(props.goalFundraising),
+  // useEffect(() => {
+  //   setFunding({
+  //     ...funding,
+  //     totalFundraising:comma(props.totalFundraising),
+  //     goalFundraising:comma(props.goalFundraising),
       
-    })
+  //   })
     
-  }, [])
+  // }, [])
 
   return (
     <div>

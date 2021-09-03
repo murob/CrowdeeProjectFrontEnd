@@ -1,6 +1,7 @@
 import React from "react";
 // react component for creating beautiful carousel
 import Carousel from "react-slick";
+import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -10,67 +11,61 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
 
-import image1 from "assets/img/bg.jpg";
-import image2 from "assets/img/bg2.jpg";
-import image3 from "assets/img/bg3.jpg";
+import styles from "assets/jss/material-kit-react/components/parallaxStyle.js";
+// import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
 
-import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
 
 const useStyles = makeStyles(styles);
-
-export default function SectionCarousel() {
+export default function SectionCarousel(props) {
+  const { filter, className, children, style, small } = props;
   const classes = useStyles();
+  const parallaxClasses = classNames({
+    
+      [classes.parallax]: true,
+      [classes.filter]: filter,
+      [classes.small]: small,
+      [className]: className !== undefined,
+    
+    
+  
+  });
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
   };
   return (
-    <div className={classes.section}>
-      <div className={classes.container}>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
+    <div className={classes.parallaxClasses} style={{
+      ...styles,
+        marginTop:"77px",
+        maxWidth : "100%",
+        maxHeight : "550px",
+        position : "relative",
+        display : "flex",
+    }}>
+      
             <Card carousel>
               <Carousel {...settings}>
-                <div>
-                  <img src={image1} alt="First slide" className="slick-image" />
-                  <div className="slick-caption">
-                    <h4>
-                      <LocationOn className="slick-icons" />
-                      Yellowstone National Park, United States
-                    </h4>
+                {props.image.map((image,index)=>(
+                  <div>
+                    
+                  <img src={image} alt={`${index} slide`} className="slick-image" />
+                  <div className="slick-caption" style={{
+                    
+                    paddingBottom : "400px",
+                    marginRight : "400px",
+                    marginLeft : "-100px"
+                  }}>
+                    <h1>Crowdee</h1>
                   </div>
                 </div>
-                <div>
-                  <img
-                    src={image2}
-                    alt="Second slide"
-                    className="slick-image"
-                  />
-                  <div className="slick-caption">
-                    <h4>
-                      <LocationOn className="slick-icons" />
-                      Somewhere Beyond, United States
-                    </h4>
-                  </div>
-                </div>
-                <div>
-                  <img src={image3} alt="Third slide" className="slick-image" />
-                  <div className="slick-caption">
-                    <h4>
-                      <LocationOn className="slick-icons" />
-                      Yellowstone National Park, United States
-                    </h4>
-                  </div>
-                </div>
+                ))}
+            
               </Carousel>
             </Card>
-          </GridItem>
-        </GridContainer>
-      </div>
     </div>
   );
 }

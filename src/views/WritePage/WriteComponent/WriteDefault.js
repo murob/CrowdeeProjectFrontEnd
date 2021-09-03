@@ -3,9 +3,11 @@ import { Container } from '@material-ui/core';
 import SimpleSelect from 'components/CrowdeeComponents/SimpleSelect';
 import { makeStyles } from "@material-ui/core/styles";
 export default function WriteDefault(props) {
-    const [form,setForm] = useState({
-
-    });
+    console.log(props.data)
+    const [form,setForm] = useState(
+        props.data
+    );
+    
     const CategoryControl= (data)=>{
         setForm({
             ...form,
@@ -117,7 +119,7 @@ export default function WriteDefault(props) {
               return res.json();
           }).
           then((res)=>{
-            setImgUrl(res.url)
+            // setImgUrl(res.url)
             setForm({
                 ...form,
                 "thumbNailUrl" : res.url
@@ -145,9 +147,9 @@ export default function WriteDefault(props) {
                         </div>
                         <div>
                             <h5 style={{fontWeight:'bold'}}>긴 제목</h5>
-                            <input name="title" onKeyUp={FormValueHandler} onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'40px'}} placeholder={'긴 제목을 입력해주세요'}></input>
+                            <input name="title" value={form.title} onKeyUp={FormValueHandler} onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'40px'}} placeholder={'긴 제목을 입력해주세요'}></input>
                             <h5 style={{fontWeight:'bold'}}>짧은 제목</h5>
-                            <input name="subTitle" onKeyUp={FormValueHandler} onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'40px'}} placeholder={'짧은 제목을 입력해주세요'}></input>
+                            <input name="subTitle" value={form.subTitle} onKeyUp={FormValueHandler} onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'40px'}} placeholder={'짧은 제목을 입력해주세요'}></input>
                         </div>
                     </div>
 
@@ -157,7 +159,7 @@ export default function WriteDefault(props) {
                             <h6>후원자 분들이 프로젝트를 빠르게 이해할 수 있도록<br/>명확하고 간략하게 소개해주세요.</h6>
                         </div>
                         <div>
-                            <input name="summary" onKeyUp={FormValueHandler} onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'100px'}} placeholder={'프로젝트에 대해 요약해서 입력해주세요'}></input>
+                            <input name="summary" value={form.summary} onKeyUp={FormValueHandler} onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'100px'}} placeholder={'프로젝트에 대해 요약해서 입력해주세요'}></input>
                         </div>
                     </div>
 
@@ -178,7 +180,7 @@ export default function WriteDefault(props) {
                             </div>
                             <div className={classes.appendBox}>
                                 <div className={classes.appendImg}>
-                                    <img className={classes.img} src={imgUrl} ></img>
+                                    <img className={classes.img} src={form.thumbNailUrl} ></img>
                                 </div>
                             </div>
                             
@@ -193,7 +195,7 @@ export default function WriteDefault(props) {
                             <h6>잠재 후원자의 관심사를 고려한 검색 태그를 입력해주세요.</h6>
                         </div>
                         <div>
-                            <input name="tag" onKeyUp={FormValueHandler} onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'80px'}} placeholder={'예시) 피아노,사극,현대무용 (# 또는 , 로 구분)'}></input>
+                            <input name="tag" value={form.tag} onKeyUp={FormValueHandler} onChange={FormValueHandler} style={{border:'1px solid #B6B7B9', borderRadius:'3px', width:'450px', height:'80px'}} placeholder={'예시) 피아노,사극,현대무용 (# 또는 , 로 구분)'}></input>
                         </div>
                     </div>
 

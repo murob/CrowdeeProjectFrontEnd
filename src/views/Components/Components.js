@@ -21,6 +21,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import styles from "assets/jss/material-kit-react/views/components.js";
 import ProductSection from "views/LandingPage/Sections/ProductSection.js";
 import MenuLink from "components/Header/MenuLink";
+import SectionCarousel from "./Sections/SectionCarousel";
 
 const useStyles = makeStyles(styles);
 
@@ -56,7 +57,16 @@ export default function Components(props) {
       <div style={{position:'fixed', color:'transparent', height:'347px', backgroundColor:'white', width:'100%'}}>
 
       </div>
-      <Parallax image={
+      <SectionCarousel 
+        image={
+          [("https://cdn.pixabay.com/photo/2016/05/06/17/06/ballerinas-1376250_1280.jpg"),
+          ("https://cdn.pixabay.com/photo/2014/08/29/04/58/people-430545_1280.jpg"),
+          ("https://cdn.pixabay.com/photo/2017/02/25/22/05/orchestra-2098877_1280.jpg"),
+          ("https://cdn.pixabay.com/photo/2013/02/26/01/10/auditorium-86197_1280.jpg"),
+          
+          ]}
+      />
+      {/* <Parallax image={
         
         [("https://cdn.pixabay.com/photo/2016/05/06/17/06/ballerinas-1376250_1280.jpg"),
         ("https://cdn.pixabay.com/photo/2014/08/29/04/58/people-430545_1280.jpg"),
@@ -72,8 +82,8 @@ export default function Components(props) {
               </div>
             </GridItem>
           </GridContainer>
-        </div>
-      </Parallax>
+        </div>0
+      </Parallax> */}
 
       <div className={classNames(classes.main, classes.mainRaised)}>
         <ProductSection/>
