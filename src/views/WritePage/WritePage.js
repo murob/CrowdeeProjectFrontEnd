@@ -182,7 +182,9 @@ export default function WritePage(props) {
         })
         
     }
-
+    // if(creatorId){
+    //     edit()
+    // }
     useEffect(() => {
          if(creatorId){
             edit();

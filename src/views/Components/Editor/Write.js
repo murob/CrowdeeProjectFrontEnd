@@ -53,7 +53,9 @@ export default function Write(props) {
     const handleClose = () => {
         setFlag(false);
     }
- 
+    useEffect(() => {
+       
+    }, [])
     
     
     return (
@@ -65,7 +67,7 @@ export default function Write(props) {
             <div>
             <CKEditor
               editor={ Editor }
-              
+              data ={props.data}
               config={{
                 
                 placeholder: "내용을 입력해주세요!",
