@@ -364,6 +364,7 @@ const handleClose = () => {
                     totalFundraising={view.totalFundraising}
                     goalFundraising={view.goalFundraising}
                     minFundraising={view.minFundraising}
+                    projectUrl={view.projectUrl}
                   ></JoinFundingModal>
                 </Modal>
               </div>
