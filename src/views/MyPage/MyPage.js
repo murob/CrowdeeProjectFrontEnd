@@ -21,37 +21,21 @@ export default function MyPage(props) {
         history.push(url);
       };
 
-    const [funding,setFunding] = useState();
+    const [funding,setFunding] = useState([]);
     const [result,setResult] = useState();
     const [token,setToken] = useState(localStorage.getItem("token"))
 
-    useEffect(() => {
-        wish()
+  const setFund = (data) => {
+    return new Promise((resolve,reject) =>{
+        resolve(setFunding(data))
+        console.log(data)
         
-    }, [])
-
-  const wish = () =>{
-    fetch("http://localhost:8081/member/myPage/wishList", {
-        headers : {
-          "Authorization" : `Bearer ${token}`}
-        }).
-        then((res) =>{
-            if(res.status==200){
-                
-                return res.json()
-            }
-           else{
-               throw Error("에러")
-           }
-        })
-        .then((res)=>{
-            console.log(res)
-            setFunding(res);
-           
-            
-        }).then(res=>{
-            console.log(funding)
-            setResult(
+    })
+  }
+  const setRes = () =>{
+      return new Promise((resolve,reject)=>{
+          resolve(
+              setResult(
                 <div className={classes.section}>
                     <GridContainer justify="center">
                         {funding.map((funding)=>(
@@ -70,8 +54,22 @@ export default function MyPage(props) {
                     </GridContainer>
                 </div>
               )
-        })
-        .catch((e) =>{
+                
+          )
+      })
+  }
+
+  const wish = async () =>{
+    try{
+        let data = await fetch("http://localhost:8081/member/myPage/wishList", {
+            headers : {
+            "Authorization" : `Bearer ${token}`}
+            });
+        
+        let res = await data.json();
+        await setFund(res)
+    }
+        catch(e){
             console.log(e.message)
             setResult(
                 <div>
@@ -80,45 +78,21 @@ export default function MyPage(props) {
                     </h5>
                 </div>
             )
-        });
-  }
+        }
+    }
 
-  const participant = () =>{
-    fetch("http://localhost:8081/member/myPage/fundingList", {
-        headers : {
-          "Authorization" : `Bearer ${token}`}
-        }).
-        then((res) =>{
-            if(res.status==200){
-                return res.json()
-            }
-           else{
-               throw Error("에러")
-           }
-        })
-        .then(res=>{
-            setFunding(res);
-            setResult(
-              <div className={classes.section}>
-                  <GridContainer justify="center">
-                      {funding.map((funding)=>(
-                      <MyFundingCard 
-                      id={funding.fundingId}
-                      title={funding.title}
-                      imgUrl={funding.thumbNailUrl}
-                      summary={funding.summary}
-                      restDate={funding.restDate}
-                      category={funding.category}
-                      totalFundraising={funding.totalFundraising}
-                      goalFundraising={funding.goalFundraising}
-                      ROA={funding.rateOfAchievement}
-                      projectUrl={funding.projectUrl} />
-                      ))}
-                  </GridContainer>
-              </div>
-            )
-        })
-        .catch((e) =>{
+  const participant = async () =>{
+    try{
+        let data = await fetch("http://localhost:8081/member/myPage/fundingList", {
+            headers : {
+            "Authorization" : `Bearer ${token}`}
+            });
+        
+        let res = await data.json();
+        await setFund(res)
+    }
+        catch(e){
+            console.log(e.message)
             setResult(
                 <div>
                     <h5 style={{fontWeight:'bold', color:'gray'}}>
@@ -126,54 +100,31 @@ export default function MyPage(props) {
                     </h5>
                 </div>
             )
-        });
-  }
+        }
+    }
   
-  const waiting = () =>{
-    fetch("http://localhost:8081/member/myPage/waitingForPayment", {
-        headers : {
-          "Authorization" : `Bearer ${token}`}
-        }).
-        then((res) =>{
-            if(res.status==200){
-                return res.json()
-            }
-           else{
-               throw Error("에러")
-           }
-        })
-        .then(res=>{
-            setFunding(res);
-            setResult(
-              <div className={classes.section}>
-                  <GridContainer justify="center">
-                      {funding.map((funding)=>(
-                      <MyFundingCard 
-                      id={funding.fundingId}
-                      title={funding.title}
-                      imgUrl={funding.thumbNailUrl}
-                      summary={funding.summary}
-                      restDate={funding.restDate}
-                      category={funding.category}
-                      totalFundraising={funding.totalFundraising}
-                      goalFundraising={funding.goalFundraising}
-                      ROA={funding.rateOfAchievement}
-                      projectUrl={funding.projectUrl} />
-                      ))}
-                  </GridContainer>
-              </div>
-            )
-        })
-        .catch((e) =>{
-            setResult(
-                <div>
-                    <h5 style={{fontWeight:'bold', color:'gray'}}>
-                        진행중인 프로젝트가 없습니다.
-                    </h5>
-                </div>
-            )
-        });
-  }
+  const waiting = async () =>{
+
+    try{
+        let data = await fetch("http://localhost:8081/member/myPage/waitingForPayment", {
+            headers : {
+            "Authorization" : `Bearer ${token}`}
+            });
+            
+            let res = await data.json();
+            await setFund(res)
+    }
+    catch(e){
+        console.log(e.message)
+        setResult(
+            <div>
+                <h5 style={{fontWeight:'bold', color:'gray'}}>
+                    진행중인 프로젝트가 없습니다.
+                </h5>
+            </div>
+        )
+    }
+    }
   
 
 
@@ -186,14 +137,23 @@ export default function MyPage(props) {
         setPath('/my/intro')
         props.history.push('/my/intro')
     }
-    const changeBacked = () =>{
-        participant()
+    const changeBacked = async () =>{
+        await participant()
+        await setRes()
+        
+        
+        
     }
-    const changeCreated = () =>{
-       waiting()
+    const changeCreated = async () =>{
+        await waiting()
+        await setRes()
+        
+        
+       
     }
-    const changeWish = () =>{
-        wish()
+    const changeWish = async () =>{
+        await wish()
+        await setRes()
     }
 
    
