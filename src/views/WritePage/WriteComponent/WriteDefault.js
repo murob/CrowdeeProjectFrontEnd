@@ -3,11 +3,11 @@ import { Container } from '@material-ui/core';
 import SimpleSelect from 'components/CrowdeeComponents/SimpleSelect';
 import { makeStyles } from "@material-ui/core/styles";
 export default function WriteDefault(props) {
-    console.log(props.data)
     const [form,setForm] = useState(
         props.data
     );
-    
+  
+    console.log("asd",form)
     const CategoryControl= (data)=>{
         setForm({
             ...form,
@@ -126,7 +126,7 @@ export default function WriteDefault(props) {
             })
           })
       }
-      
+    
     return (
         <div style={{paddingTop:'30px', paddingBottom:'30px', backgroundColor:'#FCFCFC',}}>
                 <Container maxWidth="md">
@@ -136,7 +136,7 @@ export default function WriteDefault(props) {
                             <h6>프로젝트 성격상 가장 일치하는 카테고리를 선택해주세요.</h6>
                         </div>
                         <div style={{display:'flex', alignItems:'center'}}>
-                            <SimpleSelect handleState={CategoryControl} />
+                            <SimpleSelect handleState={CategoryControl} data={props.category} />
                         </div>
                     </div>
 
