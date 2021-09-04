@@ -1,13 +1,16 @@
 import React,{useState,useEffect} from 'react';
+import { useParams } from 'react-router';
 import { Container } from '@material-ui/core';
 import SimpleSelect from 'components/CrowdeeComponents/SimpleSelect';
 import { makeStyles } from "@material-ui/core/styles";
 export default function WriteDefault(props) {
-    const [form,setForm] = useState(
-        props.data
-    );
-  
-    console.log("asd",form)
+
+    const [form,setForm] = useState({});
+    
+    const {manageUrl} = useParams();
+    
+    const [token,setToken] = useState(localStorage.getItem("token"))
+
     const CategoryControl= (data)=>{
         setForm({
             ...form,
@@ -20,7 +23,7 @@ export default function WriteDefault(props) {
             ...form,
             [e.target.name] : e.target.value
         })
-       props.save(form)
+
     }
     const useStyles = makeStyles((theme)=>({
         imgContent : {
@@ -126,7 +129,27 @@ export default function WriteDefault(props) {
             })
           })
       }
+    useEffect(() => {
+        fetch(`http://localhost:8081/creator/edit/${manageUrl}`,{
+            headers : {
+                "Authorization" : `Bearer ${token}`
+            }
+        }).then((res)=>{
+            if(!res.status==200){
+                throw new Error("http에러")
+            }
+            return res.json()
+        }).then((res)=>{
+            
+            setForm(res)
+        }).catch((e)=>{
+            console.log(e.message)
+        })
+    }, [])
+    useEffect(() => {
+        props.save(form)
     
+    }, [form])
     return (
         <div style={{paddingTop:'30px', paddingBottom:'30px', backgroundColor:'#FCFCFC',}}>
                 <Container maxWidth="md">

@@ -5,7 +5,7 @@ import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
 import Footer from 'components/Footer/Footer';
-
+import WritePageRouter from './MyPageRouter';
 import GridContainer from "components/Grid/GridContainer.js";
 import MyFundingCard from "components/CrowdeeComponents/MyFundingCard";
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,18 +24,118 @@ export default function MyPage(props) {
     const [funding,setFunding] = useState([]);
     const [result,setResult] = useState();
     const [token,setToken] = useState(localStorage.getItem("token"))
+    const [nickName,setNickName] = useState(localStorage.getItem("nickName"))
+  
+  
 
-  const setFund = (data) => {
-    return new Promise((resolve,reject) =>{
-        resolve(setFunding(data))
-        console.log(data)
+  const wish = () =>{
+    
+        fetch("http://localhost:8081/member/myPage/wishList", {
+            headers : {
+            "Authorization" : `Bearer ${token}`}
+            }).then((res)=>{
+                if(res.status==200){
+                    return res.json()
+                    
+                }
+                throw new Error("http 통신 에러")
+            }).then((res)=>{
+                setFunding(res)
+            }).catch(e=>{
+                e.message;
+                setResult(
+                    <div>
+                    <h5 style={{fontWeight:'bold', color:'gray'}}>
+                        찜한 프로젝트가 없습니다.
+                    </h5>
+                </div>
+                )
+            })
+        }
+    
+
+  const participant =  () =>{
+   
+       fetch("http://localhost:8081/member/myPage/fundingList", {
+            headers : {
+            "Authorization" : `Bearer ${token}`}
+            }).then((res)=>{
+                if(res.status==200){
+                    return res.json()
+                }
+                throw new Error("http 통신 에러")
+                
+            }).then((res)=>{
+                setFunding(res)
+            }).catch(e=>{
+                e.message;
+                setResult(
+                    <div>
+                        <h5 style={{fontWeight:'bold', color:'gray'}}>
+                            참여한 프로젝트가 없습니다.
+                        </h5>
+                    </div>
+                )
+            })
+    }
+  
+  const waiting =  () =>{
+    fetch("http://localhost:8081/member/myPage/waitingForPayment", {
+        headers : {
+        "Authorization" : `Bearer ${token}`}
+        }).
+        then((res)=>{
+            if(res.status==200){
+                return res.json()
+                
+            }
+            throw new Error("http 통신 에러")
+        }).
+        then((res)=>{
+            setFunding(res)
+        }).
+        catch(e=>{
+            e.message;
+            setFunding("")
+            setResult(
+                <div>
+                    <h5 style={{fontWeight:'bold', color:'gray'}}>
+                        진행중인 프로젝트가 없습니다.
+                    </h5>
+                </div>
+            )
+        })
+    
+    }
+  
+
+    const changeIntro = () =>{
+        setPath('/my/intro')
+        props.history.push('/my/intro')
+    }
+    const changeBacked =  () =>{
+       participant()
         
-    })
-  }
-  const setRes = () =>{
-      return new Promise((resolve,reject)=>{
-          resolve(
-              setResult(
+        // props.history.push('/my/backed')
+        
+        
+    }
+    const changeCreated =  () =>{
+        waiting()
+
+        // props.history.push('/my/created')
+        
+       
+    }
+    const changeWish = async () =>{
+        wish()
+
+        // props.history.push('/my/wish')
+    }
+
+   useEffect(() => {
+       if(funding.length>0){
+            setResult(
                 <div className={classes.section}>
                     <GridContainer justify="center">
                         {funding.map((funding)=>(
@@ -53,110 +153,11 @@ export default function MyPage(props) {
                         ))}
                     </GridContainer>
                 </div>
-              )
-                
-          )
-      })
-  }
-
-  const wish = async () =>{
-    try{
-        let data = await fetch("http://localhost:8081/member/myPage/wishList", {
-            headers : {
-            "Authorization" : `Bearer ${token}`}
-            });
-        
-        let res = await data.json();
-        await setFund(res)
-    }
-        catch(e){
-            console.log(e.message)
-            setResult(
-                <div>
-                    <h5 style={{fontWeight:'bold', color:'gray'}}>
-                        찜한 프로젝트가 없습니다.
-                    </h5>
-                </div>
-            )
-        }
-    }
-
-  const participant = async () =>{
-    try{
-        let data = await fetch("http://localhost:8081/member/myPage/fundingList", {
-            headers : {
-            "Authorization" : `Bearer ${token}`}
-            });
-        
-        let res = await data.json();
-        await setFund(res)
-    }
-        catch(e){
-            console.log(e.message)
-            setResult(
-                <div>
-                    <h5 style={{fontWeight:'bold', color:'gray'}}>
-                        후원한 프로젝트가 없습니다.
-                    </h5>
-                </div>
-            )
-        }
-    }
-  
-  const waiting = async () =>{
-
-    try{
-        let data = await fetch("http://localhost:8081/member/myPage/waitingForPayment", {
-            headers : {
-            "Authorization" : `Bearer ${token}`}
-            });
-            
-            let res = await data.json();
-            await setFund(res)
-    }
-    catch(e){
-        console.log(e.message)
-        setResult(
-            <div>
-                <h5 style={{fontWeight:'bold', color:'gray'}}>
-                    진행중인 프로젝트가 없습니다.
-                </h5>
-            </div>
-        )
-    }
-    }
-  
-
-
-   
-    const [nickName,setNickName] = useState(localStorage.getItem("nickName"))
-
- 
-    
-    const changeIntro = () =>{
-        setPath('/my/intro')
-        props.history.push('/my/intro')
-    }
-    const changeBacked = async () =>{
-        await participant()
-        await setRes()
-        
-        
-        
-    }
-    const changeCreated = async () =>{
-        await waiting()
-        await setRes()
-        
-        
+           )
+       }
        
-    }
-    const changeWish = async () =>{
-        await wish()
-        await setRes()
-    }
-
-   
+      
+   }, [funding])
 
 
     return (
@@ -195,9 +196,7 @@ export default function MyPage(props) {
                     <Button style={{fontSize:'25px', color:'gray'}} onClick={changeWish}>찜한 프로젝트</Button>
                 </div>
                 <div style={{padding:'40px'}}>
-                   <div>
-                        {result}
-                   </div>
+                  {result}
                 </div>
             </div>
             <Footer />
