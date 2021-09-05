@@ -30,8 +30,9 @@ export default function FundingCard(props) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height : '850px',
-      backgroundImage : `url(${props.imgUrl})`
+      height : '80%',
+      marginTop:'10%'
+      // backgroundImage : `url(${props.imgUrl})`
     },
     paper: {
       

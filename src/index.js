@@ -67,7 +67,7 @@ ReactDOM.render(
       {/* <Route path="/write-page/:manageUrl/:creatorId" component={WritePage} /> */}
       <Route path="/project-start" component={ProjectStartPage} />
       <Route path="/menu-page" component={MenuPage} />
-      <Route path="/category/:param" component={CategoryPage} />
+      <Route path="/category/:menu" component={CategoryPage} />
       <Route path="/my" component={MyPage} />
       {/* <Route path="/my/:memberId" component={MyPage} /> */}
       <Route path="/search" component={SearchPage} />

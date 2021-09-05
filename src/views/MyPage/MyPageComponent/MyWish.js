@@ -17,7 +17,6 @@ export default function MyWish(props) {
     const [result,setResult] = useState()
     const [token,setToken] = useState(localStorage.getItem("token"))
     
-<<<<<<< HEAD
     //함수 실행시 최초 한번 실행되는 것
     const [funding, setFunding] = useState(
         
@@ -57,12 +56,9 @@ export default function MyWish(props) {
            else{
                throw Error("에러")
            }
-
-        }
-        )
-        .then(res=>{
-            console.log(res)
-           
+        }).
+        then(res=>{
+            console.log(res)           
                 setFunding(res);
                 setResult(
                     <div className={classes.section}>
@@ -97,13 +93,11 @@ export default function MyWish(props) {
     },[])
     console.log(fundings)
 
-=======
-    const [funding, setFunding] = useState();
+    // const [funding, setFunding] = useState();
   
->>>>>>> 1e4f8c5043479387472d93d8184ee6d9e2e32cbf
     return (
         <div>
-         
+            {result}
         </div>
     );
 };

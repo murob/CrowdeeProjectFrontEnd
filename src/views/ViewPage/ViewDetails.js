@@ -8,6 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
+import { Fade } from "@material-ui/core";
+
 import Button from '@material-ui/core/Button';
 import LinearWithValueLabel from "components/CrowdeeComponents/LinearProgressWithLabel";
 //아이콘임포트
@@ -55,16 +57,17 @@ export default function ViewDetails(props) {
         paper: {
           width : 1000,
           maxWidth : 1000,
-          height : 800,
+          height : 620,
           backgroundColor: theme.palette.background.paper,
-          border: '2px solid #000',
-          boxShadow: theme.shadows[5],
+          borderRadius:'15px',
+          border: '0px solid #000',
+          boxShadow: theme.shadows[20],
           padding: theme.spacing(2, 4, 3),
           textAlign: 'center',
-          transition: 'transform 0.7s,opacity 1s',
+          transition: 'transform 2s,opacity 5s',
           overflowY: 'auto',
           padding: theme.spacing(2),
-          marginBottom : 50
+          marginBottom : 50,
         },
         topmain: {
             backgroundColor: theme.palette.background.paper,
@@ -96,66 +99,73 @@ export default function ViewDetails(props) {
   
    
     return (
-    <div className={classes.paper}>
-        <div className={classes.root}>
-        <Grid container spacing={3}>
-            <Grid item xs={7}>
-                <Paper className={classes.topmain}>
-                <CardMedia
-                    component="img"
-                    alt="펀딩 사진"
-                    height="380"
-                    image={props.imgUrl}
-                    title="펀딩 사진"
-        />
-                </Paper>
-            </Grid>
-            <Grid item xs={5}>
-                <Paper className={classes.topmain}>
-                    <h4>
-                    {props.title}
-                    </h4>
+    <Fade 
+        in='checked' 
+        timeout={{
+            appear: 1000, 
+            enter: 500, 
+            exit: 1000
+        }}>
+        <div className={classes.paper}>
+            <div className={classes.root}>
+            <Grid container spacing={3}>
+                <Grid item xs={7}>
+                    <Paper className={classes.topmain}>
+                    <CardMedia
+                        component="img"
+                        alt="펀딩 사진"
+                        height="368"
+                        image={props.imgUrl}
+                        title="펀딩 사진"
+            />
+                    </Paper>
+                </Grid>
+                <Grid item xs={5}>
+                    <Paper className={classes.topmain}>
+                        <h4>
+                        {props.title}
+                        </h4>
+                            
                         
-                   
-                    <h5>
-                    남은 기간  {props.restDate}일
-                    </h5>
-                    
-                 
-                    
-                    <h6 style={{marginTop:"15px" ,display:"block"}} >
-                        이만큼 모였어요.  /  이만큼 모아야 해요.
-                    </h6>
-                    <h6 style={{marginTop:"15px" ,display:"block"}} >
-                    {props.totalFundraising} 원  /  {props.goalFundraising} 원 
-                    </h6>
-                    <div style={{marginTop:"65px"}}>
-                    <LinearWithValueLabel  value={props.rateOfAchievment} />
-                    </div>
-                    
-                    <div className={classes.fundingButton} style={{marginTop:"100px"}}>
-            
+                        <h5>
+                        남은 기간  {props.restDate}일
+                        </h5>
                         
                         
-                        <Button variant="outlined"  color="primary"  onClick={()=>buttonClick(`/view/${props.projectUrl}`)}>
-                            자세히보기
+                        
+                        <h6 style={{marginTop:"15px" ,display:"block"}} >
+                            이만큼 모였어요.  /  이만큼 모아야 해요.
+                        </h6>
+                        <h6 style={{marginTop:"15px" ,display:"block"}} >
+                        {props.totalFundraising} 원  /  {props.goalFundraising} 원 
+                        </h6>
+                        <div style={{marginTop:"65px"}}>
+                        <LinearWithValueLabel  value={props.rateOfAchievment} />
+                        </div>
+                        
+                        <div className={classes.fundingButton} style={{marginTop:"100px"}}>
+                
+                            
+                            
+                            <Button variant="outlined"  color="primary"  onClick={()=>buttonClick(`/view/${props.projectUrl}`)}>
+                                자세히보기
+                            </Button>
+                        </div>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12}>
+                    <Paper className={classes.bottom}>
+                        <Button  size="large"  >
+                            프로젝트스토리  프로젝트 안내
                         </Button>
-                    </div>
-                </Paper>
-            </Grid>
-            <Grid item xs={12}>
-                <Paper className={classes.bottom}>
-                    <Button  size="large"  >
-                       프로젝트스토리  프로젝트 안내
-                    </Button>
-                    <h6>{props.summary}</h6>
-                </Paper>
-            </Grid>
-           
-        </Grid> 
+                        <h6>{props.summary}</h6>
+                    </Paper>
+                </Grid>
+                
+            </Grid> 
+            </div>
+            
         </div>
-       
-    </div>
-
+    </Fade>
     );
 };
