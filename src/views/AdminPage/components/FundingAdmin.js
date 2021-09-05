@@ -4,7 +4,7 @@ import MenuAppBar from './MenuAppBar';
 import { useEffect, useState } from "react";
 import BackerView from './BackerView';
 import { Button } from '@material-ui/core';
-
+import { ACCESS_TOKEN } from "export/export";
 
 function fundingView(list) {
   var tempList = []
@@ -33,6 +33,7 @@ export default function FundingAdmin() {
         "/admin-fundingView/"+params.row.manageUrl;
     }
     const [rows,setRows] = React.useState([])
+    const [token,setToken] = useState(localStorage.getItem("token"))
 
     const columns = [
       {
@@ -101,7 +102,12 @@ export default function FundingAdmin() {
     ];
 
     useEffect(() => {
-        fetch('http://localhost:8081/admin/funding')
+        fetch('http://localhost:8081/admin/funding', {
+          headers: {
+            'content-type': 'application/json',
+            "Authorization" : 'Bearer '+ localStorage.getItem(ACCESS_TOKEN)
+          }
+        })
         .then(res => res.json())
         .then((res) => {
           console.log("아래")

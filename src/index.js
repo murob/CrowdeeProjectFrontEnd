@@ -19,9 +19,11 @@ import BackerAdmin from "views/AdminPage/components/BackerAdmin";
 import BackerView from "views/AdminPage/components/BackerView";
 import CreatorView from "views/AdminPage/components/CreatorView";
 import CreatorAdmin from "views/AdminPage/components/CreatorAdmin";
+import CreatorNo from "views/AdminPage/components/CreatorNo";
 import CreatorInspectionAdmin from "views/AdminPage/components/CreatorInspectionAdmin";
 import FundingView from "views/AdminPage/components/FundingView";
 import FundingInspectionAdmin from "views/AdminPage/components/FundingInspectionAdmin";
+import FundingNo from "views/AdminPage/components/FundingNo";
 
 import MenuPage from "views/MenuPage/MenuPage";
 import CategoryPage from "views/CategoryPage/CategoryPage";
@@ -60,8 +62,10 @@ ReactDOM.render(
       <Route path="/admin-backerView" component={BackerView} /> 
       <Route path="/admin-creatorView" component={CreatorView} /> 
       <Route path="/admin-creator-inspection" component={CreatorInspectionAdmin} /> 
+      <Route path="/admin-creatorNo" component={CreatorNo} /> 
       <Route path="/admin-fundingView" component={FundingView} /> 
       <Route path="/admin-funding-inspection" component={FundingInspectionAdmin} /> 
+      <Route path="/admin-fundingNo" component={FundingNo} /> 
       <Route path="/view/:projectUrl" component={ViewPage}/>
       <Route path="/write-page/:manageUrl" component={WritePage} />
       {/* <Route path="/write-page/:manageUrl/:creatorId" component={WritePage} /> */}

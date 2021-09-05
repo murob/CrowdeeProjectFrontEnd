@@ -3,6 +3,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import MenuAppBar from './MenuAppBar';
 import { useEffect, useState } from "react";
 import * as React from 'react';
+import { ACCESS_TOKEN } from "export/export";
 
 const columns = [
   {
@@ -72,23 +73,29 @@ function backerDataList(list) {
 
 export default function BackerView() {
     const [rows,setRows] = React.useState([])
+    const [token,setToken] = useState(localStorage.getItem("token"))
     const viewId = window.location.pathname.substring(window.location.pathname.lastIndexOf("/") + 1)
+    
     useEffect(() => {
-        fetch('http://localhost:8081/admin/backerView/'+viewId)
+        fetch('http://localhost:8081/admin/backerView/'+viewId, {
+          headers: {
+            'content-type': 'application/json',
+            "Authorization" : 'Bearer '+ localStorage.getItem(ACCESS_TOKEN)
+          }
+        })
         .then(res => res.json())
         .then((res) => {
           console.log("아래")
           console.log(res)
           console.log("위")
           if(!res.status==200){
-                console.log("혹시 여기왔니?")
-                throw new Error('http 오류');
-              }
-              setRows(backerDataList(res));
-               if (res.success) {
-          }
+            console.log("혹시 여기왔니?")
+            throw new Error('http 오류');
+            }
+            setRows(backerDataList(res));
         })
       }, []);
+
     return (
       <div>
         <MenuAppBar></MenuAppBar>

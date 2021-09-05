@@ -3,6 +3,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import MenuAppBar from './MenuAppBar';
 import { useEffect, useState } from "react";
 import { Button } from '@material-ui/core';
+import { ACCESS_TOKEN } from "export/export";
 
 function CreatorView(list) {
   var tempList = []
@@ -24,7 +25,7 @@ function CreatorView(list) {
   }
   
   export default function CreatorAdmin() {
-
+    const [token,setToken] = useState(localStorage.getItem("token"))
     const [rows,setRows] = React.useState([])
 
     const columns = [
@@ -81,7 +82,12 @@ function CreatorView(list) {
     ];
 
     useEffect(() => {
-        fetch('http://localhost:8081/admin/creator')
+        fetch('http://localhost:8081/admin/creator', {
+          headers: {
+            'content-type': 'application/json',
+            "Authorization" : 'Bearer '+ localStorage.getItem(ACCESS_TOKEN)
+          }
+        })  
         .then(res => res.json())
         .then((res) => {
           console.log("아래")

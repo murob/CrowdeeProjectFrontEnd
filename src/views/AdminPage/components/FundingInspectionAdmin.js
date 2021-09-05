@@ -3,7 +3,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import MenuAppBar from './MenuAppBar';
 import { useEffect, useState } from "react";
 import { Button } from '@material-ui/core';
-
+import { ACCESS_TOKEN } from "export/export";
 
 function createData(list) {
   var tempList = []
@@ -24,7 +24,7 @@ function createData(list) {
 
 
   export default function FundingInspectionAdmin() {
-    
+    const [token,setToken] = useState(localStorage.getItem("token"))
     const [rows,setRows] = React.useState([])
 
     function fundingOk(e, params) {
@@ -35,8 +35,7 @@ function createData(list) {
 
     function fundingNo(e,params) {
       e.preventDefault();
-      changereject(params.id)
-          alert("승인 거절되었습니다.");
+      window.location.href = "/admin-fundingNo/"+params.id;
     }
 
     //펀딩 상세보기로 이동
@@ -147,46 +146,40 @@ function createData(list) {
     //심사승인
     function changeConfirm(id) {
       console.log("메소드 실행잘됨")
-      fetch('http://localhost:8081/admin/fundingOk/'+id)
-      .then(res => res.json())
-      .then((res) => {
-        console.log(res)
-        if(!res.status==200){
-              console.log("혹시 여기왔니?")
-              throw new Error('http 오류');
+      fetch('http://localhost:8081/admin/fundingOk/'+id, {
+        headers: {
+          'content-type': 'application/json',
+          "Authorization" : 'Bearer '+ localStorage.getItem(ACCESS_TOKEN)
         }
-      });
-    }
-
-    //심사 거절
-    function changereject(id) {
-      console.log("메소드 실행잘됨")
-      fetch('http://localhost:8081/admin/fundingNo/'+id)
+      }) 
       .then(res => res.json())
       .then((res) => {
         console.log(res)
         if(!res.status==200){
-              console.log("혹시 여기왔니?")
-              throw new Error('http 오류');
+          console.log("혹시 여기왔니?")
+          throw new Error('http 오류');
         }
       });
     }
 
     //심사 전체
     useEffect(() => {
-        fetch('http://localhost:8081/admin/fundingInspection')
+        fetch('http://localhost:8081/admin/fundingInspection', {
+          headers: {
+            'content-type': 'application/json',
+            "Authorization" : 'Bearer '+ localStorage.getItem(ACCESS_TOKEN)
+          }
+        }) 
         .then(res => res.json())
         .then((res) => {
           console.log("아래")
           console.log(res)
           console.log("위")
           if(!res.status==200){
-                console.log("혹시 여기왔니?")
-                throw new Error('http 오류');
-              }
-              setRows(createData(res));
-               if (res.success) {
+            console.log("혹시 여기왔니?")
+            throw new Error('http 오류');
           }
+          setRows(createData(res));
         })
       }, []);
       return (
