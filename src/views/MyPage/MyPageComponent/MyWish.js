@@ -1,21 +1,23 @@
 // @material-ui/core components
+
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState,useMemo } from "react";
 import MyFundingCard from "components/CrowdeeComponents/MyFundingCard";
 
 const useStyles = makeStyles(styles);
 
-export default function MyCreated() {
+export default function MyWish(props) {
 
     const classes = useStyles();
-    const [fundings, setFundings] = useState([]);
+   
     const [result,setResult] = useState()
     const [token,setToken] = useState(localStorage.getItem("token"))
     
+<<<<<<< HEAD
     //함수 실행시 최초 한번 실행되는 것
     const [funding, setFunding] = useState(
         
@@ -95,9 +97,13 @@ export default function MyCreated() {
     },[])
     console.log(fundings)
 
+=======
+    const [funding, setFunding] = useState();
+  
+>>>>>>> 1e4f8c5043479387472d93d8184ee6d9e2e32cbf
     return (
         <div>
-            {result}
+         
         </div>
     );
 };

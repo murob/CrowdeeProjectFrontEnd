@@ -104,7 +104,7 @@ export default function JoinFundingModal (props) {
             }).then((res)=>{
                 if(res.status==200){
                     alert("펀딩 참여가 성공적으로 완료되었습니다.")
-                    history.push(`/view/${form.projectUrl}`)
+                    history.push(`/view/${props.projectUrl}`)
                 }
                 else{
                     throw new Error("error")

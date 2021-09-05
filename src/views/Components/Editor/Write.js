@@ -12,8 +12,8 @@ export default function Write(props) {
     const [content, setContent] = useState("");
     const [flag, setFlag] = useState(false);
     const inputRef = useRef();
-    
-    
+   const [data,setData] = useState("")
+   
     
     // useEffect(()=>{
     //     // 저장 후 목록으로 이동
@@ -54,9 +54,15 @@ export default function Write(props) {
         setFlag(false);
     }
     useEffect(() => {
+        console.log("ckeditor",props.data)
+        if(props.data==undefined){
+            setData("")
+        }
+        else{
+           setData(props.data)
+        }
        
     }, [])
-    
     
     return (
 
@@ -67,7 +73,7 @@ export default function Write(props) {
             <div>
             <CKEditor
               editor={ Editor }
-              data ={props.data}
+              data = {props.data}
               config={{
                 
                 placeholder: "내용을 입력해주세요!",
