@@ -30,8 +30,9 @@ export default function FundingCard(props) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height : '850px',
-      backgroundImage : `url(${props.imgUrl})`
+      height : '80%',
+      marginTop:'10%'
+      // backgroundImage : `url(${props.imgUrl})`
     },
     paper: {
       
@@ -39,7 +40,9 @@ export default function FundingCard(props) {
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
-      transition: 'transform 0.7s,opacity 1s'
+      transition: 'transform 0.7s,opacity 1s',
+      height:'100%',
+      width:'100%'
     },
   }));
   const [open, setOpen] = React.useState(false);

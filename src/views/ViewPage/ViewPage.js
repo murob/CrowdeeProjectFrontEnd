@@ -257,7 +257,7 @@ const handleClose = () => {
           <div style={{marginRight:'-85%', display:'flex', alignItems:'center'}}>
             <Button onClick={()=>buttonClick(`/my/${memberId}`)}>
               <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}>{view.profileImgUrl}</Avatar>
-              
+              <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
             </Button>
           </div>
       </div>
