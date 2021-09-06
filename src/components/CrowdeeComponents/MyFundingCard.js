@@ -18,7 +18,7 @@ export default function MyFundingCard(props) {
     root: {
       width : 250,
       maxWidth: 250,
-      maxHeight: 350,
+      maxHeight: 375,
       margin:20
     },
     media: {
@@ -29,7 +29,8 @@ export default function MyFundingCard(props) {
       alignItems: 'center',
       justifyContent: 'center',
       height : '850px',
-      backgroundImage : `url(${props.imgUrl})`
+      marginTop:'7%'
+      // backgroundImage : `url(${props.imgUrl})`
     },
     paper: {
       
@@ -79,15 +80,7 @@ export default function MyFundingCard(props) {
   );
   
 
-  // useEffect(() => {
-  //   setFunding({
-  //     ...funding,
-  //     totalFundraising:comma(props.totalFundraising),
-  //     goalFundraising:comma(props.goalFundraising),
-      
-  //   })
-    
-  // }, [])
+  
 
   return (
     <div>
@@ -102,12 +95,20 @@ export default function MyFundingCard(props) {
             image={funding.imgUrl}
             title="펀딩 사진"
           />
-          <CardContent>
+          <CardContent >
             <Typography gutterBottom variant="h6" component="h6">
               {funding.title}
             </Typography>
-            <Typography variant="caption" display="block" gutterBottom>
-              {funding.summary}
+            <div style={{maxHeight:"25px",overflow:"hidden",textOverflow:"ellipsis",display:"block"}}>
+              <p style={{maxHeight:"25px",overflow:"hidden",textOverflow:"ellipsis",display:"block"}}>
+                {funding.summary}
+              </p>
+            </div>
+            
+            <Typography style={{maxHeight:"25px",overflow:"hidden",textOverflow:"ellipsis"}} variant="caption" display="block" gutterBottom>
+             
+             
+            
             </Typography>
             <Typography variant="caption" display="block" gutterBottom>
               카테고리 : {funding.category}

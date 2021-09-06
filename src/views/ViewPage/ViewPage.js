@@ -133,7 +133,7 @@ const handleClose = () => {
   );
       
   useEffect(() => {
-    
+      window.scrollTo(0,0);
       fetch(`http://localhost:8081/contents/${projectUrl}`, {
         headers : {
             "Authorization" : `Bearer ${token}`
@@ -218,7 +218,7 @@ const handleClose = () => {
     
     modifyUrl(view.aboutUs)
     return(
-      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
            
       </div>
     )
@@ -256,8 +256,9 @@ const handleClose = () => {
           </div>
           <div style={{marginRight:'-85%', display:'flex', alignItems:'center'}}>
             <Button onClick={()=>buttonClick(`/my/${memberId}`)}>
-              <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}>{view.profileImgUrl}</Avatar>
-              
+            <Avatar alt="Remy Sharp" src={view.profileImgUrl} style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}/>
+              {/* <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}>{view.profileImgUrl}</Avatar> */}
+              <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
             </Button>
           </div>
       </div>
@@ -277,7 +278,7 @@ const handleClose = () => {
               
             </div>
             <div style={{display:'flex', alignItems:'center'}}>
-              <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold'}}>{view.profileImgUrl}</Avatar>
+              <Avatar alt="Remy Sharp" src={view.profileImgUrl} style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold'}}/>
               <Button onClick={()=>buttonClick(`/my/:memberId`)}>
                 <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
                 
@@ -356,6 +357,7 @@ const handleClose = () => {
                   aria-describedby="simple-modal-description">
                       
                   <JoinFundingModal
+                    onClose={handleClose}
                     fundingId={view.fundingId}
                     title={view.title}
                     creatorNickName={view.creatorNickName}
@@ -364,6 +366,7 @@ const handleClose = () => {
                     totalFundraising={view.totalFundraising}
                     goalFundraising={view.goalFundraising}
                     minFundraising={view.minFundraising}
+                    projectUrl={view.projectUrl}
                   ></JoinFundingModal>
                 </Modal>
               </div>
@@ -401,7 +404,7 @@ const handleClose = () => {
               <h5 style={{fontWeight:'bold'}}>크리에이터 소개</h5>
               <div style={{display:'flex', alignItems:'center'}}>
                 <Button onClick={()=>buttonClick(`/my/intro/:memberId`)}>
-                  <Avatar style={{width:'40px', height:'40px', fontSize:'12px', fontWeight:'bold', marginRight:'10px'}}>{view.profileImgUrl}</Avatar>
+                  <Avatar src={view.profileImgUrl} style={{width:'40px', height:'40px', fontSize:'12px', fontWeight:'bold', marginRight:'10px'}} />
                   <h5 style={{fontWeight:'bold'}}>{view.creatorNickName}</h5>
 
                 </Button>

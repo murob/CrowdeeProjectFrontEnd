@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from "react";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from "ckeditor5-custom-build/build/ckeditor";
-import classNames from "classnames";
+
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/components.js";
-import { Button } from "@material-ui/core";
+
 export default function Write(props) {
     const useStyles = makeStyles(styles);
     const classes = useStyles();
@@ -12,17 +12,9 @@ export default function Write(props) {
     const [content, setContent] = useState("");
     const [flag, setFlag] = useState(false);
     const inputRef = useRef();
+    const [data,setData] = useState()
     
-    
-    
-    // useEffect(()=>{
-    //     // 저장 후 목록으로 이동
-       
-    //         history.push('/app/list');
-    //     }
-    // },[]);
-    
-    
+    const [token,setToken] = useState(localStorage.getItem("token"))
     const handleList = () => {
         history.push('/app/list');
     }
@@ -54,9 +46,60 @@ export default function Write(props) {
         setFlag(false);
     }
     useEffect(() => {
-       
+        fetch(`http://localhost:8081/creator/edit/${props.manageUrl}`,{
+            headers : {
+                "Authorization" : `Bearer ${token}`
+            }
+        }).then((res)=>{
+            if(!res.status==200){
+                throw new Error("http에러")
+            }
+            return res.json()
+        }).then((res)=>{
+            console.log("죽여버리고싶다",res)
+            switch (props.data) {
+                case "content":
+                    if(!res.content){
+                        setData("")
+                    }
+                    else{
+                        setData(res.content)
+                    }
+                    break;
+                case "budget":
+                    if(!res.budget){
+                        setData("")
+                    }
+                    else{
+                        setData(res.budget)
+                    }
+                    
+                    break;
+                case "schedule":
+                    if(!res.schedule){
+                        setData("")
+                    }
+                    else{
+                        setData(res.schedule)
+                    }
+                    
+                    break;
+
+                case "aboutUs":
+                    if(!res.schedule){
+                        setData("")
+                    }
+                    else{
+                        setData(res.schedule)
+                    }
+                    
+                    break;
+            }
+        }).
+        catch((e)=>{
+            console.log(e.message)
+        })
     }, [])
-    
     
     return (
 
@@ -67,7 +110,7 @@ export default function Write(props) {
             <div>
             <CKEditor
               editor={ Editor }
-              data ={props.data}
+              data = {data}
               config={{
                 
                 placeholder: "내용을 입력해주세요!",
@@ -95,7 +138,7 @@ export default function Write(props) {
              
                 
                 
-                toolbar: ['heading','Title', 'bold', 'italic', '|',
+                toolbar: ['heading','Title', 'bold', 'italic','alignment', '|',
                 'bulletedList', 'numberedList','TodoList','Underline', 'blockquote', 'link', 'code', 'codeblock', '|',
                 'imageupload','MediaEmbed', 'imagestyle:alignLeft', 'imagestyle:alignCenter', 'imagestyle:alignRight', '|',
                 'undo', 'redo','resizeImage:50','resizeImage:75','resizeImage:original','FontColor','FontFamily','FontSize','FontBackgroundColor',

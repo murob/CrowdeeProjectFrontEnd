@@ -9,18 +9,19 @@ import WritePageNav from './WritePageNav';
 import Modal from '@material-ui/core/Modal';
 import PreviewPage from 'views/ViewPage/PreviewPage';
 import queryString from 'query-string';
-
+import { useParams } from 'react-router';
 export default function WritePage(props) {
  
     var saveCheck = 0;
 
     const [token,setToken] = useState(localStorage.getItem("token"))
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
+   
     
-    const [creatorId,setCreatorId] = useState(queryString.parse(props.location.search))
-    
+    const [creatorId,setCreatorId] = useState()
+  
     const [path,setPath] = useState(`/creator/create/thumbNail/${manageUrl}`);
-    const [nextPath,setNextPath] = useState(`/write-page/funding/${manageUrl}`);
+    
     const [formData,setFormData] = useState();
     const [open, setOpen] =useState(false);
     const [modalData,setModalData] = useState();
@@ -50,44 +51,97 @@ export default function WritePage(props) {
       const classes = useStyles();
 
     const changeDef = () =>{
-        if(saveCheck){
-            setFirst(true)
-            setPath(`/creator/create/thumbNail/${manageUrl}`)
-            props.history.push(`/write-page/${manageUrl}`)
+        setPath(`/creator/create/thumbNail/${manageUrl}`)
+        if(creatorId){
+            if(saveCheck){
+                setFirst(true)
+                
+                props.history.push(`/write-page/${manageUrl}?creatorId=${creatorId.creatorId}`)
+            }
+            else{
+                if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    props.history.push(`/write-page/${manageUrl}?creatorId=${creatorId.creatorId}`)
+                }
+            }
+            saveCheck =0
         }
         else{
-            if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+            if(saveCheck){
+                setFirst(true)
+                
                 props.history.push(`/write-page/${manageUrl}`)
             }
+            else{
+                if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    props.history.push(`/write-page/${manageUrl}`)
+                }
+            }
+            saveCheck =0
         }
-        saveCheck =0
+        
     }
     const changeFun = () =>{
-        if(saveCheck){
-            setSecond(true)
-            setPath(`/creator/create/fundingPlan/${manageUrl}`)
-            props.history.push(`/write-page/funding/${manageUrl}`)
+        setPath(`/creator/create/fundingPlan/${manageUrl}`)
+        if(creatorId){
+            if(saveCheck){
+                setSecond(true)
+                
+                props.history.push(`/write-page/funding/${manageUrl}?creatorId=${creatorId.creatorId}`)
+            }
+            else{
+                if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    props.history.push(`/write-page/funding/${manageUrl}?creatorId=${creatorId.creatorId}`)
+                }
+            }
+         
+            saveCheck =0
         }
         else{
-            if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+            if(saveCheck){
+                setSecond(true)
+                
                 props.history.push(`/write-page/funding/${manageUrl}`)
             }
+            else{
+                if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    props.history.push(`/write-page/funding/${manageUrl}`)
+                }
+            }
+         
+            saveCheck =0
         }
-     
-        saveCheck =0
+       
     }
     const changeSto = () =>{
-        if(saveCheck){
-            setThird(true)
-            setPath(`/creator/create/detail/${manageUrl}`)
-            props.history.push(`/write-page/story/${manageUrl}`)
+        setPath(`/creator/create/detail/${manageUrl}`)
+        if(!creatorId==undefined){
+            if(saveCheck){
+                setThird(true)
+                
+                props.history.push(`/write-page/story/${manageUrl}?creatorId=${creatorId.creatorId}`)
+            }
+            else{
+                if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    
+                    props.history.push(`/write-page/story/${manageUrl}?creatorId=${creatorId.creatorId}`)
+                }
+            }
+            saveCheck =0
         }
         else{
-            if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+            if(saveCheck){
+                setThird(true)
+                
                 props.history.push(`/write-page/story/${manageUrl}`)
             }
+            else{
+                if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    props.history.push(`/write-page/story/${manageUrl}`)
+                }
+            }
+            saveCheck =0
         }
-        saveCheck =0
+       
     }
     const move = () =>{
         props.history.push("/")
@@ -164,7 +218,7 @@ export default function WritePage(props) {
     }
 
     const edit = () =>{
-        console.log("실행")
+        
         fetch(`http://localhost:8081/creator/edit/${manageUrl}`,{
             headers : {
                 "Authorization" : `Bearer ${token}`
@@ -175,7 +229,7 @@ export default function WritePage(props) {
             }
             return res.json()
         }).then((res)=>{
-            console.log(res)
+            console.log("writePage",res)
             setEditDTO(res)
         }).catch((e)=>{
             console.log(e.message)
@@ -186,10 +240,12 @@ export default function WritePage(props) {
     //     edit()
     // }
     useEffect(() => {
-         if(creatorId){
-            edit();
-        }
+        setPath(`/creator/create/thumbNail/${manageUrl}`);
+        setManageUrl(props.match.params.manageUrl)
+        setCreatorId(queryString.parse(props.location.search))
+        edit();
         
+       
     }, [])
     return (
     <div style={{height:'1500px'}}>

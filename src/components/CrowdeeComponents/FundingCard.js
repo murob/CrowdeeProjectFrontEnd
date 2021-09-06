@@ -20,7 +20,7 @@ export default function FundingCard(props) {
     root: {
       width : 250,
       maxWidth: 250,
-      maxHeight: 350,
+      maxHeight: 375,
       margin:20
     },
     media: {
@@ -30,8 +30,9 @@ export default function FundingCard(props) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height : '850px',
-      backgroundImage : `url(${props.imgUrl})`
+      height : '80%',
+      marginTop:'7%'
+      // backgroundImage : `url(${props.imgUrl})`
     },
     paper: {
       
@@ -39,7 +40,9 @@ export default function FundingCard(props) {
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
-      transition: 'transform 0.7s,opacity 1s'
+      transition: 'transform 0.7s,opacity 1s',
+      height:'100%',
+      width:'100%'
     },
   }));
   const [open, setOpen] = React.useState(false);
@@ -106,7 +109,7 @@ useEffect(() => {
         <CardContent>
           <h6>{funding.title}</h6>
 
-          <h6 style={{display:"block"}}>{funding.summary}</h6>
+          <h6 style={{maxHeight:"35px",whiteSpace:"nowrap",overflow:"auto",textOverflow:"ellipsis",display:"block"}}>{funding.summary}</h6>
           
           <h6 style={{display:"block"}}> 
           카테고리 : {funding.category}
