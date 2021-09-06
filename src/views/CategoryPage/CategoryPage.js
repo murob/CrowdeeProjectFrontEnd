@@ -9,8 +9,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import GridContainer from 'components/Grid/GridContainer';
 import MyFundingCard from 'components/CrowdeeComponents/MyFundingCard';
 import Footer from 'components/Footer/Footer';
+import classNames from 'classnames';
 
-import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
+
+import styles from "assets/jss/material-kit-react/views/components.js";
 
 const useStyles = makeStyles(styles);
 
@@ -99,6 +101,38 @@ export default function CategoryPage(props) {
         })
         .catch((e) =>{
             console.log("여기 들어오냐",e)
+            switch(props.match.params.menu){
+                case 'startDate':
+                    setTitle('신규 등록 펀딩');
+                    break;
+                case 'visitCount':
+                    setTitle('방문자가 많은 펀딩');
+                    break;
+                case 'outOfStock':
+                    setTitle('마감임박 펀딩');
+                    break;
+                case 'vergeOfSuccess':
+                    setTitle('성공임박 펀딩');
+                    break;
+                case 'excess':
+                    setTitle('초과달성 펀딩');
+                    break;
+                case 'dance':
+                    setTitle('무용');
+                    break;
+                case 'theater':
+                    setTitle('연극');
+                    break;
+                case 'musical':
+                    setTitle('뮤지컬');
+                    break;
+                case 'concert':
+                    setTitle('공연');
+                    break;
+                case 'etc':
+                    setTitle('기타');
+                    break;    
+            }
             setResult(
                 <div>
                     <h5 style={{fontWeight:'bold', color:'gray'}}>
@@ -154,17 +188,18 @@ export default function CategoryPage(props) {
                 <div style={{marginRight:'-85%', display:'flex', alignItems:'center'}}>
                     <Button onClick={()=>buttonClick("/my")}>
                     {/* <Avatar src={funding.} style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}></Avatar> */}
-                    
                     </Button>
                 </div>
             </div>
-            <Container style={{backgroundColor:'white', minHeight:'100vh', maxHeight:'100%', paddingTop:'100px', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
-                <div>
-                    <h2>{title}</h2>
-                </div>
-                {result}
-            </Container>    
-            <Footer />
+                <Container style={{backgroundColor:'white', minHeight:'100vh', maxHeight:'100%', paddingTop:'100px', display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column', zIndex:'0', marginBottom:'50px'}}>
+                    <div className={classNames(classes.main, classes.mainRaised)} style={{width:'100%', display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center', minHeight:'300px', maxHeight:'100%', marginTop:'60px', zIndex:'0'}}>
+                        <div style={{marginBottom:'50px', marginTop:'50px'}}>
+                            <h2>{title}</h2>
+                        </div>
+                        {result}
+                    </div>
+                </Container>            
+                <Footer />
         </div>
     );
 };
