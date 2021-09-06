@@ -77,7 +77,6 @@ export default function CategoryPage(props) {
                 case 'vergeOfSuccess':
                     setTitle('성공임박 펀딩');
                     break;
-
                 case 'excess':
                     setTitle('초과달성 펀딩');
                     break;
@@ -154,7 +153,7 @@ export default function CategoryPage(props) {
                 </div>
                 <div style={{marginRight:'-85%', display:'flex', alignItems:'center'}}>
                     <Button onClick={()=>buttonClick("/my")}>
-                    <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}></Avatar>
+                    {/* <Avatar src={funding.} style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}></Avatar> */}
                     
                     </Button>
                 </div>
