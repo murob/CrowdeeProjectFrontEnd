@@ -9,7 +9,7 @@ import Header from 'components/Header/Header';
 import MenuIcon from '@material-ui/icons/Menu';
 import GridContainer from 'components/Grid/GridContainer';
 import MyFundingCard from 'components/CrowdeeComponents/MyFundingCard';
-
+import FundingCard from 'components/CrowdeeComponents/FundingCard';
 import styles from "assets/jss/material-kit-react/views/components.js";
 
 const useStyles = makeStyles(styles);
@@ -83,7 +83,7 @@ export default function SearchPage(props) {
                 <div className={classes.section}>
                      <GridContainer justify="center">
                          {funding.map((funding)=>(
-                         <MyFundingCard 
+                         <FundingCard 
                          id={funding.fundingId}
                          title={funding.title}
                          imgUrl={funding.thumbNailUrl}

@@ -1,4 +1,4 @@
-import React , {useEffect,useState} from 'react';
+import React , {useEffect,useState,useRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import WritePageRouter from './WritePageRouter';
@@ -10,14 +10,17 @@ import Modal from '@material-ui/core/Modal';
 import PreviewPage from 'views/ViewPage/PreviewPage';
 import queryString from 'query-string';
 import { useParams } from 'react-router';
+import Progress from 'components/CrowdeeComponents/Progress';
+import DoneIcon from '@material-ui/icons/Done';
 export default function WritePage(props) {
- 
-    var saveCheck = 0;
+    
+    const saveCheck = useRef(0)
+  
 
     const [token,setToken] = useState(localStorage.getItem("token"))
     const [manageUrl,setManageUrl] = useState(props.match.params.manageUrl)
-   
-    
+    const [inspect,setInsepct] = useState(true)
+    const [progressValue,setProgressValue] = useState(0)
     const [creatorId,setCreatorId] = useState()
   
     const [path,setPath] = useState(`/creator/create/thumbNail/${manageUrl}`);
@@ -29,7 +32,10 @@ export default function WritePage(props) {
     const [second,setSecond] = useState(false)
     const [third,setThird] = useState(false)
     const [editDTO,setEditDTO] = useState({})
-
+    const [location,setLocation] = useState("first")
+    const [firstCheck,setFirstCheck] = useState("none")
+    const [secondCheck,setSecondCheck] = useState("none")
+    const [thirdCheck,setThirdCheck] = useState("none")
     const useStyles = makeStyles((theme)=>({
        
         modal: {
@@ -53,93 +59,106 @@ export default function WritePage(props) {
     const changeDef = () =>{
         setPath(`/creator/create/thumbNail/${manageUrl}`)
         if(creatorId){
-            if(saveCheck){
+            if(saveCheck.current.current){
                 setFirst(true)
-                
+                setLocation("first")
+                setProgressValue(progressValue+33)
                 props.history.push(`/write-page/${manageUrl}?creatorId=${creatorId.creatorId}`)
             }
             else{
                 if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    setLocation("first")
                     props.history.push(`/write-page/${manageUrl}?creatorId=${creatorId.creatorId}`)
                 }
             }
-            saveCheck =0
+            saveCheck.current =0
         }
         else{
-            if(saveCheck){
+            if(saveCheck.current.current){
                 setFirst(true)
+
+                setLocation("first")
+                
                 
                 props.history.push(`/write-page/${manageUrl}`)
             }
             else{
                 if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    setLocation("first")
                     props.history.push(`/write-page/${manageUrl}`)
                 }
             }
-            saveCheck =0
+            saveCheck.current =0
         }
         
     }
     const changeFun = () =>{
         setPath(`/creator/create/fundingPlan/${manageUrl}`)
         if(creatorId){
-            if(saveCheck){
+            if(saveCheck.current){
                 setSecond(true)
+                setLocation("second")
                 
                 props.history.push(`/write-page/funding/${manageUrl}?creatorId=${creatorId.creatorId}`)
             }
             else{
                 if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    setLocation("second")
                     props.history.push(`/write-page/funding/${manageUrl}?creatorId=${creatorId.creatorId}`)
                 }
             }
          
-            saveCheck =0
+            saveCheck.current =0
         }
         else{
-            if(saveCheck){
+            if(saveCheck.current){
                 setSecond(true)
+                setLocation("second")
                 
                 props.history.push(`/write-page/funding/${manageUrl}`)
             }
             else{
                 if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    setLocation("second")
                     props.history.push(`/write-page/funding/${manageUrl}`)
                 }
             }
          
-            saveCheck =0
+            saveCheck.current =0
         }
        
     }
     const changeSto = () =>{
         setPath(`/creator/create/detail/${manageUrl}`)
         if(!creatorId==undefined){
-            if(saveCheck){
+            if(saveCheck.current){
                 setThird(true)
+                setLocation("third")
                 
                 props.history.push(`/write-page/story/${manageUrl}?creatorId=${creatorId.creatorId}`)
             }
             else{
                 if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
-                    
+                    setLocation("third")
                     props.history.push(`/write-page/story/${manageUrl}?creatorId=${creatorId.creatorId}`)
                 }
             }
-            saveCheck =0
+            saveCheck.current =0
         }
         else{
-            if(saveCheck){
+            if(saveCheck.current){
                 setThird(true)
+                setLocation("third")
                 
                 props.history.push(`/write-page/story/${manageUrl}`)
             }
             else{
                 if(confirm("입력하신 내용이 저장되지 않았습니다. 저장하지 않고 넘어가시겠습니까?")){
+                    setLocation("third")
                     props.history.push(`/write-page/story/${manageUrl}`)
                 }
             }
-            saveCheck =0
+            saveCheck.current =0
         }
        
     }
@@ -151,7 +170,21 @@ export default function WritePage(props) {
         setFormData(data)
     }
 
-    
+    const requestInspection = () =>{
+        fetch(`http://localhost:8081/creator/create/${manageUrl}`,{
+            
+                headers : {
+                    "Authorization" : `Bearer ${token}`
+                }
+                }).
+                then((res)=>{
+                    if(!res.status==200){
+                        throw new Error('http에러')
+                    }
+                    alert("요청하신 펀딩은 관리자의 심사 후 등록 될 예정입니다!")
+                    props.history.push("/")
+                })
+    }
     const preview = () =>{
        
         fetch(`http://localhost:8081/creator/create/preview/${manageUrl}`,{
@@ -194,26 +227,37 @@ export default function WritePage(props) {
                 if(!res.status==200){
                     throw new Error('http에러')
                 }
-               saveCheck=1;
+               
+               switch (location) {
+                   case "first":
+                       setFirstCheck("")
+                       if(progressValue<100){
+                            setProgressValue(progressValue+33)
+                       }
+                       break;
+               
+                   case "second":
+                        setSecondCheck("")
+                        if(progressValue<100){
+                            setProgressValue(progressValue+33)
+                       }
+                       break;
+                    case "third":
+                        setThirdCheck("")
+                        if(progressValue<100){
+                            setProgressValue(progressValue+34)
+                       }
+                    break;
+               }
+               saveCheck.current=1;
                if(first&&second&&third){
-                fetch(`http://localhost:8081/creator/create/${manageUrl}`,{
-            
-                headers : {
-                    "Authorization" : `Bearer ${token}`
-                }
-                }).
-                then((res)=>{
-                    if(!res.status==200){
-                        throw new Error('http에러')
-                    }
-                    alert("저장하신 펀딩은 관리자의 검수 후 등록 될 예정입니다!")
-                    props.history.push("/")
-                })
-                
+                   setProgressValue(100)
+                   setInsepct(false)
                }
             }).catch((e)=>{
                 alert("데이터 전송 중 에러 발생"+e.message)
             })
+
         }
     }
 
@@ -257,7 +301,10 @@ export default function WritePage(props) {
                         <Button fontSize="large" size='large' onClick={move}><ArrowBackIcon fontSize="large"/></Button>{' '}
                     </div>
                     <div>
-                        {/* <Button variant="outlined" size='large'>취소</Button>{' '} */}
+                        <Button style={{marginRight:"30px"}} onClick={requestInspection} disabled={inspect} variant="contained" color="secondary" size='large'>
+                            <Progress value={progressValue}/>
+                            심사신청하기
+                            </Button>
                         <Button variant="contained" color="secondary" size='large' onClick={onSubmit}>저장</Button>{' '}
                         <Button variant="contained" color="secondary" size='large' onClick={preview}>미리보기</Button>{' '}
                         <Modal
@@ -277,13 +324,13 @@ export default function WritePage(props) {
                 </div>
                 <div style={{display:'flex', justifyContent:'space-around',marginTop:'50px'}}>
                     <Button>
-                        <h4 style={{fontWeight:'bold'}} onClick={changeDef}>기본정보</h4>
+                        <h4 style={{fontWeight:'bold'}} onClick={changeDef}>기본정보 <DoneIcon  style={{color:"green",display:firstCheck}}/></h4>
                     </Button>
                     <Button>
-                        <h4 style={{fontWeight:'bold'}} onClick={changeFun}>펀딩 계획</h4>
+                        <h4 style={{fontWeight:'bold'}} onClick={changeFun}>펀딩 계획 <DoneIcon style={{color:"green",display:secondCheck}}/> </h4>
                     </Button>
                     <Button>
-                        <h4 style={{fontWeight:'bold'}} onClick={changeSto}>프로젝트 계획</h4>
+                        <h4 style={{fontWeight:'bold'}} onClick={changeSto}>프로젝트 계획 <DoneIcon style={{color:"green",display:thirdCheck}}/> </h4>
                     </Button>
                 </div>
             </div>
