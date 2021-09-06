@@ -114,7 +114,7 @@ export default function WritePage(props) {
     }
     const changeSto = () =>{
         setPath(`/creator/create/detail/${manageUrl}`)
-        if(creatorId){
+        if(!creatorId==undefined){
             if(saveCheck){
                 setThird(true)
                 

@@ -12,17 +12,9 @@ export default function Write(props) {
     const [content, setContent] = useState("");
     const [flag, setFlag] = useState(false);
     const inputRef = useRef();
-    const [data,setData] = useState("")
-    // const [manageUrl,setManageUrl] = useState(props.)
+    const [data,setData] = useState()
+    
     const [token,setToken] = useState(localStorage.getItem("token"))
-    // useEffect(()=>{
-    //     // 저장 후 목록으로 이동
-       
-    //         history.push('/app/list');
-    //     }
-    // },[]);
-    
-    
     const handleList = () => {
         history.push('/app/list');
     }
@@ -64,30 +56,49 @@ export default function Write(props) {
             }
             return res.json()
         }).then((res)=>{
+            console.log("죽여버리고싶다",res)
             switch (props.data) {
                 case "content":
-                    setData(res.content)
+                    if(!res.content){
+                        setData("")
+                    }
+                    else{
+                        setData(res.content)
+                    }
                     break;
                 case "budget":
-                    setData(res.budget)
+                    if(!res.budget){
+                        setData("")
+                    }
+                    else{
+                        setData(res.budget)
+                    }
+                    
                     break;
                 case "schedule":
-                    setData(res.schedule)
+                    if(!res.schedule){
+                        setData("")
+                    }
+                    else{
+                        setData(res.schedule)
+                    }
+                    
                     break;
+
                 case "aboutUs":
-                    setData(res.aboutUs)
+                    if(!res.schedule){
+                        setData("")
+                    }
+                    else{
+                        setData(res.schedule)
+                    }
+                    
                     break;
-            }
-        }).then(()=>{
-            if(data==undefined){
-                setData("")
             }
         }).
         catch((e)=>{
             console.log(e.message)
         })
-       
-       
     }, [])
     
     return (

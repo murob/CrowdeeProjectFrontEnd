@@ -8,6 +8,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import SearchIcon from '@material-ui/icons/Search';
 import GridContainer from 'components/Grid/GridContainer';
 import MyFundingCard from 'components/CrowdeeComponents/MyFundingCard';
+import FundingCard from 'components/CrowdeeComponents/FundingCard';
 import Footer from 'components/Footer/Footer';
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
@@ -41,9 +42,10 @@ export default function CategoryPage(props) {
     }
 
     useEffect(() => {
+        window.scrollTo(0,0);
         setMenu(category)
 
-        console.log(props.match.params.menu)
+        
 
         fetch("http://localhost:8081/contents/menuList", {
             method:'POST',
@@ -115,7 +117,7 @@ export default function CategoryPage(props) {
                  <div className={classes.section}>
                      <GridContainer justify="center">
                          {funding.map((funding)=>(
-                         <MyFundingCard 
+                         <FundingCard 
                          id={funding.fundingId}
                          title={funding.title}
                          imgUrl={funding.thumbNailUrl}
