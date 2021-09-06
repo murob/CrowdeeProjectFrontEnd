@@ -54,7 +54,7 @@ export default function Write(props) {
         setFlag(false);
     }
     useEffect(() => {
-        console.log("ckeditor",props.data)
+       
         if(props.data==undefined){
             setData("")
         }
@@ -73,7 +73,7 @@ export default function Write(props) {
             <div>
             <CKEditor
               editor={ Editor }
-              data = {props.data}
+              data = {data}
               config={{
                 
                 placeholder: "내용을 입력해주세요!",
