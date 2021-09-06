@@ -53,30 +53,7 @@ export default function WriteStory(props) {
         props.save(totalForm)
     }
     useEffect(() => {
-        console.log("asdasd,",props.data)
-        setTotalForm(props.data)
-        fetch(`http://localhost:8081/creator/edit/${manageUrl}`,{
-            headers : {
-                "Authorization" : `Bearer ${token}`
-            }
-        }).then((res)=>{
-            if(!res.status==200){
-                throw new Error("http에러")
-            }
-            return res.json()
-        }).then((res)=>{
-            console.log("writeStory",res)
-            setTotalForm({
-                "content" : res.content,
-                "budget" : res.budget,
-                "schedule" :res.schedule,
-                "aboutUs" : res.aboutUs
-            })
-            
-        }).catch((e)=>{
-            console.log(e.message)
-        })
-        
+       
     },[])
 
     return (
@@ -85,22 +62,22 @@ export default function WriteStory(props) {
                     <div style={{borderBottom:'1px solid #CECECE', paddingBottom:'40px', marginBottom:'40px', }}>
                         <h3 style={{fontWeight:'bold'}}>프로젝트 내용</h3>
                         <h5>무엇을 만들기 위한 프로젝트인지 분명히 알려주세요.</h5>
-                        <Write onSave={contentValueHandler} data={totalForm.content}></Write>
+                        <Write onSave={contentValueHandler} manageUrl={manageUrl} data="content"></Write>
                     </div>
                     <div style={{borderBottom:'1px solid #CECECE', paddingBottom:'40px', marginBottom:'40px'}}>
                         <h3 style={{fontWeight:'bold'}}>프로젝트 예산</h3>
                         <h5>프로젝트를 소개내용을 요약해주세요.</h5>
-                        <Write api="budget" onSave={budgetValueHandler} data={totalForm.budget}></Write>
+                        <Write api="budget" onSave={budgetValueHandler} manageUrl={manageUrl} data="budget" ></Write>
                     </div>
                     <div style={{borderBottom:'1px solid #CECECE', paddingBottom:'40px', marginBottom:'40px'}}>
                         <h3 style={{fontWeight:'bold'}}>프로젝트 일정</h3>
                         <h5>프로젝트 팀 소개내용을 입력해주세요.</h5>
-                        <Write api="schedule" onSave={scheduleValueHandler} data={totalForm.schedule}></Write>
+                        <Write api="schedule" onSave={scheduleValueHandler} manageUrl={manageUrl} data="schedule" ></Write>
                     </div>
                     <div style={{borderBottom:'1px solid #CECECE', paddingBottom:'40px', marginBottom:'40px'}}>
                         <h3 style={{fontWeight:'bold'}}>프로젝트 팀소개</h3>
                         <h5>프로젝트 팀 소개내용을 입력해주세요.</h5>
-                        <Write api="aboutUs"  onSave={aboutUsValueHandler} data={totalForm.aboutUs}></Write>
+                        <Write api="aboutUs"  onSave={aboutUsValueHandler} manageUrl={manageUrl} data="aboutUs" ></Write>
                     </div>
                 </Container>    
             </div> 
