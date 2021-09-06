@@ -28,6 +28,10 @@ export default function JoinFundingModal (props) {
     const [tel,setTel]=useState();
     const [token,setToken] = useState(localStorage.getItem("token"))
 
+    const modalClose = () =>{
+        props.onClose
+    }
+
     useEffect(() => {
         console.log("토큰",token)
         fetch('http://localhost:8081/contents/preOrder',{
@@ -93,7 +97,7 @@ export default function JoinFundingModal (props) {
             
             
           })
-          console.log(form)
+         
           fetch("http://localhost:8081/contents/participation",{
             headers : {
                 "Authorization" : `Bearer ${token}`,
@@ -104,11 +108,13 @@ export default function JoinFundingModal (props) {
             }).then((res)=>{
                 if(res.status==200){
                     alert("펀딩 참여가 성공적으로 완료되었습니다.")
-                    history.push(`/view/${props.projectUrl}`)
+                    modalClose
+                    history.push(`/my`)
                 }
                 else{
-                    throw new Error("error")
+                    alert("이미 참여한 펀딩입니다.")
                 }
+                
             }).catch((e)=>{
                 console.log(e.message)
             })

@@ -133,7 +133,7 @@ const handleClose = () => {
   );
       
   useEffect(() => {
-    
+      window.scrollTo(0,0);
       fetch(`http://localhost:8081/contents/${projectUrl}`, {
         headers : {
             "Authorization" : `Bearer ${token}`
@@ -218,7 +218,7 @@ const handleClose = () => {
     
     modifyUrl(view.aboutUs)
     return(
-      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',alignItems:"center",justifyContent:"center",display:"flex"}}>
+      <div dangerouslySetInnerHTML={{__html:htmlCode}} style={{width:'100%', paddingLeft:'30px',overflow:'hidden'}}>
            
       </div>
     )
@@ -357,6 +357,7 @@ const handleClose = () => {
                   aria-describedby="simple-modal-description">
                       
                   <JoinFundingModal
+                    onClose={handleClose}
                     fundingId={view.fundingId}
                     title={view.title}
                     creatorNickName={view.creatorNickName}
