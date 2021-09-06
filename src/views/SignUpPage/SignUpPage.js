@@ -124,7 +124,7 @@ export default function SignUpPage(props) {
   const checkEmailCert = () =>{
     var certNum = document.querySelector('#emailCert')
     console.log(certNum.value);
-    if(authKey === certNum.value ){
+    if(authKey == certNum.value ){
       return true;
     }
     else{
@@ -133,7 +133,7 @@ export default function SignUpPage(props) {
   }
 
   const submitSignUp = (e) =>{
-    if(checkEmailCert){
+    if(checkEmailCert()){
       e.preventDefault();
 
       fetch("http://localhost:8081/member/signUp",{
@@ -152,7 +152,7 @@ export default function SignUpPage(props) {
         }
       }).then((res)=>{
         if(res != null){
-          //alert("회원가입을 축하합니다.");
+          alert("크라우디 회원가입을 축하합니다.");
           e.preventDefault();
           props.history.push("/login-page");
         }

@@ -42,8 +42,13 @@ export default function ViewPage(props) {
 />
 const [open, setOpen] = useState(false);
 const handleOpen = () => {
-  
-  setOpen(true);
+  if(localStorage.getItem("token")){
+    setOpen(true);
+  }
+  else{
+    alert("로그인 후에 펀딩 참여가 가능합니다.")
+    props.history.push("/login-page")
+  }
 };
 
 const handleClose = () => {
