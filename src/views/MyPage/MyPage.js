@@ -181,13 +181,14 @@ export default function MyPage(props) {
                 </div>
                 <div style={{marginRight:'-75%', display:'flex', alignItems:'center'}}>
                     <Button onClick={()=>buttonClick("/my")}>
-                    <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}>C</Avatar>
+                    <Avatar style={{width:'20px', height:'20px', fontSize:'12px', fontWeight:'bold', marginRight:'5px'}}></Avatar>
+                    <h5 style={{fontWeight:'bold', fontSize:'15px'}}>{nickName}</h5>
                     </Button>
                 </div>
             </div>
             <div style={{backgroundColor:'white', width:'100%', minHeight:'1000px', maxHeight:'100%'}}>
                 <div style={{display:'flex', flexDirection:'column', alignItems:'center', paddingTop:'130px'}}>
-                    <Avatar alt="Remy Sharp" src={require('./sung.png').default} style={{width:"150px",height:"150px"}} />
+                    <Avatar alt="Remy Sharp" style={{width:"150px",height:"150px"}} />
                     <h2 style={{fontWeight:'bold', fontSize:'35px'}}>{nickName}</h2>
                 </div>
                 <div style={{display:'flex', justifyContent:'space-evenly', marginTop:'45px', borderBottom:'1.8px solid #F0F1EC'}}>

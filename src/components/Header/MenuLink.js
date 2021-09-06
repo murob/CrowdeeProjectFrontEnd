@@ -6,8 +6,8 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import Menu from "@material-ui/icons/Menu";
 import MenuIcon from '@material-ui/icons/Menu';
-
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 
 import { Icon } from "@material-ui/core";
@@ -28,7 +28,7 @@ export default function MenuLink(props) {
   return (
     <Icon>
       <MenuIcon
-        color="white"
+        color="black"
         className={classes.navLink}
         onClick={()=>buttonClick("/menu-page")}>
         <AccountCircleRoundedIcon	 className={classes.inputIconsColor} />

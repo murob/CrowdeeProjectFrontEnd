@@ -31,7 +31,7 @@ export default function FundingCard(props) {
       alignItems: 'center',
       justifyContent: 'center',
       height : '80%',
-      marginTop:'10%'
+      marginTop:'7%'
       // backgroundImage : `url(${props.imgUrl})`
     },
     paper: {

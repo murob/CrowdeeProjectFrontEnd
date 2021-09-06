@@ -29,7 +29,8 @@ export default function MyFundingCard(props) {
       alignItems: 'center',
       justifyContent: 'center',
       height : '850px',
-      backgroundImage : `url(${props.imgUrl})`
+      marginTop:'7%'
+      // backgroundImage : `url(${props.imgUrl})`
     },
     paper: {
       
