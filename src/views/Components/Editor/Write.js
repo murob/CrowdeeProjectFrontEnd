@@ -127,7 +127,7 @@ export default function Write(props) {
              
                 
                 
-                toolbar: ['heading','Title', 'bold', 'italic', '|',
+                toolbar: ['heading','Title', 'bold', 'italic','alignment', '|',
                 'bulletedList', 'numberedList','TodoList','Underline', 'blockquote', 'link', 'code', 'codeblock', '|',
                 'imageupload','MediaEmbed', 'imagestyle:alignLeft', 'imagestyle:alignCenter', 'imagestyle:alignRight', '|',
                 'undo', 'redo','resizeImage:50','resizeImage:75','resizeImage:original','FontColor','FontFamily','FontSize','FontBackgroundColor',
