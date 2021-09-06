@@ -20,7 +20,7 @@ export default function FundingCard(props) {
     root: {
       width : 250,
       maxWidth: 250,
-      maxHeight: 350,
+      maxHeight: 375,
       margin:20
     },
     media: {
@@ -109,7 +109,7 @@ useEffect(() => {
         <CardContent>
           <h6>{funding.title}</h6>
 
-          <h6 style={{display:"block"}}>{funding.summary}</h6>
+          <h6 style={{maxHeight:"35px",whiteSpace:"nowrap",overflow:"auto",textOverflow:"ellipsis",display:"block"}}>{funding.summary}</h6>
           
           <h6 style={{display:"block"}}> 
           카테고리 : {funding.category}

@@ -8,6 +8,7 @@ import Footer from 'components/Footer/Footer';
 import WritePageRouter from './MyPageRouter';
 import GridContainer from "components/Grid/GridContainer.js";
 import MyFundingCard from "components/CrowdeeComponents/MyFundingCard";
+import FundingCard from 'components/CrowdeeComponents/FundingCard';
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
 const useStyles = makeStyles(styles);
@@ -29,7 +30,6 @@ export default function MyPage(props) {
   
 
   const wish = () =>{
-    
         fetch("http://localhost:8081/member/myPage/wishList", {
             headers : {
             "Authorization" : `Bearer ${token}`}
@@ -55,7 +55,7 @@ export default function MyPage(props) {
     
 
   const participant =  () =>{
-   
+        setFunding([])
        fetch("http://localhost:8081/member/myPage/fundingList", {
             headers : {
             "Authorization" : `Bearer ${token}`}
@@ -80,6 +80,7 @@ export default function MyPage(props) {
     }
   
   const waiting =  () =>{
+      setFunding([])
     fetch("http://localhost:8081/member/myPage/waitingForPayment", {
         headers : {
         "Authorization" : `Bearer ${token}`}
@@ -114,6 +115,7 @@ export default function MyPage(props) {
         props.history.push('/my/intro')
     }
     const changeBacked =  () =>{
+        setResult()
        participant()
         
         // props.history.push('/my/backed')
@@ -121,6 +123,8 @@ export default function MyPage(props) {
         
     }
     const changeCreated =  () =>{
+        setResult()
+
         waiting()
 
         // props.history.push('/my/created')
@@ -128,19 +132,26 @@ export default function MyPage(props) {
        
     }
     const changeWish = async () =>{
+        setResult()
+
         wish()
 
         // props.history.push('/my/wish')
     }
 
-   useEffect(() => {
+    useEffect(() => {
         window.scrollTo(0,0);
+       
+    }, [])
+   useEffect(() => {
+        
+        console.log(funding)
        if(funding.length>0){
             setResult(
                 <div className={classes.section}>
                     <GridContainer justify="center">
                         {funding.map((funding)=>(
-                        <MyFundingCard 
+                        <FundingCard 
                         id={funding.fundingId}
                         title={funding.title}
                         imgUrl={funding.thumbNailUrl}

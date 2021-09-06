@@ -12,7 +12,7 @@ import { Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
-
+import { Fade } from "@material-ui/core";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -121,7 +121,13 @@ export default function JoinFundingModal (props) {
         }
       
   return (
-    
+    <Fade 
+        in='checked' 
+        timeout={{
+            appear: 1000, 
+            enter: 500, 
+            exit: 1000
+        }}>
          <div style={{backgroundColor:'white',width:"70%",height:"90%"}}>
             <Container>
             <div style={{display:"flex",justifyContent:"center"}}>
@@ -250,7 +256,7 @@ export default function JoinFundingModal (props) {
             </div>
             </Container>
         </div>
-
+    </Fade>
     
    
   );
