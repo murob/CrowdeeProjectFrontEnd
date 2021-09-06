@@ -134,6 +134,7 @@ export default function MyPage(props) {
     }
 
    useEffect(() => {
+        window.scrollTo(0,0);
        if(funding.length>0){
             setResult(
                 <div className={classes.section}>

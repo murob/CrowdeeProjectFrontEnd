@@ -133,7 +133,7 @@ const handleClose = () => {
   );
       
   useEffect(() => {
-    
+      window.scrollTo(0,0);
       fetch(`http://localhost:8081/contents/${projectUrl}`, {
         headers : {
             "Authorization" : `Bearer ${token}`
@@ -356,6 +356,7 @@ const handleClose = () => {
                   aria-describedby="simple-modal-description">
                       
                   <JoinFundingModal
+                    onClose={handleClose}
                     fundingId={view.fundingId}
                     title={view.title}
                     creatorNickName={view.creatorNickName}
