@@ -53,6 +53,7 @@ export default function WriteStory(props) {
         props.save(totalForm)
     }
     useEffect(() => {
+        console.log("asdasd,",props.data)
         setTotalForm(props.data)
         fetch(`http://localhost:8081/creator/edit/${manageUrl}`,{
             headers : {
